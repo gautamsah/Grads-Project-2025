@@ -85,7 +85,7 @@ jobs:
         run: |
           sfdx force:source:deploy -p "changed-sources/force-app" -u HubOrg --testlevel NoTestRun --json
 
-      - name: 'Deploy destructive changes (if any) to Integration org'
+      - name: 'Deploy destructive changes (if any) to Production org'
         run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u HubOrg --testlevel NoTestRun --ignorewarnings 
 
 

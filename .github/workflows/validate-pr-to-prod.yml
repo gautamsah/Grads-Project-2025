@@ -12,7 +12,7 @@ permissions:
   security-events: write
 
 jobs:
-  validate-pr-to-qa:
+  validate-pr-to-prod:
     runs-on: ubuntu-latest
     environment: prod
     steps:
@@ -44,12 +44,12 @@ jobs:
         run: |
           git log -n 2 --oneline
           git diff HEAD~1 HEAD --name-only
-          git diff origin/Integration HEAD --name-only
+          git diff origin/main HEAD --name-only
           echo "List of files changed in the PR:"
       - name: Create delta packages for new, modified or deleted metadata
         run: |
           mkdir changed-sources
-          sf sgd source delta  -t "HEAD" -f "origin/Integration" -o "changed-sources/" -d -s "force-app/" --loglevel trace --json
+          sf sgd source delta  -t "HEAD" -f "origin/main" -o "changed-sources/" -d -s "force-app/" --loglevel trace --json
           echo "Delta creation output:"
           ls -al changed-sources/
       - name: Installing java
