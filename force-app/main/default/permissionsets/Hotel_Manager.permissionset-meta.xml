@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This for Hotel Manager Or Hotel Admin</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Hotel Manager</label>
+    <tabSettings>
+        <tab>standard-SemanticModel</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+</PermissionSet>
