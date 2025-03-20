@@ -71,8 +71,8 @@ jobs:
         run: |
           echo "Listing files in changed-sources/force-app:"
           ls -al changed-sources/force-app/
-          sf project deploy start --source-dir "changed-sources/force-app" --target-org TargetOrgToDeploy --test-level NoTestRun --json
+          sf project deploy validate --source-dir "changed-sources/force-app" --target-org TargetOrgToDeploy --test-level NoTestRun --json
 
       - name: Validate destructive changes (if any)
         run: |
-          sf project deploy start --metadata-dir "changed-sources/destructiveChanges" --target-org TargetOrgToDeploy --test-level NoTestRun --ignore-errors --dry-run
+          sf project deploy validate --metadata-dir "changed-sources/destructiveChanges" --target-org TargetOrgToDeploy --test-level NoTestRun --ignore-warnings
