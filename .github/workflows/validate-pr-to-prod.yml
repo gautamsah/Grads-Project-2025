@@ -67,12 +67,12 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: changed-sources/apexScanResults.sarif
-      - name: Deployment - run no tests
+      - name: Validate - run no tests
         run: |
           echo "Listing files in changed-sources/force-app:"
           ls -al changed-sources/force-app/
-          sf project deploy validate --source-dir "changed-sources/force-app" --target-org TargetOrgToDeploy --test-level NoTestRun --json
+          sfdx force:source:deploy -p "changed-sources/force-app" -u TargetOrgToDeploy --checkonly --testlevel NoTestRun --json
 
       - name: Validate destructive changes (if any)
         run: |
-          sf project deploy validate --metadata-dir "changed-sources/destructiveChanges" --target-org TargetOrgToDeploy --test-level NoTestRun --ignore-warnings
+          sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u TargetOrgToDeploy --checkonly --testlevel NoTestRun --ignorewarnings
