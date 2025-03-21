@@ -56,8 +56,8 @@
         <name>CustomTab</name>
     </types>
     <types>
-		<members>Hotel__c-Hotel Layout</members>
-		<name>Layout</name>
+	    <members>Hotel__c-Hotel Layout</members>
+	    <name>Layout</name>
 	</types>
     <types>
         <members>*</members>
@@ -68,10 +68,10 @@
         <name>ListView</name>
     </types>
     <types>
-    <members>Community_User</members>
-    <members>Hotel_Manager</members>
-    <members>System_Admin_Permissions</members>
-    <name>PermissionSet</name>
+        <members>Community_User</members>
+        <members>Hotel_Manager</members>
+        <members>System_Admin_Permissions</members>
+        <name>PermissionSet</name>
 	</types>
     <types>
         <members>*</members>
