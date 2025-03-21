@@ -72,7 +72,7 @@
         <members>Hotel_Manager</members>
         <members>System_Admin_Permissions</members>
         <name>PermissionSet</name>
-	</types>
+    </types>
     <types>
         <members>*</members>
         <name>StaticResource</name>
