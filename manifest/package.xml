@@ -32,7 +32,7 @@
         <members>*</members>
         <name>StaticResource</name>
     </types>
-	 <types>
+	<types>
         <members>Community User RES</members>
 		<members>Hotel Experience</members>
 		<members>System Admin RES</members>
