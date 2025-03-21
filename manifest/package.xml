@@ -36,9 +36,13 @@
         <members>Hotel__c.Website__c</members>
         <members>Product2.Banquet_Hall_Capacity__c</members>
         <members>Product2.Conference_Room_Capacity__c</members>
+        <members>Product2.Description</members>
         <members>Product2.Dining_Capacity__c</members>
         <members>Product2.Hotel_Product_Type__c</members>
         <members>Product2.Hotel__c</members>
+        <members>Product2.IsActive</members>
+        <members>Product2.Name</members>
+        <members>Product2.ProductCode</members>
         <members>Product2.Product_Final_Unit_Price__c</members>
         <members>Product2.Product_Unit_Price__c</members>
         <members>Product2.Room_Type__c</members>
