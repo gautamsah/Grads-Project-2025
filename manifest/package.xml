@@ -29,10 +29,14 @@
         <name>LightningComponentBundle</name>
     </types>
     <types>
-		<members>Community User RES</members>
+        <members>*</members>
+        <name>StaticResource</name>
+    </types>
+	 <types>
+        <members>Community User RES</members>
 		<members>Hotel Experience</members>
 		<members>System Admin RES</members>
-		<name>Profile</name>
+        <name>Profile</name>
     </types>
     <version>63.0</version>
 </Package>
