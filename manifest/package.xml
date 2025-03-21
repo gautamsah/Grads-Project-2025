@@ -56,9 +56,9 @@
         <name>CustomTab</name>
     </types>
     <types>
-	    <members>Hotel__c-Hotel Layout</members>
-	    <name>Layout</name>
-	</types>
+        <members>Hotel__c-Hotel Layout</members>
+        <name>Layout</name>
+    </types>
     <types>
         <members>*</members>
         <name>LightningComponentBundle</name>
