@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Banner_Photo_Url__c</fullName>
+    <description>Banner Photo Url is the custome field used to store the Url of the Banner Image.</description>
     <label>Banner Photo Url</label>
     <required>false</required>
     <trackTrending>false</trackTrending>

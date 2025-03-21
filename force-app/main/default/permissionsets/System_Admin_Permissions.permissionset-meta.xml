@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>This is for the System Admin User</description>
+    <description>This Permission Set is used to assign Permissions to System Administrator</description>
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.AccountNumber</field>

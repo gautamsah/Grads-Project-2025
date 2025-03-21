@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Swimming_Pool_Capacity__c</fullName>
+    <description>Swimming Pool Capacity is the custom field that is used to store the capacity of that perticular Swimming Pool.</description>
     <label>Swimming Pool Capacity</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>

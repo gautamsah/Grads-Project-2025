@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Hotel_Type__c</fullName>
+    <description>Hotel Type is the custom field of type picklist that is used to store the type of the Hotel, i.e. : 5 star, 4 star, etc.</description>
     <label>Hotel Type</label>
     <required>false</required>
     <trackTrending>false</trackTrending>

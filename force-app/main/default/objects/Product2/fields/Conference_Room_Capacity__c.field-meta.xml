@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Conference_Room_Capacity__c</fullName>
+    <description>Conference Room Capacity is the custom field that is used to store the capacity of that Conference Room hall.</description>
     <label>Conference Room Capacity</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
