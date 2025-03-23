@@ -61,6 +61,7 @@
     </types>
     <types>
         <members>Hotel__c-Hotel Layout</members>
+        <members>Product2-Product Layout</members>
         <name>Layout</name>
     </types>
     <types>
