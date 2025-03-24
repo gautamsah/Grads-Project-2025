@@ -5,7 +5,7 @@
     <decisions>
         <name>Check_Permission_Set_Availability</name>
         <label>Check Permission Set Availability</label>
-        <locationX>182</locationX>
+        <locationX>314</locationX>
         <locationY>242</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -35,7 +35,7 @@
            &quot;&quot;)</expression>
     </formulas>
     <interviewLabel>User:AssignPermission {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>User:AssignPermission</label>
+    <label>User: Assign Permission</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -60,6 +60,9 @@
         <label>Permission set Assignment</label>
         <locationX>50</locationX>
         <locationY>350</locationY>
+        <faultConnector>
+            <targetReference>Log_Error_While_Assigning_Permission_Set</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>AssigneeId</field>
             <value>
@@ -78,12 +81,16 @@
     <recordLookups>
         <name>Get_Permission_Set</name>
         <label>Get Permission Set</label>
-        <locationX>182</locationX>
+        <locationX>314</locationX>
         <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Check_Permission_Set_Availability</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Log_Error_While_Assigning_Permission_Set</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
@@ -98,13 +105,61 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>56</locationX>
+        <locationX>188</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Permission_Set</targetReference>
         </connector>
     </start>
     <status>Active</status>
+    <subflows>
+        <description>Logs the error occurred while assigning the permission set in Error Logger Object</description>
+        <name>Log_Error_While_Assigning_Permission_Set</name>
+        <label>Log Error While Assigning Permission Set</label>
+        <locationX>314</locationX>
+        <locationY>458</locationY>
+        <flowName>Error_Logger_Create_Error_Record</flowName>
+        <inputAssignments>
+            <name>errorMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>errorName</name>
+            <value>
+                <elementReference>currentFlowName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>errorObject</name>
+            <value>
+                <elementReference>currentFlowObjectName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>errorObjectRecordid</name>
+            <value>
+                <elementReference>userId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>errorOwnerId</name>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <textTemplates>
+        <name>currentFlowName</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;User: Assign Permission&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>currentFlowObjectName</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;User&lt;/p&gt;</text>
+    </textTemplates>
     <variables>
         <name>getProfileName</name>
         <dataType>String</dataType>

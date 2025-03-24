@@ -5,7 +5,7 @@
     <decisions>
         <name>Decision_3</name>
         <label>Old Permission Set Assignment is Available or Not</label>
-        <locationX>182</locationX>
+        <locationX>314</locationX>
         <locationY>458</locationY>
         <defaultConnector>
             <targetReference>Assign_Permission_Set_for_New_Profile</targetReference>
@@ -30,7 +30,7 @@
     <decisions>
         <name>Old_Permission_Set_available_or_not</name>
         <label>Old Permission Set available or not</label>
-        <locationX>336</locationX>
+        <locationX>666</locationX>
         <locationY>242</locationY>
         <defaultConnector>
             <targetReference>Assign_Permission_Set_for_New_Profile</targetReference>
@@ -72,7 +72,7 @@
            &quot;&quot;)</expression>
     </formulas>
     <interviewLabel>User:RemovePermission {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>User:RemovePermission</label>
+    <label>User: Remove Permission</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -100,17 +100,24 @@
         <connector>
             <targetReference>Assign_Permission_Set_for_New_Profile</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Log_Error_While_Getting_Old_Permission_Set</targetReference>
+        </faultConnector>
         <inputReference>Get_Old_Permission_Set_Assignment</inputReference>
     </recordDeletes>
     <recordLookups>
         <name>Get_Old_Permission_Set</name>
         <label>Get Old Permission Set</label>
-        <locationX>336</locationX>
+        <locationX>666</locationX>
         <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Old_Permission_Set_available_or_not</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Log_Error_While_Getting_Old_Permission_Set</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
@@ -126,12 +133,16 @@
     <recordLookups>
         <name>Get_Old_Permission_Set_Assignment</name>
         <label>Get Old Permission Set Assignment</label>
-        <locationX>182</locationX>
+        <locationX>314</locationX>
         <locationY>350</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Decision_3</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Log_Error_While_Getting_Old_Permission_Set</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>AssigneeId</field>
@@ -152,7 +163,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>210</locationX>
+        <locationX>540</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Old_Permission_Set</targetReference>
@@ -162,8 +173,8 @@
     <subflows>
         <name>Assign_Permission_Set_for_New_Profile</name>
         <label>Assign Permission Set for New Profile</label>
-        <locationX>336</locationX>
-        <locationY>842</locationY>
+        <locationX>666</locationX>
+        <locationY>890</locationY>
         <flowName>User_AssignPermission</flowName>
         <inputAssignments>
             <name>getProfileName</name>
@@ -179,6 +190,48 @@
         </inputAssignments>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </subflows>
+    <subflows>
+        <description>Logs the error occurred while getting the old permission set.</description>
+        <name>Log_Error_While_Getting_Old_Permission_Set</name>
+        <label>Log Error While Getting Old Permission Set</label>
+        <locationX>1194</locationX>
+        <locationY>242</locationY>
+        <flowName>Error_Logger_Create_Error_Record</flowName>
+        <inputAssignments>
+            <name>errorMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>errorName</name>
+            <value>
+                <elementReference>currentFlowName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>errorObject</name>
+            <value>
+                <elementReference>currentObjectName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>errorOwnerId</name>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <textTemplates>
+        <name>currentFlowName</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;User: Remove Permission&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>currentObjectName</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;User&lt;/p&gt;</text>
+    </textTemplates>
     <variables>
         <name>getNewProfileName</name>
         <dataType>String</dataType>
