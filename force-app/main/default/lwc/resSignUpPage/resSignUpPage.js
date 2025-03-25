@@ -1,13 +1,11 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import createSiteUser from '@salesforce/apex/RESSignUpController.createSiteUser';
 import myResource from '@salesforce/resourceUrl/respiraLogo';
-import poolPhoto from '@salesforce/resourceUrl/signUpImage';
 export default class ResSignUpPage extends NavigationMixin(LightningElement) {
 
     paradiseStay = myResource;
-    hotelPool = poolPhoto;
 
     userDetails = {
         firstName: '',
@@ -20,7 +18,7 @@ export default class ResSignUpPage extends NavigationMixin(LightningElement) {
     field;
     count = 0;
     haveError = false;
-
+    // @track myImgUrl = "https://raw.githubusercontent.com/milinkapatel/Respira-Images/refs/heads/main/hotel%20(3).jpg";
 
     errorMessageCssClass = 'hide-error';
 

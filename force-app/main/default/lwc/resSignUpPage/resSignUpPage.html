@@ -1,8 +1,8 @@
 <template>
     <lightning-layout horizontal-align="center">
         <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
-            <lightning-layout multiple-rows vertical-align="stretch" cl>
-                <lightning-layout-item size="12" small-device-size="12" large-device-size="4" medium-device-size="6">
+            <lightning-layout multiple-rows vertical-align="stretch">
+                <lightning-layout-item class="" size="12" small-device-size="12" large-device-size="4" medium-device-size="6">
                     <lightning-layout multiple-rows class="input-and-button-holder slds-p-horizontal_large">
                         <lightning-layout-item >
                             <p class="header slds-m-top_x-large">Get Started</p>
@@ -35,19 +35,8 @@
                         </lightning-layout-item>
                     </lightning-layout>
                 </lightning-layout-item>
-                <lightning-layout-item size="12" small-device-size="12" large-device-size="8" medium-device-size="6" class="image-and-quote-holder">
-                    <img src={hotelPool} alt="Paradise Stay Logo" class="sign-up-image">
-                    <lightning-layout multiple-rows class="quote-comma-holder">
-                        <lightning-layout-item>
-                            <span class="quote-comma">“</span>
-                        </lightning-layout-item>
-                        <lightning-layout-item>
-                            <p class="quote">Respira made our vacation planning so easy and stress-free. The Recommendations were spot on, and we had an unforgattable experience!</p>
-                        </lightning-layout-item>
-                        <lightning-layout-item>
-                            <span class="quote-comma">”</span>
-                        </lightning-layout-item>
-                    </lightning-layout>
+                <lightning-layout-item size="12" small-device-size="12" large-device-size="8" medium-device-size="6" class=" image-and-quote-holder">
+                    <c-res-testimony-card></c-res-testimony-card>
                 </lightning-layout-item>
             </lightning-layout>
         </lightning-layout-item>    

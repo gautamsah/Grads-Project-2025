@@ -31,6 +31,9 @@ export default class ResInput extends LightningElement {
     get isCheckbox() {
         return this.field === 'checkbox';
     }
+    get isPassword() {
+        return this.field === 'password';
+    }
     get isEmail() {
         return this.field === 'email';
     }
@@ -57,7 +60,7 @@ export default class ResInput extends LightningElement {
             this.errorMessage = 'Please enter a valid email!';
         }
 
-        if (this.isText && !this.textFormat.test(this.fieldValue)) {
+        if (this.isText && !this.fieldName == 'username' && !this.textFormat.test(this.fieldValue)) {
             this.hasError = true;
             this.errorMessage = 'Name can only contain digit and only be 40 digits long!';
         }
@@ -74,7 +77,7 @@ export default class ResInput extends LightningElement {
 
     handleChange(event) {
         console.log('I am in child' , event);
-        this.fieldValue = this.isText || this.isEmail || this.isPhone ? event.target.value : event.target.checked;
+        this.fieldValue = this.isPassword || this.isText || this.isEmail || this.isPhone ? event.target.value : event.target.checked;
         
         this.validationCheck();
 

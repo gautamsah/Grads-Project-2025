@@ -10,6 +10,7 @@ Created Date       : March 18, 2025
 Revision Log:
 Ver   Date         Author                               Modification
 1.0   18-03-2025   Milin Kapatel                      Initial Version
+2.0   24-03-2025   Pritkumar Prajapati(GT25-4)        Added getQuote() method for retrieveing quote records.
 *********************************************************
 */
 public without sharing class RESSignUpController {
@@ -63,7 +64,28 @@ public without sharing class RESSignUpController {
             throw new RESSignUpException(e.getMessage());
         }
     }
-    
+
+    /*
+    *********************************************************
+    @Method Name    : getQuotes
+    @author         : Pritkumar Prajapati
+    @description    : This method is used to get the quotes list.
+    @param          : none
+    @return         : List<SObject>
+	@date			: March 25, 2025
+	@JIRA			: GT25-4
+    ********************************************************
+	*/
+
+    @AuraEnabled(cacheable = false)
+    public static List<SObject> getQuotes(){
+        List<SObject> quoteList = [SELECT Id, Type__c, Offer_Img_Url__c, Quote_Person_Name__c, Quote_Person_Img_Url__c, Quote_Description__c FROM Offer_Or_Quote__c WHERE 	Type__c = 'Quote'  LIMIT 6];
+        try {
+            return quoteList;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
     
     /*
     *********************************************************

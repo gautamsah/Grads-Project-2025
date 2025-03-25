@@ -1,0 +1,22 @@
+<template>
+    <div class="main slds-grid_vertical-stretch">
+        <img src={hotelPool} alt="hotel image" class="image">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <template for:each={testimonies} for:item="testimony">
+                        <div class="swiper-slide" key={testimony.id}>
+                            <div>
+                                <p class="comma">“</p>
+                                <p class="quote">{testimony.Quote_Description__c}</p>
+                                <p class="comma">”</p>
+                            </div>
+                            <div class="reviewer-and-name-holder">
+                                <img class="reviewer" src={testimony.Quote_Person_Img_Url__c} alt="Reviewer">
+                                <span class="reviewer-name">{testimony.Quote_Person_Name__c}</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+    </div>
+</template>
