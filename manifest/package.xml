@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>*</members>
+        <members>RESConstantUtil</members>
+		<members>RESErrorLogger</members>
+		<members>RESErrorLoggerTest</members>
+		<members>RESSignUpController</members>
+		<members>RESSignUpControllerTest</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -60,12 +64,23 @@
         <name>CustomTab</name>
     </types>
     <types>
+		<members>Error_Logger_Create_Error_Record</members>
+		<members>User_After_Create</members>
+		<members>User_After_Update</members>
+		<members>User_AssignPermission</members>
+		<members>User_RemovePermission</members>
+		<name>Flow</name>
+	</types>
+    <types>
         <members>Hotel__c-Hotel Layout</members>
         <members>Product2-Product Layout</members>
         <name>Layout</name>
     </types>
     <types>
-        <members>*</members>
+        <members>resButton</members>
+		<members>resInput</members>
+		<members>resSignUpPage</members>
+		<members>resTestimonyCard</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>

@@ -2,7 +2,6 @@ import { LightningElement, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import createSiteUser from '@salesforce/apex/RESSignUpController.createSiteUser';
-import myResource from '@salesforce/resourceUrl/respiraLogo';
 export default class ResSignUpPage extends NavigationMixin(LightningElement) {
 
     paradiseStay = myResource;
@@ -18,7 +17,6 @@ export default class ResSignUpPage extends NavigationMixin(LightningElement) {
     field;
     count = 0;
     haveError = false;
-    // @track myImgUrl = "https://raw.githubusercontent.com/milinkapatel/Respira-Images/refs/heads/main/hotel%20(3).jpg";
     backgroundImage = "https://raw.githubusercontent.com/pritprajapati/Trisog-images/refs/heads/main/big-ben.jpg";
 
     errorMessageCssClass = 'hide-error';
