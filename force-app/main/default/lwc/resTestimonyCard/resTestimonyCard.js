@@ -6,7 +6,7 @@ import SwiperJsCss from '@salesforce/resourceUrl/SwiperJsCss';
 
 export default class ResTestimonyCard extends LightningElement {
 
-    @api imgUrl = "https://raw.githubusercontent.com/milinkapatel/Respira-Images/refs/heads/main/hotel%20(3).jpg";
+    @api bgImg;
 
     hotelPool = poolPhoto;
     testimonies = [];

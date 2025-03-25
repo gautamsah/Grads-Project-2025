@@ -19,6 +19,7 @@ export default class ResSignUpPage extends NavigationMixin(LightningElement) {
     count = 0;
     haveError = false;
     // @track myImgUrl = "https://raw.githubusercontent.com/milinkapatel/Respira-Images/refs/heads/main/hotel%20(3).jpg";
+    backgroundImage = "https://raw.githubusercontent.com/pritprajapati/Trisog-images/refs/heads/main/big-ben.jpg";
 
     errorMessageCssClass = 'hide-error';
 
