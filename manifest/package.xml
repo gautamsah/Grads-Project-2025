@@ -35,10 +35,10 @@
         <members>Hotel__c.Phone__c</members>
         <members>Hotel__c.Website__c</members>
         <members>Offer_Or_Quote__c.Offer_Img_Url__c</members>
-		<members>Offer_Or_Quote__c.Quote_Description__c</members>
-		<members>Offer_Or_Quote__c.Quote_Person_Img_Url__c</members>
-		<members>Offer_Or_Quote__c.Quote_Person_Name__c</members>
-		<members>Offer_Or_Quote__c.Type__c</members>
+        <members>Offer_Or_Quote__c.Quote_Description__c</members>
+        <members>Offer_Or_Quote__c.Quote_Person_Img_Url__c</members>
+        <members>Offer_Or_Quote__c.Quote_Person_Name__c</members>
+        <members>Offer_Or_Quote__c.Type__c</members>
         <members>Product2.Banquet_Hall_Capacity__c</members>
         <members>Product2.Conference_Room_Capacity__c</members>
         <members>Product2.Description</members>
@@ -69,15 +69,15 @@
     <types>
         <members>Hotel__c-Hotel Layout</members>
         <members>Offer_Or_Quote__c-Offer Layout</members>
-		<members>Offer_Or_Quote__c-Offer Or Quote Layout</members>
-		<members>Offer_Or_Quote__c-Quote Layout</members>
+        <members>Offer_Or_Quote__c-Offer Or Quote Layout</members>
+        <members>Offer_Or_Quote__c-Quote Layout</members>
         <members>Product2-Product Layout</members>
         <name>Layout</name>
     </types>
     <types>
         <members>resCarousel</members>
-		<members>resHomePageCarousel</members>
-		<members>resTestimoniesCarousel</members>
+        <members>resHomePageCarousel</members>
+        <members>resTestimoniesCarousel</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>
