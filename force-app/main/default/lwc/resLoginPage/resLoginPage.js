@@ -3,8 +3,8 @@ import { NavigationMixin } from 'lightning/navigation';
 import myResource from '@salesforce/resourceUrl/respiraLogo';
 import poolPhoto from '@salesforce/resourceUrl/HotelLogin';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import login from '@salesforce/apex/CommunityLoginController.login';
-import forgotpassword from '@salesforce/apex/CommunityLoginController.forgotPassword';
+import login from '@salesforce/apex/RESLoginController.login';
+import forgotpassword from '@salesforce/apex/RESLoginController.forgotPassword';
 
 export default class ResLoginPage extends NavigationMixin(LightningElement) {
     paradiseStay = myResource;
