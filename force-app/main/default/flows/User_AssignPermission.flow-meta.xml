@@ -128,13 +128,13 @@
         <inputAssignments>
             <name>errorName</name>
             <value>
-                <elementReference>currentFlowName</elementReference>
+                <elementReference>getFlowName</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <name>errorObject</name>
             <value>
-                <elementReference>currentFlowObjectName</elementReference>
+                <elementReference>getObjectName</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -150,16 +150,26 @@
             </value>
         </inputAssignments>
     </subflows>
-    <textTemplates>
-        <name>currentFlowName</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;User: Assign Permission&lt;/p&gt;</text>
-    </textTemplates>
-    <textTemplates>
-        <name>currentFlowObjectName</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;User&lt;/p&gt;</text>
-    </textTemplates>
+    <variables>
+        <name>getFlowName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>User: Assign Permission</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>getObjectName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>User</stringValue>
+        </value>
+    </variables>
     <variables>
         <name>getProfileName</name>
         <dataType>String</dataType>

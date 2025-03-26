@@ -216,22 +216,38 @@
             </value>
         </inputAssignments>
         <inputAssignments>
+            <name>errorObjectRecordid</name>
+            <value>
+                <elementReference>userId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <name>errorOwnerId</name>
             <value>
                 <elementReference>$User.Id</elementReference>
             </value>
         </inputAssignments>
     </subflows>
-    <textTemplates>
+    <variables>
         <name>currentFlowName</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;User: Remove Permission&lt;/p&gt;</text>
-    </textTemplates>
-    <textTemplates>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>User: Remove Permission</stringValue>
+        </value>
+    </variables>
+    <variables>
         <name>currentObjectName</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;User&lt;/p&gt;</text>
-    </textTemplates>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>User</stringValue>
+        </value>
+    </variables>
     <variables>
         <name>getNewProfileName</name>
         <dataType>String</dataType>
