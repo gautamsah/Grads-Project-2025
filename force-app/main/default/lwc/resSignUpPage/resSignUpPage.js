@@ -4,7 +4,6 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import createSiteUser from '@salesforce/apex/RESSignUpController.createSiteUser';
 export default class ResSignUpPage extends NavigationMixin(LightningElement) {
 
-    paradiseStay = myResource;
 
     userDetails = {
         firstName: '',

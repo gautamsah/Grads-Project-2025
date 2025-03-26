@@ -11,10 +11,10 @@
                             <p class="slds-m-vertical_small signup-detail">Create an account to access exclusive deals, manage your bookings and personalize your travel experience. Start your journey with us. Respira provides the best possible staying options across the globe, which is just a click away!</p>
                         </lightning-layout-item>
                         <lightning-layout-item size="12">
-                            <c-res-input class="slds-m-vertical_small child-input"  input-type="text" field-label="First Name" field-name="firstName" field-value={userDetails.firstName} onchange={handleChange} ></c-res-input>
+                            <c-res-input class="slds-m-vertical_small child-input" validate="true"  input-type="text" field-label="First Name" field-name="firstName" field-value={userDetails.firstName} onchange={handleChange} ></c-res-input>
                         </lightning-layout-item>
                         <lightning-layout-item size="12">
-                            <c-res-input class="slds-m-vertical_small child-input"  input-type="text" field-label="Last Name" field-name="lastName" field-value={userDetails.lastName} onchange={handleChange} ></c-res-input>
+                            <c-res-input class="slds-m-vertical_small child-input" validate="true"  input-type="text" field-label="Last Name" field-name="lastName" field-value={userDetails.lastName} onchange={handleChange} ></c-res-input>
                         </lightning-layout-item>
                         <lightning-layout-item size="12">
                             <c-res-input class="slds-m-vertical_small child-input"  input-type="email" field-label="E-mail" field-name="email" field-value={userDetails.email} onchange={handleChange} ></c-res-input>
