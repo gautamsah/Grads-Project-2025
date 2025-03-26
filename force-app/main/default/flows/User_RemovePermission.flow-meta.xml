@@ -3,7 +3,8 @@
     <apiVersion>63.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
-        <name>Decision_3</name>
+        <description>This Will check that old permission set is assigned to user or not.</description>
+        <name>Old_Permission_Set_Assignment_is_Available_or_Not</name>
         <label>Old Permission Set Assignment is Available or Not</label>
         <locationX>314</locationX>
         <locationY>458</locationY>
@@ -28,6 +29,7 @@
         </rules>
     </decisions>
     <decisions>
+        <description>It will check that Old Permission set is available or not.</description>
         <name>Old_Permission_Set_available_or_not</name>
         <label>Old Permission Set available or not</label>
         <locationX>666</locationX>
@@ -93,6 +95,7 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordDeletes>
+        <description>Delete that old Permission Set Assignment</description>
         <name>Delete_Assigned_Permission_Set</name>
         <label>Delete Assigned Permission Set</label>
         <locationX>50</locationX>
@@ -107,6 +110,7 @@
         <inputReference>Get_Old_Permission_Set_Assignment</inputReference>
     </recordDeletes>
     <recordLookups>
+        <description>It will retrieve Old Profile Permission Set.</description>
         <name>Get_Old_Permission_Set</name>
         <label>Get Old Permission Set</label>
         <locationX>666</locationX>
@@ -131,13 +135,14 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <description>Try to fetch the Old Permission Set Assignment</description>
         <name>Get_Old_Permission_Set_Assignment</name>
         <label>Get Old Permission Set Assignment</label>
         <locationX>314</locationX>
         <locationY>350</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Decision_3</targetReference>
+            <targetReference>Old_Permission_Set_Assignment_is_Available_or_Not</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -171,6 +176,7 @@
     </start>
     <status>Active</status>
     <subflows>
+        <description>This Subflow will assign permission set to new Profile Accordingly.</description>
         <name>Assign_Permission_Set_for_New_Profile</name>
         <label>Assign Permission Set for New Profile</label>
         <locationX>666</locationX>
@@ -216,38 +222,22 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <name>errorObjectRecordid</name>
-            <value>
-                <elementReference>userId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
             <name>errorOwnerId</name>
             <value>
                 <elementReference>$User.Id</elementReference>
             </value>
         </inputAssignments>
     </subflows>
-    <variables>
+    <textTemplates>
         <name>currentFlowName</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <value>
-            <stringValue>User: Remove Permission</stringValue>
-        </value>
-    </variables>
-    <variables>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;User: Remove Permission&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
         <name>currentObjectName</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <value>
-            <stringValue>User</stringValue>
-        </value>
-    </variables>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;User&lt;/p&gt;</text>
+    </textTemplates>
     <variables>
         <name>getNewProfileName</name>
         <dataType>String</dataType>

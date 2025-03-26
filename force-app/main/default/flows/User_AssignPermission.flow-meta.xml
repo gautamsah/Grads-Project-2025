@@ -3,9 +3,33 @@
     <apiVersion>63.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
+        <description>This Decision will check that Permission Set Assignment record is Available or Not.</description>
+        <name>check_Permission_Set_Assignment_Availability</name>
+        <label>check Permission Set Assignment Availability</label>
+        <locationX>314</locationX>
+        <locationY>458</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>NotAvailable</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Old_Permission_Set_Assignment</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Permission_set_Assignment</targetReference>
+            </connector>
+            <label>NotAvailable</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>This Decision will check that permission set is Available or Not.</description>
         <name>Check_Permission_Set_Availability</name>
         <label>Check Permission Set Availability</label>
-        <locationX>314</locationX>
+        <locationX>710</locationX>
         <locationY>242</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -19,7 +43,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Permission_set_Assignment</targetReference>
+                <targetReference>Get_Old_Permission_Set_Assignment</targetReference>
             </connector>
             <label>IsNull</label>
         </rules>
@@ -56,10 +80,11 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordCreates>
+        <description>If no any record of new permission ser assignment is available so it will create new permission set assignment record.</description>
         <name>Permission_set_Assignment</name>
         <label>Permission set Assignment</label>
         <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationY>566</locationY>
         <faultConnector>
             <targetReference>Log_Error_While_Assigning_Permission_Set</targetReference>
         </faultConnector>
@@ -79,9 +104,43 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
+        <description>This will fetch the permission set Assignment record for the new Profile.</description>
+        <name>Get_Old_Permission_Set_Assignment</name>
+        <label>Get Old Permission Set Assignment</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>check_Permission_Set_Assignment_Availability</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Log_Error_While_Assigning_Permission_Set</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AssigneeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>userId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>PermissionSetId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Permission_Set.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>PermissionSetAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Permission Set of the as Per Profile</description>
         <name>Get_Permission_Set</name>
         <label>Get Permission Set</label>
-        <locationX>314</locationX>
+        <locationX>710</locationX>
         <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -105,7 +164,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>188</locationX>
+        <locationX>584</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Permission_Set</targetReference>
@@ -117,7 +176,7 @@
         <name>Log_Error_While_Assigning_Permission_Set</name>
         <label>Log Error While Assigning Permission Set</label>
         <locationX>314</locationX>
-        <locationY>458</locationY>
+        <locationY>674</locationY>
         <flowName>Error_Logger_Create_Error_Record</flowName>
         <inputAssignments>
             <name>errorMessage</name>
@@ -128,13 +187,13 @@
         <inputAssignments>
             <name>errorName</name>
             <value>
-                <elementReference>getFlowName</elementReference>
+                <elementReference>currentFlowName</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <name>errorObject</name>
             <value>
-                <elementReference>getObjectName</elementReference>
+                <elementReference>currentFlowObjectName</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -150,26 +209,16 @@
             </value>
         </inputAssignments>
     </subflows>
-    <variables>
-        <name>getFlowName</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <value>
-            <stringValue>User: Assign Permission</stringValue>
-        </value>
-    </variables>
-    <variables>
-        <name>getObjectName</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <value>
-            <stringValue>User</stringValue>
-        </value>
-    </variables>
+    <textTemplates>
+        <name>currentFlowName</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;User: Assign Permission&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>currentFlowObjectName</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;User&lt;/p&gt;</text>
+    </textTemplates>
     <variables>
         <name>getProfileName</name>
         <dataType>String</dataType>
