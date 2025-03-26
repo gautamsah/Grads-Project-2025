@@ -25,6 +25,7 @@
             <label>Changed</label>
         </rules>
     </decisions>
+    <description>This Flow will run after Update for Assign the Permission set to user for new Profile.</description>
     <environments>Default</environments>
     <interviewLabel>User:After Update {!$Flow.CurrentDateTime}</interviewLabel>
     <label>User: After Update</label>

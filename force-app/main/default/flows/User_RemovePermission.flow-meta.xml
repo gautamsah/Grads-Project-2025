@@ -54,6 +54,7 @@
             <label>IsOldAvailable</label>
         </rules>
     </decisions>
+    <description>This Flow is Used for Remove the Current Permission set and Assign Permission set According to Profile.</description>
     <environments>Default</environments>
     <formulas>
         <name>getNewPermissionSetFromProfile</name>

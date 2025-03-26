@@ -33,7 +33,7 @@
         <locationY>242</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>IsNull</name>
+            <name>IsNotNull</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Get_Permission_Set.Id</leftValueReference>
@@ -45,9 +45,10 @@
             <connector>
                 <targetReference>Get_Old_Permission_Set_Assignment</targetReference>
             </connector>
-            <label>IsNull</label>
+            <label>IsNotNull</label>
         </rules>
     </decisions>
+    <description>This Flow is Used For Assign Permission Set to User.</description>
     <environments>Default</environments>
     <formulas>
         <name>ProfilePermissionSet</name>
