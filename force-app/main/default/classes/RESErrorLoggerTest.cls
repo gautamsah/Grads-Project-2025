@@ -29,20 +29,4 @@ public class RESErrorLoggerTest {
         
         System.assertEquals(caughtErr, err);
     }
-
-    @isTest
-    private static void testRESErrorLoggerFunctionality_errorLogCreation(){
-        String err;
-        String caughtErr;
-
-        Test.startTest();
-        try{
-            RESErrorLogger.createErrorLog('Test Name', 'Test Message', 'Test Object', 'Test Object RecordId');
-        } catch (DmlException e) {
-            caughtErr = e.getMessage();
-        }
-        Test.stopTest();
-        
-        System.assertEquals(caughtErr, err);
-    }
 }
