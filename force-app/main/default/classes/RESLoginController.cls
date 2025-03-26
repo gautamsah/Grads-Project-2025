@@ -30,7 +30,7 @@ public with sharing class RESLoginController {
         try {
             PageReference loginPage = Site.login(username, password, startUrl);
             if (loginPage != null) {
-                return loginPage.getUrl();
+                return 'https://respira-dev.my.site.com/respira';
             } else {
                 throw new AuraHandledException('Invalid credentials');
             }
