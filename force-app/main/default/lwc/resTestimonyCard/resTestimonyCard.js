@@ -1,5 +1,4 @@
 import { api, LightningElement, track} from 'lwc';
-import poolPhoto from '@salesforce/resourceUrl/signUpImage';
 import getQuote from '@salesforce/apex/RESSignUpController.getQuotes';
 import { loadScript, loadStyle } from "lightning/platformResourceLoader";
 import SwiperJsCss from '@salesforce/resourceUrl/SwiperJsCss';
@@ -8,7 +7,6 @@ export default class ResTestimonyCard extends LightningElement {
 
     @api bgImg;
 
-    hotelPool = poolPhoto;
     testimonies = [];
     async connectedCallback() {
         try {
