@@ -1,0 +1,32 @@
+<template>
+    <div class="swiper-outer-container">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <template for:each={carouselItems} for:item="carouselItem">
+                    <div key={carouselItem.Id} class={carouselSlideClass}>  
+                        <!-- "swiper-slide quote-slide" -->
+                        <div class={carouselCardClass}>
+                            <!-- "carousel-card quote-card" -->
+                            <template if:true={isQuoteSwiper}>
+                                <div class="quote-img-name">
+                                    <img src={carouselItem.Quote_Person_Img_Url__c} alt="img">
+                                    <p class="quote-name">{carouselItem.Quote_Person_Name__c}</p>
+                                </div>
+                                <div class="quote-discription">
+                                    <p>{carouselItem.Quote_Description__c}</p>
+                                </div>
+                            </template>
+                            <template if:true={isOfferSwiper}>
+                                <img src={carouselItem.Offer_Img_Url__c} alt="img">
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="swiper-button-next">
+            </div>
+            <div class="swiper-button-prev">
+            </div>
+        </div>
+    </div>
+</template>
