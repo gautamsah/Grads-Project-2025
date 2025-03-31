@@ -1,0 +1,30 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="12" class="slds-is-relative input-label-holder slds-m-vertical_small">
+            <template if:false={isCheckbox}>
+                <label class="input-label slds-m-right_small" for={fieldLabel}>{fieldLabel}</label>
+            </template>
+            <template if:true={isText}>
+                <input class={cssClasses} placeholder={placeHolder}  id={fieldLabel} name={fieldName} type="text" value={fieldValue} oninput={handleChange} required>
+            </template>
+            <template if:true={isEmail}>
+                <input class={cssClasses} placeholder={placeHolder} id={fieldLabel} name={fieldName} type="email" value={fieldValue} oninput={handleChange} required>
+            </template>
+            <template if:true={isPhone}>
+                <input class={cssClasses} placeholder={placeHolder} id={fieldLabel} name={fieldName} type="tel" value={fieldValue} oninput={handleChange} required>
+            </template>
+            <template if:true={isPassword}>
+                <input class={cssClasses} placeholder={fieldLabel} name={fieldName} type="password" value={fieldValue} oninput={handleChange} required>
+            </template>
+            <template if:true={isCheckbox}>
+                <lightning-layout class="slds-m-bottom_small">
+                    <lightning-layout-item size="12" class="checkbox-layout slds-m-vertical_xx-small">
+                        <input class={cssClasses} name={fieldName} id={fieldLabel} type="checkbox" checked={fieldValue} onchange={handleChange}>
+                        <label class="input-label slds-m-left_small" for={fieldLabel}>{fieldLabel}</label>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+            <p if:true={hasError} class="errorMessage slds-is-absolute">{errorMessage}</p>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

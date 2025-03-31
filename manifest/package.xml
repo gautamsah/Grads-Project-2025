@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>*</members>
+        <members>RESHomePageCarouselController</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -25,12 +25,81 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Hotel__c.Address__c</members>
+        <members>Hotel__c.Amenities__c</members>
+        <members>Hotel__c.Banner_Photo_Url__c</members>
+        <members>Hotel__c.Description__c</members>
+        <members>Hotel__c.Email__c</members>
+        <members>Hotel__c.Hotel_Type__c</members>
+        <members>Hotel__c.Number_Of_Rooms__c</members>
+        <members>Hotel__c.Phone__c</members>
+        <members>Hotel__c.Website__c</members>
+        <members>Offer_Or_Quote__c.Offer_Img_Url__c</members>
+        <members>Offer_Or_Quote__c.Quote_Description__c</members>
+        <members>Offer_Or_Quote__c.Quote_Person_Img_Url__c</members>
+        <members>Offer_Or_Quote__c.Quote_Person_Name__c</members>
+        <members>Offer_Or_Quote__c.Type__c</members>
+        <members>Product2.Banquet_Hall_Capacity__c</members>
+        <members>Product2.Conference_Room_Capacity__c</members>
+        <members>Product2.Description</members>
+        <members>Product2.Dining_Capacity__c</members>
+        <members>Product2.Hotel_Product_Type__c</members>
+        <members>Product2.Hotel__c</members>
+        <members>Product2.IsActive</members>
+        <members>Product2.Name</members>
+        <members>Product2.ProductCode</members>
+        <members>Product2.Product_Final_Unit_Price__c</members>
+        <members>Product2.Product_Unit_Price__c</members>
+        <members>Product2.Room_Type__c</members>
+        <members>Product2.Swimming_Pool_Capacity__c</members>
+        <members>Product2.Total_Quantity__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Hotel__c</members>
+        <members>Offer_Or_Quote__c</members>
+        <members>Product2</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Hotel__c</members>
+        <members>Offer_Or_Quote__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Hotel__c-Hotel Layout</members>
+        <members>Offer_Or_Quote__c-Offer Layout</members>
+        <members>Offer_Or_Quote__c-Offer Or Quote Layout</members>
+        <members>Offer_Or_Quote__c-Quote Layout</members>
+        <members>Product2-Product Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>resCarousel</members>
+        <members>resHomePageCarousel</members>
+        <members>resTestimoniesCarousel</members>
         <name>LightningComponentBundle</name>
+    </types>
+    <types>
+        <members>Hotel__c.All</members>
+        <members>Offer_Or_Quote__c.All</members>
+        <name>ListView</name>
+    </types>
+    <types>
+        <members>Community_User</members>
+        <members>Hotel_Manager</members>
+        <members>System_Admin_Permissions</members>
+        <name>PermissionSet</name>
     </types>
     <types>
         <members>*</members>
         <name>StaticResource</name>
+    </types>
+    <types>
+        <members>Community User RES</members>
+        <members>Hotel Experience</members>
+        <members>System Admin RES</members>
+	<name>Profile</name>
     </types>
     <version>63.0</version>
 </Package>

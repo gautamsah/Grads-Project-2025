@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Final_Unit_Price__c</fullName>
+    <description>Product Final Price is the custom field that is used to store the final price at that perticular instance of time of that perticular hotel product.</description>
+    <externalId>false</externalId>
+    <label>Product Final Unit Price</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
