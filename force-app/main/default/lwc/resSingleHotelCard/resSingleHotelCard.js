@@ -7,13 +7,13 @@ export default class ResHotelCardChild extends NavigationMixin(LightningElement)
 
        @api
        rating = 4.8;
-
+       
        @api
        price = 120;
-
+   
        @api
        hotelName = "Serenity Villa";
-
+  
        @api
        imgName = myResource;
 
