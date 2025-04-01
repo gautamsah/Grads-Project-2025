@@ -1,0 +1,60 @@
+.child-input .details {
+    color: rgba(102, 102, 102, 1);
+    
+}
+
+a {
+    color: blue;
+}
+
+.header {
+    font-weight: 800;
+    font-size: x-large;
+    
+}
+
+.hide-error {
+    display: none;
+}
+
+.logo {
+    width: 40%;
+}
+
+.show-error {
+    bottom: 100;
+    display: block;
+    color: red;
+}
+
+.signup-detail {
+    font-weight: 500;
+    font-size: large;
+    color: rgba(102, 102, 102, 1);
+    
+}
+
+.sign-up-image {
+    object-fit: cover;
+}
+
+.log-in-text {
+    text-align: center;
+}
+
+button:hover {
+    background-color: #066bd6;
+}
+
+@media screen and (max-width: 425px) {
+    .quote {
+        font-size: medium;
+        line-height: 0.9;
+    }
+
+    .quote-comma {
+        font-size: xx-large;
+        font-weight: 600;
+    }
+
+}

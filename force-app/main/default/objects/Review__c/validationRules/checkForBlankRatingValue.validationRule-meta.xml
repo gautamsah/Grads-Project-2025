@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>checkForBlankRatingValue</fullName>
+    <active>true</active>
+    <description>This validation rule checks if there is any rating field value blank or not.</description>
+    <errorConditionFormula>OR( ISBLANK( Cleanliness_And_Hygiene__c ), ISBLANK(  Food_Quality__c ),  ISBLANK(  Hospitality__c ),  ISBLANK(  Value_For_Money__c ))</errorConditionFormula>
+    <errorMessage>Please fill all Rating Values.</errorMessage>
+</ValidationRule>
