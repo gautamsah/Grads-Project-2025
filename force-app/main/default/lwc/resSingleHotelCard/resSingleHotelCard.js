@@ -13,7 +13,7 @@ export default class ResHotelCardChild extends NavigationMixin(LightningElement)
    
        @api
        hotelName = "Serenity Villa";
-  
+   
        @api
        imgName = myResource;
 
