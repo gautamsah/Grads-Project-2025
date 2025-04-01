@@ -6,9 +6,6 @@ import { NavigationMixin } from 'lightning/navigation';
 export default class ResHotelCardChild extends NavigationMixin(LightningElement) {
 
     @api
-    hotelUniqueName;
-
-    @api
     rating = 4.8;
 
     @api
@@ -32,9 +29,8 @@ export default class ResHotelCardChild extends NavigationMixin(LightningElement)
               this[NavigationMixin.Navigate]({
                          type: 'standard__webPage',
                          attributes: {
-                             url: `https://respira-dev.my.site.com/respira/s/hotel?hotelUniqueName=${this.hotelUniqueName}`,
-                             target:'_self',
-                             componentName: 'c__resHotelDetailPage'
+                             url: `https://respira-dev.my.site.com/respira/s/hoteldetailpage`,
+                             target:'_self'
                          }
                      });
         }
