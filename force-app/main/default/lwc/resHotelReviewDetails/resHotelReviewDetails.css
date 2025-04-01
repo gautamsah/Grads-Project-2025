@@ -1,0 +1,404 @@
+.hotel-review-details {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 26px auto 0;
+}
+
+.review-details-customer-review-text {
+    font-family: 'TerminaMedium';
+    font-size: 22px;
+}
+.review-details-no-reviews-found{
+    font-family: "TerminaLight";
+    line-height: 30px;
+    font-size: 18px;
+    margin-top: 16px;
+}
+.review-details-summary-part {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 22px;
+}
+.review-details-overall{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+}
+.review-details-overall-rating {
+    font-family: 'TerminaBold';
+    font-size: 48px;
+    padding-right : 6px;
+}
+
+.review-details-total-review {
+    font-family: 'TerminaLight';
+    font-size: 24px;
+}
+.review-details-avg{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.review-details-avg-rating-text {
+    font-family: 'TerminaRegular';
+    font-size: 12px;
+    width: 100px;
+    color: #495560;
+}
+
+.review-details-avg-rating-range {
+    width: 100px;
+}
+
+
+.review-details-avg-rating-value {
+    font-family: 'TerminaRegular';
+    font-size: 12px;
+    color: #778088;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    /* -webkit-appearance: none; */
+    background: rgba(255, 255, 255, 0);
+}
+
+.review-details-overall-stars {
+    display: flex;
+    height: 50px;
+    width: auto;
+    margin-top : 15px;
+}
+
+
+
+.side {
+    float: left;
+    width: 53%;
+    margin-top: 12px;
+}
+
+.middle {
+    margin-top: 12px;
+    float: left;
+    width: 40%;
+}
+
+/* Place text to the right */
+.right {
+
+    float: right;
+    width: 7%;
+    margin-top: 12px;
+    text-align: right;
+}
+
+
+
+/* The bar container */
+.bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+}
+
+/* Individual bars */
+.value-for-money-bar {
+    border-radius: 20px;
+    width: 20%;
+    height: 10px;
+    background-color: #b88917;
+}
+.cleanliness-and-hygiene-bar {
+    border-radius: 20px;
+    width: 20%;
+    height: 10px;
+    background-color: #b88917;
+}
+.hospitality-bar {
+    border-radius: 20px;
+    width: 20%;
+    height: 10px;
+    background-color: #b88917;
+}
+.food-quality-bar {
+    border-radius: 20px;
+    width: 20%;
+    height: 10px;
+    background-color: #b88917;
+}
+.review-details-sort-container{
+    display: flex;
+    justify-content: space-between;
+    margin : 28px 0 0 0;
+    color : #495560;
+    font-family: 'TerminaRegular';
+    font-size: 12px;
+    background-color: #F8FAFC;
+    border-radius: 20px;
+    padding: 15px 0;
+    font-size: 15px;
+}
+.review-details-sort-heading{
+    display: flex;
+    align-items: center;
+    width: 30%;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 10px 0;
+}
+.review-details-sort-date{
+    display: flex;
+    align-items: center;
+    width: 45%;
+    margin: 0 auto;
+    justify-content: center;
+    background: #b88917;
+    color : white;
+    border-radius: 18px;
+    padding: 10px 0;
+    text-decoration: none;
+}
+.review-details-sort-rating{
+    display: flex;
+    align-items: center;
+    width: 45%;
+    margin: 0 auto;
+    justify-content: center;
+    background: #b88917;
+    color : white;
+    border-radius: 18px;
+    padding: 10px 0;
+    text-decoration: none;
+}
+.review-details-icon{
+    --sds-c-icon-color-foreground-default: white;
+    margin : 0 10px;
+}
+.review-details-icon-sort{
+    --sds-c-icon-color-foreground-default: #485560;
+}
+.review-details-sort-btns-container{
+    display: flex;
+    width: 70%;
+}
+
+.review-details-reviews-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 26px 0 54px 0;
+    position: relative;
+}
+.review-details-reviews-container::after{
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    content : '';
+    background-color: #e8eaeb;
+    bottom: -28px;
+    left: 0;
+}
+.review-details-review-left{
+    display: flex;
+    justify-content: center;
+    width: 35%;
+}
+.review-details-review-person-img{
+    width: 60px;
+    margin : 0 20px 0 0;
+}
+.review-details-review-person-img img{
+    border-radius: 50%;
+}
+.review-details-review-star-name-date{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.review-details-review-star{
+    display: flex;
+    height: 14px;
+    width: auto;
+}
+.review-details-review-name{
+    font-size: 14px;
+    font-family: 'TerminaRegular';
+}
+.review-details-review-date{
+    font-size: 12px;
+    font-family: 'TerminaLight';
+}
+.review-details-reviews-right-part{
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    padding : 0 0 0 12px;
+}
+.review-details-review-title{
+    font-size: 14px;
+    font-family: 'TerminaRegular';
+    line-height: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.review-details-review-description{
+    font-size: 12px;
+    font-family: 'TerminaLight';
+    line-height: 20px;
+    margin: 16px 0 0 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+.arrow-visible{
+    display : inline-block;
+}
+.arrow-hidden{
+    display : none;
+}
+.review-details-load-more{
+    width: 100%;
+    font-size: 14px;
+    font-family: 'TerminaRegular';
+    text-decoration: none;
+
+}
+.review-details-load-more-hidden{
+    display: none;
+}
+.review-details-load-more-btn{
+    display: block;
+    width: 150px;
+    margin: 0 auto;
+    text-align: center;
+    color : black;
+    border: black solid 1px;
+    border-radius: 5px;
+    padding: 12px;
+    box-shadow: 1px 2px #888888;
+}
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 900px) and (min-width: 768px) {
+
+    .review-details-overall{
+        width: 60%;
+    }
+    .review-details-avg{
+        padding: 0 0 0 30px;
+        width: 40%;
+    }
+    .side{
+        width: 90%;
+    }
+    .right{
+        width: 10%;
+    }
+    .middle{
+        width: 100%;
+    }
+    .review-details-review-left{
+        flex-direction: column;
+        align-items: center;
+    }
+    .review-details-review-star-name-date{
+        margin: 18px 0 0 0;
+        align-items: center;
+    }
+    .review-details-review-person-img{
+        margin : 0;
+    }
+    .review-details-review-star{
+        width: 70px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hotel-review-details{
+        width: 90%;
+    }
+    .review-details-summary-part{
+        flex-direction: column;
+    }
+    .review-details-overall{
+        width: 100%;
+    }
+    .review-details-avg{
+        padding: 0;
+        margin-top : 18px;
+        width: 100%;
+    }
+    .side{
+        width: 90%;
+    }
+    .right{
+        width: 10%;
+    }
+    .middle{
+        width: 100%;
+    }
+    .review-details-overall{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .review-details-overall-content{
+        display: flex;
+        flex-direction: column;
+    }
+    .review-details-overall-rating{
+        font-size: 30px;
+    }
+    .review-details-total-review{
+        font-size: 20px;
+    }
+    .review-details-overall-stars{
+        height: 40px;
+        margin : 0;
+    }
+    .review-details-sort-container{
+        flex-direction: column;
+
+    }
+    .review-details-sort-btns-container{
+        margin : 12px 0 0 0;
+        width: 100%;
+    }
+    .review-details-sort-heading{
+        width: 100%;
+    }
+    .review-details-reviews-container{
+        flex-direction: column;
+    }
+    .review-details-review-left{
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .review-details-reviews-right-part{
+        width: 100%;
+        margin: 16px 0 0 0;
+        padding : 0;
+    }
+}
+@media screen and (max-width: 450px) {
+    .review-details-overall-rating{
+        font-size: 24px;
+    }
+    .review-details-total-review{
+        font-size: 15px;
+    }
+    .review-details-overall-stars{
+        height: 30px;
+    }
+}
