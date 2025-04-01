@@ -8,10 +8,6 @@
         <apexClass>RESSignUpController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>RES_Utility</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
     <description>This Permission Set is used to assign Permissions to System Administrator</description>
     <fieldPermissions>
         <editable>true</editable>
@@ -1568,10 +1564,6 @@
     </tabSettings>
     <tabSettings>
         <tab>Offer_Or_Quote__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
-        <tab>Review__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
