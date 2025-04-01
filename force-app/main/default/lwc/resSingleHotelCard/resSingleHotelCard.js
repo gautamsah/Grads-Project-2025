@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement,api } from 'lwc';
 import myResource from '@salesforce/resourceUrl/respiraLogo';
 import { NavigationMixin } from 'lightning/navigation';
 
@@ -29,7 +29,7 @@ export default class ResHotelCardChild extends NavigationMixin(LightningElement)
               this[NavigationMixin.Navigate]({
                          type: 'standard__webPage',
                          attributes: {
-                             url: `https://respira-dev.my.site.com/respira/s/hoteldetailpage`,
+                             url: 'https://respira-dev.my.site.com/respira/s/hoteldetailpage',
                              target:'_self'
                          }
                      });
