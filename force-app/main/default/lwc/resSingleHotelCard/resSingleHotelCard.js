@@ -5,26 +5,26 @@ import { NavigationMixin } from 'lightning/navigation';
 
 export default class ResHotelCardChild extends NavigationMixin(LightningElement) {
 
-    @api
-    rating = 4.8;
+       @api
+       rating = 4.8;
 
-    @api
-    price = 120;
+       @api
+       price = 120;
 
-    @api
-    hotelName = "Serenity Villa";
+       @api
+       hotelName = "Serenity Villa";
 
-    @api
-    imgName = myResource;
+       @api
+       imgName = myResource;
 
-    @api
-    city = "Ubud";
+       @api
+       city = "Ubud";
 
-    @api
-    state = "Bali";
+       @api
+       state = "Bali";
 
 
-    gotodetailpage(){
+       gotodetailpage(){
               this[NavigationMixin.Navigate]({
                          type: 'standard__webPage',
                          attributes: {
