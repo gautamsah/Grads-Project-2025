@@ -24,8 +24,7 @@ export default class ResHotelCardChild extends NavigationMixin(LightningElement)
     state = "Bali";
 
 
-       gotodetailpage(){
-        console.log("Hotel Id", this.hotelId);
+    gotodetailpage(){
               this[NavigationMixin.Navigate]({
                          type: 'standard__webPage',
                          attributes: {
@@ -33,5 +32,5 @@ export default class ResHotelCardChild extends NavigationMixin(LightningElement)
                              target:'_self'
                          }
                      });
-        }
+         }
 }
