@@ -1,0 +1,31 @@
+<template>
+    <lightning-layout class="slds-grid_vertical-align-center bgwhite">
+        <lightning-layout-item style="width: 80%;">
+            <lightning-layout multiple-rows="true" class="title-container">
+                <lightning-layout-item style="width: 90%;">
+                    <p class="title-name">Featured Hotels: Your Ultimate Retreats</p>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" style="width: 70%;">
+                    <p class="description">Explore our curated list of top-rated hotels. Enjoy exceptional comfort, superb amenities, and prime locations, ensuring a memorable stay every time.</p>
+                </lightning-layout-item>
+            </lightning-layout>
+            <template if:true={hasRenderd}>
+                <lightning-layout multiple-rows="true" class="slds-grid slds-gutters card-container">
+                    <template for:each={getHotels} for:item="hotel">
+                        <lightning-layout-item key={hotel.Id} class="slds-col child-card" size="12" small-device-size="12" medium-device-size="6" large-device-size="3">
+                            <c-res-single-hotel-card hotel-unique-name={hotel.Unique_Hotel_Name__c} img-name={hotel.Banner_Photo_Url__c} hotel-name={hotel.Name}
+                                rating={hotel.Overall_Rating__c} price={hotel.Price__c} city={hotel.City__c}
+                                state={hotel.State__c} onclick={gotodetailpage}>
+                            </c-res-single-hotel-card>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+            
+            <template if:false={hasRenderd}>
+                <c-res-loading-spinner></c-res-loading-spinner>
+            </template>
+            
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
