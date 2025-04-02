@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#B38A24</headerColor>
+        <logo>Respira_Logo_12</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>This app is used for Respira Hotel, Member and System Admin.</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Respira</label>
+    <navType>Standard</navType>
+    <tabs>Hotel__c</tabs>
+    <tabs>standard-Product2</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>Review__c</tabs>
+    <tabs>Offer_Or_Quote__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Respira_UtilityBar</utilityBar>
+</CustomApplication>
