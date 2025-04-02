@@ -21,5 +21,4 @@
     <tabs>Review__c</tabs>
     <tabs>Offer_Or_Quote__c</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Respira_UtilityBar</utilityBar>
 </CustomApplication>
