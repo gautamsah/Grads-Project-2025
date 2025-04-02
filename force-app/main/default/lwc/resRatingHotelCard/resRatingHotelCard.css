@@ -1,6 +1,5 @@
 .bgwhite{
     background-color: white;
-    /* margin: 0 auto; */
     width: 100%;
     justify-content: center;
 }
@@ -42,5 +41,4 @@
         font-size: 10px;
         margin-bottom: 25px;
     }
-   
 }
