@@ -4,10 +4,6 @@
         <application>Respira</application>
         <visible>true</visible>
     </applicationVisibilities>
-    <classAccesses>
-        <apexClass>RES_Utility</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
     <description>This Permission Set is used to assign Permissions to Hotel Manager Or Hotel Admin</description>
     <fieldPermissions>
         <editable>true</editable>
