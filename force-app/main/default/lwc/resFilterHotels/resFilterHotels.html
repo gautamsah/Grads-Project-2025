@@ -1,0 +1,68 @@
+<template>
+    <lightning-layout class="filter-hotel-container">
+        <lightning-layout-item class="filter-container" size="3">
+            <c-res-search-filter onkeychange={searchFilter}></c-res-search-filter>
+            <lightning-layout multiple-rows="true" class="price-container">
+                <lightning-layout-item size="12" class="font-container">
+                    Price
+                </lightning-layout-item>
+                <lightning-layout-item size="12" >
+                    <lightning-input type="range" min="0" max="1000" onchange={priceFilter}></lightning-input> 
+                </lightning-layout-item>
+            </lightning-layout>
+            <!-- <c-res-price-filter onpricechange={priceFilter}></c-res-price-filter> -->
+            <!-- <c-category-filter-component onchangecategory={changeCategory}></c-category-filter-component> -->
+             <!-- <c-country-filter onchangecountry={changeCountry}></c-country-filter> -->
+             <!-- <c-day-filter onchangeday={dayFilter}></c-day-filter> -->
+            <c-res-review-filter onchangeevent={reviewFilter}></c-res-review-filter>
+            <!-- <lightning-layout multiple-rows="true" class="price-container">
+                <lightning-layout-item size="12" class="font-container">
+                    Adults
+                </lightning-layout-item>
+                <lightning-layout-item size="12" >
+                    <lightning-input type="checkbox" onchange={adultFilter} value="1" class="capacity-checkbox" label="One">One</lightning-input>
+                    <lightning-input type="checkbox" onchange={adultFilter} value="2" class="capacity-checkbox" label="Two">Two</lightning-input>
+                    <lightning-input type="checkbox" onchange={adultFilter} value="3" class="capacity-checkbox" label="Three">Three</lightning-input>
+                    <lightning-input type="checkbox" onchange={adultFilter} value="4" class="capacity-checkbox" label="Four">Four</lightning-input>
+                    <lightning-input type="checkbox" onchange={adultFilter} value="5" class="capacity-checkbox" label="Five">Five</lightning-input>
+                    <lightning-input type="checkbox" onchange={adultFilter} value="6" class="capacity-checkbox" label="Six">Six</lightning-input>
+                </lightning-layout-item>
+            </lightning-layout> -->
+            <lightning-layout multiple-rows="true" class="room-container">
+                <lightning-layout-item size="12" class="font-container-child">
+                    Adults
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12">
+                    <lightning-layout class="adult-container">
+                    <button class="counter" id="decrement" onclick={decrement}>-</button>
+                    <input type="number" onchange={adultFilter} value={adultCount} class="adult-value" min="1" max="6" disabled></input>
+                    <button class="counter" id="increment" onclick={increment}>+</button>
+                    </lightning-layout>
+                    <!-- <lightning-layout>
+                        <button onclick={adultFilter} class="btn-filter">Submit</button>
+                    </lightning-layout> -->
+                     <!-- <lightning-input type="range" min="1" max="6" onchange={roomFilter} value={roomValue}></lightning-input> -->
+                </lightning-layout-item>
+                <!-- <lightning-layout-item size="12">
+                    <button class="btn-filter" onclick={roomFilter}>Submit</button>
+                </lightning-layout-item> -->
+            </lightning-layout>
+
+
+        </lightning-layout-item>
+        
+        <lightning-layout-item size="9" class="card-container">
+            <lightning-layout multiple-rows="true">
+                <template for:each={filtertour} for:item="hotel">
+                    <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="4" key={hotel.key} multiple-rows="true" class="outer-container">
+                        <c-res-single-hotel-card hotel-unique-name={hotel.Unique_Hotel_Name__c} img-name={hotel.Banner_Photo_Url__c} hotel-name={hotel.Name}
+                        rating={hotel.Overall_Rating__c} price={hotel.Price__c} city={hotel.City__c}
+                        state={hotel.State__c} book-btn={hotel.isAvailable} onclick={gotodetailpage}>
+                    </c-res-single-hotel-card>
+                    </lightning-layout-item>
+                </template>
+        </lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

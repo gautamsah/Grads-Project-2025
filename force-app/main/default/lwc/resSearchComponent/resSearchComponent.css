@@ -1,0 +1,213 @@
+.res-search-container{
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background: #fffdf8;
+    padding: 25px;
+    border-radius: 15px;
+}
+.res-search-input{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-radius: 15px;
+    border: 1px solid #B88917;
+    color: #B88917;
+    outline: none;
+}
+.res-search-input::placeholder{
+    color: #B88917;
+    opacity: 0.5;
+}
+.res-search-input-item{
+    height: 50px;
+    position: relative;
+    padding: 0 5px;
+}
+.res-search-checkin-input{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-radius: 15px;
+    border: 1px solid #B88917;
+    color: #B88917;
+    outline: none;
+}
+.res-search-checkin-input-item{
+    height: 50px;
+    padding: 0 5px;
+}
+.res-search-checkout-input{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-radius: 15px;
+    border: 1px solid #B88917;
+    color: #B88917;
+    outline: none;
+}
+.res-search-checkout-input-item{
+    height: 50px;
+    padding: 0 5px;
+}
+.res-search-book-button{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    border: none;
+    background: #B88917;
+    color: white;
+}
+.res-search-book-button-item{
+    height: 50px;
+    padding: 0 5px;
+}
+
+
+/* =============== */
+.calendar{
+    position: absolute;
+    top: 60px;
+    right: 60%;
+    z-index: 999;
+}
+.res-calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+.res-calendar-container {
+    
+
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 549px;
+    margin: 0 auto;
+    background-color: #fffdf6;
+    box-shadow: 6px 6px 9px 0px rgba(0, 0, 0, 0.25);
+    padding: 10px 5px;
+    
+  }
+.res-calendar-grid{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+.res-calendar-grid-item{
+    width: 75px;
+    height: 75px;
+    align-content: center;
+    border: 1px solid #ffffff;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 15px;
+}
+.res-calendar-controlls{
+    margin: 10px 0;
+    --lwc-colorTextIconDefault: #b38a24;
+    font-family: TerminaRegular;
+    font-weight: 900;
+    font-size: 16px;
+    color: #b88917;
+}
+.res-calendar-grid-item:hover{
+    background-color: #d6aa42;
+    color: #ffffff;
+    text-decoration: none;
+}
+.DateSelected{
+    background-color: #B88917;
+    color: #ffffff;
+    text-decoration: none;
+}
+.selectNone{
+    pointer-events: none;
+}
+.res-calendar-week-days{
+    font-weight: 900;
+}
+.dropdown-content{
+    position: absolute;
+    top : 60px;
+    background-color: #fffdf8;
+    flex-direction: column;
+    min-width: 95%;
+    box-shadow: 6px 6px 9px 0px rgba(0, 0, 0, 0.25); 
+    left: 50%;
+    transform: translate(-50%, 0%);
+    font-size: 18px;
+    font-weight: 500;
+    z-index: 999;
+    max-height: 250px;
+    overflow: auto;
+}
+.dropDownItem{
+    padding: 10px 0;
+    color: #B88917;
+}
+.dropDownItem:hover{
+    background-color: #B88917;
+    color: #ffffff;
+    text-decoration: none;
+}
+.pointerDisabled{
+    cursor: not-allowed;
+}
+.res-calendar-layout{
+    position: relative;
+}
+.res-search-error-msg{
+    margin: 10px 0 0 0;
+    color: red;
+    font-size: 12px;
+}
+.res-search-error-msg-hidden{
+    display: none;
+}
+@media screen and (max-width: 1024px) {
+    .calendar{
+        right: 0;
+        left: 50%;
+        transform: translate(-50%,0);
+    }
+    .res-calendar-container {
+        width: 374px;
+    }
+    .res-calendar-grid-item{
+        width: 50px;
+        height: 50px;
+    }
+    .res-search-book-button-item{
+        margin: 10px 0 0 0;
+    }
+}
+@media screen and (max-width: 768px) {
+    .res-calendar-container {
+        width: 283px;
+    }
+    .res-calendar-grid-item{
+        width: 37px;
+        height: 37px;
+    }
+    
+    .res-search-checkin-input-item{
+        margin: 10px 0 0 0;
+    }
+    .res-search-checkout-input-item{
+        margin: 10px 0 0 0;
+    }
+    .res-search-container{
+        padding: 15px;
+    }
+
+}
+@media screen and (max-width: 450px) {
+    .calendar{
+        font-size: 12px;
+    }
+}

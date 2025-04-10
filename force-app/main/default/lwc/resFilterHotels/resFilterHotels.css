@@ -1,0 +1,112 @@
+.filter-hotel-container{
+    width: 80%;
+    justify-content: center;
+    margin: 0 auto;
+}
+.outer-container{
+    padding: 10px;
+    max-width: 350px;
+    
+}
+.filter-container{
+    margin-right: 10px;
+}
+.font-container{
+    margin: 8px;
+    font-size: 25px;
+    font-family:'TerminaRegular';
+    color: black;
+}
+.font-container-child{
+    margin: 8px;
+    font-size: 25px;
+    font-family:'TerminaRegular';
+    color: black;
+}
+.price-container{
+    background-color: #fffdf8;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+.room-container{
+    background-color: #fffdf8;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.btn-filter{
+    margin-top: 5px;
+    padding: 5px 30px;
+    background-color: #B38A24;
+    color: white;
+    font-family: 'TerminaRegular';
+    font-size: 18px;
+    border-radius: 20px;
+    border:none;
+    cursor: pointer;
+}
+.adult-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.adult-value{
+    display: block;
+    width: 60%;
+    height: 32px;
+    background: #B38A24;
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    border: none;
+}
+.counter{
+    display: block;
+    height: 32px;
+    width: 50px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+    background-color: #B38A24;
+    border: none;
+}
+.counter:hover{
+    background-color: #8b6f26;
+}
+.btn-filter:hover{
+    background-color: #8b6f26;
+    color: black;
+}
+
+.capacity-checkbox{
+    margin-top: 5px;
+    padding: 5px 30px;
+    background-color: white;
+    color: #B38A24;
+    font-family: 'TerminaRegular';
+    font-size: 20px;
+    border-radius: 20px;
+    border:2px solid #B38A24;
+    cursor: pointer;
+    width: 100%;
+}
+
+@media  screen and (min-width: 320px) and (max-width: 767px) {
+    .filter-container{
+        display: none;
+    }
+    .card-container{
+        width: 100%;
+        margin: 0;
+    }
+    .outer-container{
+        padding: 0px;
+        margin-top: 20px;
+    }
+}

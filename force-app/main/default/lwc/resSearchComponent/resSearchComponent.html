@@ -1,0 +1,80 @@
+<template>
+    <lightning-layout multiple-rows class="res-search-container">
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="res-search-input-item">
+            <input type="text" name="input" placeholder={placeholder} class="res-search-input" onkeyup={handleInput} value={searchInput}>
+            <lightning-layout class="dropdown-layout">
+                <template if:true={showDropDown}>
+                    <lightning-layout class="dropdown-content">
+                        <template for:each={dropDownList} for:item="value">
+                            <a key={value} class="dropDownItem" data-item={value} onclick={handleDropDownClick}>{value}</a>
+                        </template>
+                    </lightning-layout>
+                </template>
+            </lightning-layout>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4">
+            <lightning-layout class="res-calendar-layout">
+                <lightning-layout-item size="6" small-device-size="6" medium-device-size="6" large-device-size="6" class="res-search-checkin-input-item"  onclick={toggleCalendar} >
+                    <input type="text" readonly name="Checkin-date" class="res-search-checkin-input" value={startDate} >
+                </lightning-layout-item>
+                <lightning-layout-item size="6" small-device-size="6" medium-device-size="6" large-device-size="6" class="res-search-checkout-input-item" onclick={toggleCalendar} >
+                    <input type="text" readonly name="Checkout-date" class="res-search-checkout-input" value={endDate}>
+                </lightning-layout-item>
+                <lightning-layout-item class="calendar-item">
+                    <template if:true={showCalendar}>
+                        <lightning-layout-item size="12" class="calendar" onblur={handleBlur}>
+                            <lightning-layout class="res-calendar-container" multiple-rows  onblur={handleBlur}>
+                                <lightning-layout-item size="12" class="res-calendar-controlls">
+                                    <lightning-layout>
+                                        <lightning-layout-item size="1">
+                                            <a onclick={handleBackMonth}>
+                                                <lightning-icon class="footer-icon" icon-name="utility:back" size="small" alternative-text="Back"
+                                            title="Back"></lightning-icon>
+                                            </a>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="10">
+                                            <span>{selectedMonthString} </span>
+                                            <span> {selectedYear}</span>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="1">
+                                            <a onclick={handleForwardMonth}>
+                                                <lightning-icon class="footer-icon" icon-name="utility:forward" size="small" alternative-text="Forward"
+                                                title="Forward"></lightning-icon>
+                                            </a>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="res-calendar" size="12">
+                                <lightning-layout class="res-calendar-grid res-calendar-week-days" multiple-rows>
+                                    <lightning-layout-item class="res-calendar-grid-item selectNone">Sun</lightning-layout-item>
+                                    <lightning-layout-item class="res-calendar-grid-item selectNone">Mon</lightning-layout-item>
+                                    <lightning-layout-item class="res-calendar-grid-item selectNone">Tue</lightning-layout-item>
+                                    <lightning-layout-item class="res-calendar-grid-item selectNone">Wed</lightning-layout-item>
+                                    <lightning-layout-item class="res-calendar-grid-item selectNone">Thu</lightning-layout-item>
+                                    <lightning-layout-item class="res-calendar-grid-item selectNone">Fri</lightning-layout-item>
+                                    <lightning-layout-item class="res-calendar-grid-item selectNone">Sat</lightning-layout-item>
+                                </lightning-layout>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="res-calendar" size="12">
+                                <lightning-layout class="res-calendar-grid" multiple-rows>
+                                    <template for:each={daysList} for:item="day">
+                                        <a key={day.date} data-item={day.dateKey} onclick={handleDayClick} class={day.className}>
+                                            {day.date}
+                                        </a>
+                                    </template>
+                                </lightning-layout>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="2" class="res-search-book-button-item">
+            <button class="res-search-book-button" onclick={handleBookNow}>Book Now</button>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class={ErrorMsgCss}>
+            <p>Please fill details to proceed further</p>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

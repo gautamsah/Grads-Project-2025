@@ -1,0 +1,203 @@
+<template>
+    <template for:each={hotelDetails} for:item="hotel">
+        <lightning-layout multiple-rows key={hotel.id} class="detail-holder">
+            <lightning-layout-item size="12" class="hotel-details slds-m-top_medium">
+                <p class="hotel-name">{hotel.hotelRecord.Name}</p>
+                <button class="hotel-book-button" onclick={goToRoom}>BOOK NOW</button>
+            </lightning-layout-item>
+            <lightning-layout-item size="12">
+                <lightning-layout multiple-rows class="location-review-holder">
+                    <lightning-layout-item class="icon-city">
+                        <lightning-icon class="location-icon" icon-name="utility:checkin" alternative-text="Location" title="Location"></lightning-icon>
+                        <p class="location slds-p-right_small">{hotel.hotelRecord.City__c}</p>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4" large-device-size="1" medium-device-size="2" small-device-size="3" class="reviews slds-p-left_small">
+                        <c-res-rating-star class="rating-star" rating={hotel.hotelRecord.Overall_Rating__c}></c-res-rating-star>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="star-review">
+                        <p class="reviews slds-p-left_x-small">({hotel.hotelRecord.Total_Reviews__c
+                        } Reviews)</p>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-m-top_medium">
+                <lightning-layout class="hotel-image-holder">
+                    <lightning-layout-item class="banner-img-holder" size="9">
+                        <img class="banner-img" src={bannerImg} alt="Hotel Banner Image" data-id="banner">
+                    </lightning-layout-item>
+                    <lightning-layout-item  size="3">
+                        <lightning-layout class="vtcl-img-holder">
+                            <lightning-layout-item class="vtcl-img-item">
+                                <img class="vtcl-img" src={img1} alt="Hotel Banner Image" data-id="1" onclick={handleImageChange}>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="vtcl-img-item">
+                                <img class="vtcl-img" src={img2} alt="Hotel Banner Image" data-id="2" onclick={handleImageChange}>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="vtcl-img-item">
+                                <img class="vtcl-img" src={img3} alt="Hotel Banner Image" data-id="3" onclick={handleImageChange}>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-m-vertical_x-large">
+                <lightning-layout-item size="12">
+                    <p class="content-heading">DESCRIPTION</p>
+                </lightning-layout-item>
+                <lightning-layout-item size="12">
+                    <p class="content-text slds-m-top_small">{hotel.hotelRecord.Description__c}</p>
+                </lightning-layout-item>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows key={hotel.id} class="activity-holder">
+            <lightning-layout-item size="12" class=" activity">
+                <lightning-layout-item size="12" >
+                    <p class="content-heading ">ACTIVITIES</p>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" >
+                    <p class="content-text slds-m-top_small">Step into India's inaugural luxury haven, a 5-star hotel in Mumbai's Colaba. Indulge in a symphony of culinary delights at our nine legendary bars and restaurants, and revel in the stellar service of our devoted butlers and concierge.</p>
+                </lightning-layout-item>
+                <lightning-layout-item size="12">
+                    <lightning-layout multiple-rows class="activity-img-holder">
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4" class="item1">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12">
+                                    <img src="https://raw.githubusercontent.com/pritprajapati/Trisog-images/refs/heads/main/0669ed84e95eaaaf15a9b34547f54d0f19a3c5ad-912x966.avif" alt="Bar">
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="activity-text">Glamorous Bandra nightlife</lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4" class="item2">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12">
+                                    <img src="https://raw.githubusercontent.com/pritprajapati/Trisog-images/refs/heads/main/16904e39b4926f8f5e31938a68eac658a9fbafb9-912x954.avif" alt="Rooms">
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="activity-text">LUXURIOUS ROOMS</lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item> 
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4" class="item3">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12">
+                                    <img src="https://raw.githubusercontent.com/pritprajapati/Trisog-images/refs/heads/main/ec2f9d29776e03dc0fd29e81847c121b340d8654-456x483.avif" alt="Sea View">
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="activity-text">SEA-FACING BALCONY</lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout-item>
+        </lightning-layout>
+        </lightning-layout><lightning-layout multiple-rows key={hotel.id} class="detail-holder">
+            <lightning-layout-item size="12" class=" includes">
+                <lightning-layout-item size="12" >
+                    <p class="content-heading">FACILITIES</p>
+                </lightning-layout-item>
+                <lightning-layout-item size="12">
+                    <lightning-layout class="slds-m-top_small">
+                        <lightning-layout-item size="6" >
+                            <p class="list-header">Includes</p>
+                            <ul class="list-holder" >
+                                <template for:each={includes} for:item="include">
+                                    <li class="content-text" key={include}>{include}</li>
+                                </template>
+                            </ul>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6">
+                            <p class="list-header">Not Includes</p>
+                            <ul class="list-holder">
+                                <template for:each={notIncludes} for:item="notInclude">
+                                    <li class="content-text" key={notInclude}>{notInclude}</li>
+                                </template>
+                            </ul>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class=" safety">
+                <lightning-layout-item size="12" >
+                    <p class="content-heading">SAFETY</p>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-m-top_small">
+                    <p class="list-header slds-m-top_small">Health Precautions</p>
+                    <ul class="list-holder">
+                        <template for:each={safety} for:item="rule">
+                            <li class="content-text" key={rule}>{rule}</li>
+                        </template>
+                    </ul>
+                </lightning-layout-item>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class=" location-map">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                        <lightning-map class="map"
+                        map-markers={mapMarkers}
+                        zoom-level="17"
+                        center={center}
+                        list-view="visible"
+                        ></lightning-map>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-left_x-large location-text">
+                        <p class="content-heading">LOCATION</p>
+                        <p class="city-name slds-p-top_large">GETTING HERE</p>
+                        <p class="city-name slds-p-top_large">{hotel.hotelRecord.Address__c}</p>
+                        <p class="slds-p-top_large">
+                            <a href="https://www.google.com/maps/dir/" target="_blank" class="city-name" >OPEN GOOGLE MAP ></a>
+                        </p>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="utility slds-m-top_large slds-grid slds-gutters">
+                <lightning-layout class="utility-holder" multiple-rows>
+                    <lightning-layout-item class="slds-col" size="12" small-device-size="12" large-device-size="4" medium-device-size="6">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item class="utility-item">
+                                <svg width="25" height="25" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.6889 1C3.52594 1.00003 3.36742 1.05314 3.23733 1.1513C3.10724 1.24945 3.01266 1.3873 2.9679 1.544L1.1099 8.044C1.078 8.15569 1.07247 8.27326 1.09376 8.38744C1.11504 8.50163 1.16256 8.60931 1.23256 8.702C1.30256 8.79469 1.39314 8.86985 1.49714 8.92157C1.60115 8.97328 1.71575 9.00013 1.8319 9H3.3599L2.0149 14.379C1.98812 14.4863 1.99767 14.5995 2.04206 14.7008C2.08645 14.8021 2.16318 14.8858 2.26023 14.9388C2.35728 14.9919 2.46918 15.0112 2.57841 14.9939C2.68765 14.9766 2.78805 14.9235 2.8639 14.843L5.2919 12.273C5.01202 11.4514 4.93055 10.5753 5.05416 9.71619C5.17776 8.8571 5.50292 8.03946 6.00306 7.33011C6.5032 6.62077 7.16412 6.03986 7.93178 5.63488C8.69944 5.22989 9.55205 5.01234 10.4199 5H8.2219L9.3419 2.012C9.3842 1.89854 9.3984 1.77653 9.38329 1.65639C9.36817 1.53625 9.3242 1.42156 9.25512 1.32211C9.18603 1.22267 9.0939 1.14142 8.98659 1.08533C8.87928 1.02924 8.75999 0.999959 8.6389 1H3.6899H3.6889ZM10.4999 15C11.0908 15 11.676 14.8836 12.222 14.6575C12.7679 14.4313 13.264 14.0998 13.6819 13.682C14.0997 13.2641 14.4312 12.768 14.6574 12.2221C14.8835 11.6761 14.9999 11.0909 14.9999 10.5C14.9999 9.90905 14.8835 9.32389 14.6574 8.77792C14.4312 8.23196 14.0997 7.73588 13.6819 7.31802C13.264 6.90016 12.7679 6.56869 12.222 6.34254C11.676 6.1164 11.0908 6 10.4999 6C9.30643 6 8.16183 6.47411 7.31792 7.31802C6.47401 8.16193 5.9999 9.30653 5.9999 10.5C5.9999 11.6935 6.47401 12.8381 7.31792 13.682C8.16183 14.5259 9.30643 15 10.4999 15ZM12.8539 9.354L9.8539 12.354C9.76014 12.4477 9.63298 12.5004 9.5004 12.5004C9.36782 12.5004 9.24066 12.4477 9.1469 12.354L8.1469 11.354C8.10041 11.3076 8.06352 11.2525 8.03834 11.1918C8.01315 11.1311 8.00017 11.0661 8.00012 11.0004C8.00003 10.8677 8.05265 10.7404 8.1464 10.6465C8.24015 10.5526 8.36737 10.4998 8.50005 10.4997C8.63273 10.4996 8.76001 10.5522 8.8539 10.646L9.4999 11.293L12.1459 8.646C12.2398 8.55211 12.3671 8.49937 12.4999 8.49937C12.6327 8.49937 12.76 8.55211 12.8539 8.646C12.9478 8.73989 13.0005 8.86722 13.0005 9C13.0005 9.13278 12.9478 9.26011 12.8539 9.354Z" fill="#b38a24"/>
+                                </svg>
+                                <p class="utility-header slds-p-left_small">Instant Confirmation</p>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12">
+                                <p class="content-text">Don't Wait for the Confirmation!</p>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-col" size="12" small-device-size="12" large-device-size="4" medium-device-size="6">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item class="utility-item">
+                                <svg width="25" height="25" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.9375 3.9375H15.1875V6.1875H12.9375V3.9375Z" fill="#b38a24"/>
+                                    <path d="M12.9375 7.3125H15.1875V9.5625H12.9375V7.3125Z" fill="#b38a24"/>
+                                    <path d="M9.5625 3.9375H11.8125V6.1875H9.5625V3.9375Z" fill="#b38a24"/>
+                                    <path d="M9.5625 7.3125H11.8125V9.5625H9.5625V7.3125Z" fill="#b38a24"/>
+                                    <path d="M8.15625 14.625C8.62224 14.625 9 14.2472 9 13.7812C9 13.3153 8.62224 12.9375 8.15625 12.9375C7.69026 12.9375 7.3125 13.3153 7.3125 13.7812C7.3125 14.2472 7.69026 14.625 8.15625 14.625Z" fill="#b38a24"/>
+                                    <path d="M11.8125 16.875H4.5C4.20172 16.8747 3.91575 16.7561 3.70483 16.5452C3.49392 16.3343 3.3753 16.0483 3.375 15.75V2.25C3.3753 1.95172 3.49392 1.66575 3.70483 1.45483C3.91575 1.24392 4.20172 1.1253 4.5 1.125H11.8125V2.25H4.5V15.75H11.8125V11.25H12.9375V15.75C12.9372 16.0483 12.8186 16.3343 12.6077 16.5452C12.3968 16.7561 12.1108 16.8747 11.8125 16.875Z" fill="#b38a24"/>
+                                    </svg>
+                                    <p class="utility-header slds-p-left_small">Mobile ticketing</p>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12">
+                                <p class="content-text">Use your phone or print your voucher</p>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-col" size="12" small-device-size="12" large-device-size="4" medium-device-size="6">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item class="utility-item">
+                                <svg width="25" height="25" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.75737 3.75731C4.31452 3.20015 4.97596 2.75819 5.70392 2.45666C6.43188 2.15513 7.2121 1.99994 8.00004 1.99994C8.78797 1.99994 9.56819 2.15513 10.2962 2.45666C11.0241 2.75819 11.6855 3.20015 12.2427 3.75731C12.7999 4.31446 13.2418 4.9759 13.5433 5.70386C13.8449 6.43182 14.0001 7.21204 14.0001 7.99998C14.0001 8.78791 13.8449 9.56813 13.5433 10.2961C13.2418 11.024 12.7999 11.6855 12.2427 12.2426C11.1175 13.3679 9.59135 14 8.00004 14C6.40873 14 4.8826 13.3679 3.75737 12.2426C2.63214 11.1174 2 9.59128 2 7.99998C2 6.40867 2.63214 4.88253 3.75737 3.75731V3.75731Z" stroke="#b38a24" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M4 4L12 12" stroke="#b38a24" stroke-width="1.8" stroke-linecap="round"/>
+                                    </svg>
+                                    <p class="utility-header slds-p-left_small">Free Cancellation</p>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12">
+                                <p class="content-text">Cancel up to 24 hours in advance to receive a full refund</p>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12">
+                <c-res-related-hotel hotel-name={hotel.hotelRecord.Name} city-name={hotel.hotelRecord.City__c}></c-res-related-hotel>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

@@ -1,0 +1,19 @@
+.outer-container{
+    margin-top: 15px;
+   background-color: #fffdf8;
+   color: #979cac;
+   padding: 20px;
+   border-radius: 10px;
+}
+
+.big-font{
+    color: black;
+    font-weight: 500;
+    font-size: 25px;
+    font-family:'TerminaRegular';
+}
+
+lightning-input{
+    font-size: 20px;
+    font-weight: 400;
+}

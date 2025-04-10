@@ -1,0 +1,11 @@
+.outer-container{
+    padding: 20px;
+    font-size: 25px;
+    background-color: #fffdf8;
+    color: #F8EED6;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+.font-container{
+    font-family:'TerminaRegular';
+}

@@ -1,0 +1,42 @@
+.bgwhite{
+    background-color: white;
+    width: 100%;
+    justify-content: center;
+}
+.title-container{
+    text-align: center;
+    justify-content: center;
+}
+.title-name{
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 42px;
+    letter-spacing: 0%;
+    font-family: 'TerminaRegular';
+    margin: 52px 0px 35px;
+}
+.description{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    font-family: 'TerminaRegular';
+    margin-bottom: 25px;
+}
+.child-card{
+    margin : 16px 0px;
+}
+@media screen and (max-width: 600px){
+    .bcwhite{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .title-name{
+        font-size: 20px;
+        margin: 25px 0px;
+    }
+    .description{
+        font-size: 10px;
+        margin-bottom: 25px;
+    }
+}
