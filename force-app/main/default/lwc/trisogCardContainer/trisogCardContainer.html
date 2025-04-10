@@ -1,0 +1,19 @@
+<template>
+    <lightning-layout multiple-rows="true">
+        <template for:each={filterTours} for:item="tour">
+            <lightning-layout-item key={tour.id} size="12" large-device-size="4" medium-device-size="6" small-device-size="6" class="slds-p-around_medium">
+
+                <c-trisog-card
+                image={tour.Image__c}
+                location={tour.Location__c}
+                name={tour.Name}
+                rating={tour.Average_Rating__c}
+                reviews={tour.Review_Count__c}
+                price={tour.Price__c}
+                duration={tour.Duration__c}></c-trisog-card>
+            </lightning-layout-item>
+  
+        </template>
+
+    </lightning-layout> 
+</template>

@@ -20,10 +20,7 @@
                                     <c-res-input class="slds-m-vertical_small child-input"  input-type="password" field-label="Password" field-name="password" field-value={userDetails.password} onchange={handleChange} ></c-res-input> 
                                 </lightning-layout-item> <br>
                                 <lightning-layout-item size="12">
-                                    <c-res-button variant='sign-up-button' class="slds-m-vertical_small slds-p-vertical_small" button-label="Login" onpress={handleLogin} ></c-res-button>
-                                    <!-- <template if:true={forgotPasswordUrl}> -->
-                                    <a href={forgotPasswordUrl} target="_blank" class="slds-text-link">Forgot Password?</a>
-                                    <!-- </template> -->
+                                    <c-res-button variant='sign-up-button' class="slds-m-vertical_small slds-p-vertical_small" button-label="Login" onpress={onSignUpClick} ></c-res-button>
                                 </lightning-layout-item>
 
                                 <lightning-layout-item size="12">
@@ -32,18 +29,18 @@
                                             <span class="signup-detail">Don't Have an account? </span>
                                             <a onclick={handleLoginClick}>Sign Up</a> <br>
                                         </lightning-layout-item>
-                                        <!-- <lightning-layout-item size="5" class="slds-m-vertical_small forgotpass">
+                                        <lightning-layout-item size="5" class="slds-m-vertical_small forgotpass">
                                             <a onclick={onForgotPasswordClick}>Forgot Password?</a>
-                                        </lightning-layout-item> -->
+                                        </lightning-layout-item>
                                     </lightning-layout>
                                 </lightning-layout-item>
-                                <!-- <br>
+                                <br>
                                 <lightning-layout-item size="12">
                                     <span class={errorMessageCssClass}>Please fill all the details</span>
-                                </lightning-layout-item> -->
+                                </lightning-layout-item>
                             </lightning-layout>
 
-                            <!-- <lightning-layout class={forgotpassword} multiple-rows="true">
+                            <lightning-layout class={forgotpassword} multiple-rows="true">
                                 <lightning-layout-item size="12">
                                     <c-res-input class="slds-m-vertical_small child-input"  input-type="text" field-label="Username" field-name="username" field-value={userDetails.username} onchange={handleChange} ></c-res-input>
                                 </lightning-layout-item>
@@ -57,7 +54,7 @@
                                 <lightning-layout-item size="12">
                                     <span class={errorMessageCssClass}>Please fill all the details</span>
                                 </lightning-layout-item>
-                            </lightning-layout> -->
+                            </lightning-layout>
                         </lightning-layout-item>
                        
                         

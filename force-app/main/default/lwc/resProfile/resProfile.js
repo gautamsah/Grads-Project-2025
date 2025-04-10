@@ -1,24 +1,90 @@
 import { LightningElement, track, wire } from 'lwc';
+//==========================================================
+
+
+//DONT INCLUDE
 import getRooms from '@salesforce/apex/RES_Utility.getHotelRooms';
 import { NavigationMixin } from 'lightning/navigation';
 import { getPicklistValues, getObjectInfo } from 'lightning/uiObjectInfoApi';
 import PICKLIST_FIELD from '@salesforce/schema/Product2.Related_Hotel__c';
 import roomObj from '@salesforce/schema/Product2';
 import tax from "@salesforce/label/c.Respira_Room_Tax";
+//==========================================================
+export default class ResProfile extends LightningElement {
 
-export default class ResRoom extends NavigationMixin(LightningElement) {
+    @track showUserDetails = true;
+    @track showBookings = false;
+    @track showSupportTickets = false;
+    @track firstNameInput = '';
+    @track lastNameInput = '';
+    @track emailInput = '';
+    @track contactInput = '';
+    @track userDetailsEditClicked = false;
+
+    get firstNameInputClass(){
+        return this.userDetailsEditClicked ? 'res-firstname-input' : 'res-firstname-input pointer-events-disabled';
+    }
+    get lastNameInputClass(){
+        return this.userDetailsEditClicked ? 'res-lastname-input' : 'res-lastname-input pointer-events-disabled';
+    }
+    get emailInputClass(){
+        return this.userDetailsEditClicked ? 'res-email-input' : 'res-email-input pointer-events-disabled';
+    }
+    get contactInputClass(){
+        return this.userDetailsEditClicked ? 'res-contact-input' : 'res-contact-input pointer-events-disabled';
+    }
+
+    handleUserDetails(){
+        this.showUserDetails = true;
+        this.showBookings = false;
+        this.showSupportTickets = false;
+    }
+    handleBookings(){
+        this.showUserDetails = false;
+        this.showBookings = true;
+        this.showSupportTickets = false;
+    }
+    handleSupportTickets(){
+        this.showUserDetails = false;
+        this.showBookings = false;
+        this.showSupportTickets = true;
+    }
+    handleFirstNameInputChange(event){
+        this.firstNameInput = event.target.value;
+    }
+    handleLastNameInputChange(event){
+        this.lastNameInput = event.target.value;
+    }
+    handleEmailInputChange(event){
+        this.emailInput = event.target.value;
+    }
+    handleContactInputChange(event){
+        this.contactInput = event.target.value;
+    }
+    handleUserDetailsEditButton(){
+        this.userDetailsEditClicked = true;
+    }
+    handleUserDetailsCancelButton(){
+        this.userDetailsEditClicked = false;
+    }
+    handleUserDetailsSaveButton(){
+        this.userDetailsEditClicked = false;
+    }
+
+
+
+
+    // --=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    
     formatDate(year, month, day) {
         return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     }
 
-    onDetails = true;
-    onRoom = false;
     hotelName;
     hotelUniqueName;
     @track rooms = [];
     @track selectedRooms = [];
     roomTax = tax;
-    @track taxAmount = 0;
     name;
     city;
     reviews;
@@ -80,6 +146,8 @@ export default class ResRoom extends NavigationMixin(LightningElement) {
         let basicUrl = window.location.href;
         let actualUrl = new URL(basicUrl).searchParams;
         this.hotelName = actualUrl.get('hotelUniqueName');
+        console.log(this.hotelName);
+        
         console.log('SDate:', this.startDate);
         console.log('EDate:', this.endDate);
         
@@ -183,13 +251,13 @@ export default class ResRoom extends NavigationMixin(LightningElement) {
     calculateTotals() {
         this.totalRooms = this.selectedRooms.reduce((total, room) => total + room.count, 0);
         this.totalAmount = this.selectedRooms.reduce((total, room) => total + room.calculatedPrice +(room.calculatedPrice*this.roomTax)/100, 0);
-        this.taxAmount = this.selectedRooms.reduce((total, room) => total + (room.calculatedPrice*this.roomTax)/100);
     }
 
     //*****************************************************************************************************************
 
     handleProceedButton(event){
-
+        
     }
-
+    
+    
 }

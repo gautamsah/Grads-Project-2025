@@ -25,6 +25,7 @@ export default class ResHotelDetailPage extends LightningElement {
             getHotelDetail({ hotelName: this.hotelName })
                 .then(result => {
                     this.hotelDetails = result;
+                    console.log(result);
                     if (this.hotelDetails && this.hotelDetails.length > 0 && this.hotelDetails[0].hotelRecord) {
                         this.img1 = this.hotelDetails[0].hotelRecord.Banner_Photo_Url__c;
                         this.img2 = this.hotelDetails[0].hotelRecord.Peripheral_Img__c;

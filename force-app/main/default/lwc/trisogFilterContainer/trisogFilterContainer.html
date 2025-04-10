@@ -1,0 +1,8 @@
+<template>
+    <lightning-layout multiple-rows="true">
+        <lightning-layout-item size="12">
+                <lightning-input label={rangeValue} type="range" min="100" max="600" step="1" value={rangeValue} onchange={handleRangeChange}></lightning-input>
+                <button onclick={handleFilterButton}>Filter</button>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
