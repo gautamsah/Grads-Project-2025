@@ -1,0 +1,54 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="3">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="9">
+                        <lightning-input label={rangeValue} type="range" min="100" max="600" step="1" value={rangeValue} onchange={handleRangeChange}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3">
+                        <button onclick={clearPriceFilter}>Clear</button>
+                </lightning-layout-item>
+                <lightning-layout-item size="12">
+                        <lightning-input label="Days" type="number" value={days} onchange={handleDaysChange}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-m-top_medium slds-m-bottom_medium">
+                    <template for:each={categories} for:item="category">
+                        <lightning-input key={category} type="checkbox" label={category} name={category} value={category} onchange={handleCategoryCheckbox}></lightning-input>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-m-top_medium slds-m-bottom_medium">
+                    <template for:each={countries} for:item="country">
+                        <lightning-input key={country} type="checkbox" label={country} name={country} value={country} onchange={handleCountryCheckbox}></lightning-input>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item size="9" class="slds-m-top_medium slds-m-bottom_medium">
+                    <template for:each={ratingValues} for:item="ratingVal">
+                        <lightning-input key={ratingVal} type="radio" label={ratingVal} name="rating" value={ratingVal} onchange={handleRatingsRadio}></lightning-input>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item size="3">
+                    <button onclick={clearRatingsFilter}>Clear</button>
+            </lightning-layout-item>
+                <lightning-layout-item size="12">
+                    <button onclick={handleFilterButton}>Filter</button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+        <lightning-layout-item size="9">
+            <lightning-layout multiple-rows="true">
+                <template for:each={filterTours} for:item="tour">
+                    <lightning-layout-item key={tour.id} size="12" large-device-size="4" medium-device-size="6" small-device-size="6" class="slds-p-around_medium">
+                        <c-trisog-card
+                        image={tour.Image__c}
+                        location={tour.Location__c}
+                        name={tour.Name}
+                        rating={tour.Average_Rating__c}
+                        reviews={tour.Review_Count__c}
+                        price={tour.Price__c}
+                        duration={tour.Duration__c}></c-trisog-card>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout> 
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

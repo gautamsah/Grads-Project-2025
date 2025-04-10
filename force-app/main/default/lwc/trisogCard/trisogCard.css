@@ -1,0 +1,39 @@
+.trisog-card-img{
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+}
+.trisog-card-body{
+
+}
+.trisog-card-writing{
+    padding: 12px;
+    background: #F7F8FA;
+}
+.trisog-card-name{
+    font-weight: 900;
+    min-height: 40px;
+
+}
+.trisog-card-rating-reviews-duration{
+    align-items: center;
+    justify-content: space-between;
+}
+.trisog-card-rating-container{
+    background-color: #FB595B;
+    align-items: center;
+    color : white;
+    justify-content: center;
+    border-radius: 3px;
+    padding: 3px 15px;
+}
+.trisog-card-price-container{
+    justify-content: space-between;
+    align-items: center;
+}
+.trisog-rating-review-container{
+    align-items: center;
+}
+.trisog-card-price{
+    font-weight: 900;
+}

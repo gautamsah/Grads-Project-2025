@@ -1,0 +1,57 @@
+<template>
+    <lightning-layout multiple-rows="true" class="trisog-card-body">
+        <lightning-layout-item size="12">
+            <img src={image} alt="img" class="trisog-card-img">
+        </lightning-layout-item>
+
+
+        <lightning-layout-item class="trisog-card-writing" size="12" large-device-size="12" small-device-size="12"
+            medium-device-size="12">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="12" large-device-size="12" small-device-size="12" medium-device-size="12"
+                    class="slds-text-heading_xx-small">
+                    <span>{location}</span>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" large-device-size="12" small-device-size="12" medium-device-size="12"
+                    class="slds-text-heading_small slds-m-top_small slds-m-bottom_small trisog-card-name">
+                    <span>{name}</span>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" large-device-size="12" small-device-size="12" medium-device-size="12">
+                    <lightning-layout class="trisog-card-rating-reviews-duration">
+                        <lightning-layout-item>
+                            <lightning-layout class="trisog-rating-review-container">
+                                <lightning-layout-item class="slds-p-right_x-small">
+                                    <lightning-layout class="trisog-card-rating-container">
+                                        <lightning-layout-item>
+                                            <lightning-icon size="x-small" icon-name="utility:rating"
+                                                title="Rating"></lightning-icon>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item>
+                                            {rating}
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-text-heading_xx-small">
+                                    {reviews} reviews
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item>
+                        <lightning-layout-item class="slds-text-heading_xx-small">
+                            {duration} days
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" large-device-size="12" small-device-size="12" medium-device-size="12" class="slds-m-top_large">
+                    <lightning-layout class="trisog-card-price-container">
+                        <lightning-layout-item class="slds-text-heading_xx-small">Starting from</lightning-layout-item>
+                        <lightning-layout-item class="slds-text-heading_small trisog-card-price">$ {price}</lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+
+
+            </lightning-layout>
+
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

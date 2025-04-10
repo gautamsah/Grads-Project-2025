@@ -58,7 +58,7 @@
                     <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="4" key={hotel.key} multiple-rows="true" class="outer-container">
                         <c-res-single-hotel-card hotel-unique-name={hotel.Unique_Hotel_Name__c} img-name={hotel.Banner_Photo_Url__c} hotel-name={hotel.Name}
                         rating={hotel.Overall_Rating__c} price={hotel.Price__c} city={hotel.City__c}
-                        state={hotel.State__c} book-btn={hotel.isAvailable} onclick={gotodetailpage}>
+                        state={hotel.State__c} book-btn={hotelMap.hotel} onclick={gotodetailpage}>
                     </c-res-single-hotel-card>
                     </lightning-layout-item>
                 </template>

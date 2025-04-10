@@ -1,10 +1,22 @@
 import { api, LightningElement, track } from 'lwc';
 import { loadScript, loadStyle } from "lightning/platformResourceLoader";
 import SwiperJsCss from '@salesforce/resourceUrl/SwiperJsCss';
+/*
+@Class name : ResCarousel
+@description : Reusable Carousel component
+@Author: Milin Kapatel
+@Date: 26/03/2025
+@JIRA: GT25-6
+Revision Log  :   
+Ver   Date         Author                               Modification
+1.0   26-03-2025   Milin Kapatel                      Initial Version
+2.0   02-04-2025   Milin Kapatel                      Added Comments & added a logic to let renderedCallback run only once
+*/
 export default class ResCarousel extends LightningElement {
 
     @api carouselItems = [];
     @api varient;
+    swiperInitialized = false;
 
     get isQuoteSwiper(){
         if(this.varient == 'Quote'){
@@ -39,9 +51,23 @@ export default class ResCarousel extends LightningElement {
             return 'carousel-card quote-card';
         }
     }
+    /*
+    *********************************************************
+    @methodName     : renderedCallback
+    @author         : Milin Kapatel
+    @description    : method to is used for loading the swiper js and css and initializing it after swiper slide's data is successfully fetched from parent
+    @param          : void
+    @return         : void
+	@date			: March 26, 2025
+	@JIRA			: GT25-6
+    ********************************************************
+	*/
     renderedCallback() {
             console.log('rendered callback called');
-            
+            if (this.swiperInitialized) {
+                return;
+            }
+
             Promise.all([
                 loadScript(this, SwiperJsCss + "/swiper/swiper.js"),
             ]).then(() => {
@@ -59,7 +85,7 @@ export default class ResCarousel extends LightningElement {
                           delay: 2500,
                           disableOnInteraction: false,
                         },
-    
+
                         // pagination: {
                         //   el: this.template.querySelector('.swiper-pagination'),
                         //   clickable: true,
@@ -71,7 +97,7 @@ export default class ResCarousel extends LightningElement {
                     });
                 }).catch(error => {
                     console.log('Error occured : ', error);
-    
+
                 });
             }).catch(error => {
                 console.log('Error occured in last catch : ', error);

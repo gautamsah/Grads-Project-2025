@@ -3,10 +3,9 @@
         <lightning-layout multiple-rows key={hotel.id} class="detail-holder">
             <lightning-layout-item size="12" class="hotel-details slds-m-top_medium">
                 <p class="hotel-name">{hotel.hotelRecord.Name}</p>
-                <button class="hotel-book-button" onclick={goToRoom}>BOOK NOW</button>
             </lightning-layout-item>
             <lightning-layout-item size="12">
-                <lightning-layout multiple-rows class="location-review-holder">
+                <lightning-layout multiple-rows class="location-review-holder slds-m-top_small">
                     <lightning-layout-item class="icon-city">
                         <lightning-icon class="location-icon" icon-name="utility:checkin" alternative-text="Location" title="Location"></lightning-icon>
                         <p class="location slds-p-right_small">{hotel.hotelRecord.City__c}</p>
@@ -48,18 +47,13 @@
                     <p class="content-text slds-m-top_small">{hotel.hotelRecord.Description__c}</p>
                 </lightning-layout-item>
             </lightning-layout-item>
-        </lightning-layout>
-        <lightning-layout multiple-rows key={hotel.id} class="activity-holder">
             <lightning-layout-item size="12" class=" activity">
                 <lightning-layout-item size="12" >
                     <p class="content-heading ">ACTIVITIES</p>
                 </lightning-layout-item>
-                <lightning-layout-item size="12" >
-                    <p class="content-text slds-m-top_small">Step into India's inaugural luxury haven, a 5-star hotel in Mumbai's Colaba. Indulge in a symphony of culinary delights at our nine legendary bars and restaurants, and revel in the stellar service of our devoted butlers and concierge.</p>
-                </lightning-layout-item>
                 <lightning-layout-item size="12">
                     <lightning-layout multiple-rows class="activity-img-holder">
-                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4" class="item1">
+                        <lightning-layout-item size="4" class="slds-p-right_large">
                             <lightning-layout multiple-rows>
                                 <lightning-layout-item size="12">
                                     <img src="https://raw.githubusercontent.com/pritprajapati/Trisog-images/refs/heads/main/0669ed84e95eaaaf15a9b34547f54d0f19a3c5ad-912x966.avif" alt="Bar">
@@ -67,15 +61,15 @@
                                 <lightning-layout-item size="12" class="activity-text">Glamorous Bandra nightlife</lightning-layout-item>
                             </lightning-layout>
                         </lightning-layout-item>
-                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4" class="item2">
+                        <lightning-layout-item size="4" class="slds-p-right_large">
                             <lightning-layout multiple-rows>
                                 <lightning-layout-item size="12">
                                     <img src="https://raw.githubusercontent.com/pritprajapati/Trisog-images/refs/heads/main/16904e39b4926f8f5e31938a68eac658a9fbafb9-912x954.avif" alt="Rooms">
                                 </lightning-layout-item>
                                 <lightning-layout-item size="12" class="activity-text">LUXURIOUS ROOMS</lightning-layout-item>
                             </lightning-layout>
-                        </lightning-layout-item> 
-                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4" class="item3">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4">
                             <lightning-layout multiple-rows>
                                 <lightning-layout-item size="12">
                                     <img src="https://raw.githubusercontent.com/pritprajapati/Trisog-images/refs/heads/main/ec2f9d29776e03dc0fd29e81847c121b340d8654-456x483.avif" alt="Sea View">
@@ -86,8 +80,6 @@
                     </lightning-layout>
                 </lightning-layout-item>
             </lightning-layout-item>
-        </lightning-layout>
-        </lightning-layout><lightning-layout multiple-rows key={hotel.id} class="detail-holder">
             <lightning-layout-item size="12" class=" includes">
                 <lightning-layout-item size="12" >
                     <p class="content-heading">FACILITIES</p>
@@ -128,7 +120,7 @@
             </lightning-layout-item>
             <lightning-layout-item size="12" class=" location-map">
                 <lightning-layout multiple-rows>
-                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                    <lightning-layout-item size="6">
                         <lightning-map class="map"
                         map-markers={mapMarkers}
                         zoom-level="17"
@@ -136,7 +128,7 @@
                         list-view="visible"
                         ></lightning-map>
                     </lightning-layout-item>
-                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-left_x-large location-text">
+                    <lightning-layout-item size="6" class="slds-p-left_x-large">
                         <p class="content-heading">LOCATION</p>
                         <p class="city-name slds-p-top_large">GETTING HERE</p>
                         <p class="city-name slds-p-top_large">{hotel.hotelRecord.Address__c}</p>

@@ -1,27 +1,40 @@
 <template>
     <lightning-layout class="search">
         <lightning-layout-item size="12" class="search-container slds-m-bottom_large">
-            <c-res-search-component local-storage-start-date={startDate}
-                local-storage-end-date={endDate} local-storage-input={name}
-                picklist-values={hotels} onbookbuttonclick={handleBookNow}
+            <c-res-search-component local-storage-start-date={startDate} local-storage-end-date={endDate}
+                local-storage-input={name} picklist-values={hotels} onbookbuttonclick={handleBookNow}
                 placeholder-text={placeholder}></c-res-search-component>
         </lightning-layout-item>
     </lightning-layout>
     <lightning-layout class="main" multiple-rows>
-        <lightning-layout-item size="12">
-            <p class="hotel-name">{name}</p>
-        </lightning-layout-item>
-        <lightning-layout-item class="city-review" size="12">
-            <p class="hotel-city slds-p-right_small">{city}</p>
-            <c-res-rating-star class="rating-star" rating={rating}></c-res-rating-star>
-            <p class="hotel-review slds-p-left_small">({reviews}) Reviews</p>
-        </lightning-layout-item>
-        <lightning-layout-item size="12" class="slds-m-bottom_large">
-            <p class="hotel-room-text">Available Rooms</p>
-        </lightning-layout-item>
+
+        <template if:true={onRoom}>
+            <lightning-layout-item size="12">
+                <p class="hotel-name">{name}</p>
+            </lightning-layout-item>
+            <lightning-layout-item class="city-review" size="12">
+                <p class="hotel-city slds-p-right_small">{city}</p>
+                <c-res-rating-star class="rating-star" rating={rating}></c-res-rating-star>
+                <p class="hotel-review slds-p-left_small">({reviews}) Reviews</p>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-m-bottom_large">
+                <p class="hotel-room-text">Available Rooms</p>
+            </lightning-layout-item>
+        </template>
+
+        <template if:true={onDetails}>
+            <lightning-layout-item size="12">
+                <p class="hotel-name">PRIMARY GUEST DETAILS</p>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-m-bottom_large">
+                <p class="hotel-review slds-p-left_small">Please fill all relevant fields to proceed further.</p>
+            </lightning-layout-item>
+        </template>
+
         <lightning-layout-item size="12">
             <lightning-layout multiple-rows class="room-cart-container">
-                <lightning-layout-item size="2" class="cart">
+                <lightning-layout-item size="12" small-device-size="12" large-device-size="2" medium-device-size="1"
+                    class="cart">
                     <p class="cart-heading">Your Selections:</p>
                     <template for:each={selectedRooms} for:item="selectedRoom">
                         <lightning-layout key={selectedRoom.Id} class="fields-value-container top-border" multiple-rows>
@@ -41,9 +54,23 @@
                             <p>{totalRooms}</p>
                         </lightning-layout>
                         <lightning-layout class="fields-value-container" multiple-rows>
+                            <p>Tax:</p>
+                            <p>{taxAmount}</p>
+                        </lightning-layout>
+                        <lightning-layout class="fields-value-container" multiple-rows>
                             <p>Total Amount:</p>
                             <p>$ {totalAmount}</p>
                         </lightning-layout>
+
+                        <template if:true={onRoom}>
+                            <button class="proceed-button" onclick={handleProceedButton}>Procced</button>
+                        </template>
+
+                        <template if:true={onRoom}>
+                            <c-res-button variant='details-page-button'
+                                class="slds-m-vertical_small slds-p-vertical_small sign-up-button"
+                                button-label="Pay" onpress={onSignUpClick}></c-res-button>
+                        </template>
                     </template>
                     <template if:false={selectedRooms.length}>
                         <lightning-layout class="fields-value-container top-border" multiple-rows>
@@ -51,67 +78,133 @@
                         </lightning-layout>
                     </template>
                 </lightning-layout-item>
-                <lightning-layout-item size="9" class="slds-m-bottom_x-large">
-                    <template for:each={rooms} for:item="room">
-                        <lightning-layout key={room.id} class="room" multiple-rows>
-                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="3"
-                                large-device-size="3">
-                                <img class="room-img" src={room.Image_URL__c} alt="Luxury Suite">
-                            </lightning-layout-item>
-                            <lightning-layout-item class="room-info" size="12" small-device-size="12"
-                                medium-device-size="6" large-device-size="6">
-                                <p class="room-name slds-m-bottom_medium">{room.Name}</p>
-                                <p class="room-description slds-m-bottom_small">{room.Description}</p>
-                                <lightning-layout multiple-rows>
-                                    <lightning-layout-item class="svg-icon-holder" size="12">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px"
-                                            viewBox="0 0 24 24" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M13.9928 6.6967L17.1747 3.51472L20.3567 6.6967L19.2961 7.75736L17.9247 6.38604L17.9247 17.614L19.2961 16.2426L20.3567 17.3033L17.1747 20.4853L13.9928 17.3033L15.0534 16.2426L16.4247 17.614V6.38604L15.0534 7.75736L13.9928 6.6967Z"
-                                                fill="#b88917" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M3.75 4.5L4.5 3.75H12L12.75 4.5V19.5L12 20.25H4.5L3.75 19.5V4.5ZM5.25 5.25V18.75H11.25V17.25H8.25V15.75H11.25V14.25H8.25V12.75H11.25V11.25H7.5V9.75H11.25V8.25H8.25V6.75H11.25V5.25H5.25Z"
-                                                fill="#b88917" />
-                                        </svg>
-                                        <p class="room-facility-name-area">{room.Room_Area__c} sq m</p>
+                <template if:true={onRoom}>
+                    <lightning-layout-item size="12" small-device-size="12" large-device-size="9"
+                        medium-device-size="10" class="slds-m-bottom_x-large room-info-container">
+                        <template for:each={rooms} for:item="room">
+                            <lightning-layout key={room.id} class="room" multiple-rows>
+                                <lightning-layout-item size="12" small-device-size="12" medium-device-size="3"
+                                    large-device-size="3">
+                                    <img class="room-img" src={room.Image_URL__c} alt="Luxury Suite">
+                                </lightning-layout-item>
+                                <lightning-layout-item class="room-info" size="12" small-device-size="12"
+                                    medium-device-size="6" large-device-size="6">
+                                    <p class="room-name slds-m-bottom_medium">{room.Name}</p>
+                                    <p class="room-description slds-m-bottom_small">{room.Description}</p>
+                                    <lightning-layout multiple-rows>
+                                        <lightning-layout-item class="svg-icon-holder" size="12">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M13.9928 6.6967L17.1747 3.51472L20.3567 6.6967L19.2961 7.75736L17.9247 6.38604L17.9247 17.614L19.2961 16.2426L20.3567 17.3033L17.1747 20.4853L13.9928 17.3033L15.0534 16.2426L16.4247 17.614V6.38604L15.0534 7.75736L13.9928 6.6967Z"
+                                                    fill="#b88917" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M3.75 4.5L4.5 3.75H12L12.75 4.5V19.5L12 20.25H4.5L3.75 19.5V4.5ZM5.25 5.25V18.75H11.25V17.25H8.25V15.75H11.25V14.25H8.25V12.75H11.25V11.25H7.5V9.75H11.25V8.25H8.25V6.75H11.25V5.25H5.25Z"
+                                                    fill="#b88917" />
+                                            </svg>
+                                            <p class="room-facility-name-area">{room.Room_Area__c} sq m</p>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" class="svg-icon-holder">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"
+                                                viewBox="0 0 24 24" fill="none" stroke="#b88917" stroke-width="3"
+                                                stroke-linecap="round" stroke-linejoin="arcs">
+                                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="9" cy="7" r="4"></circle>
+                                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                            </svg>
+                                            <p class="room-facility-name">Upto {room.Max_No_Of_Guest__c} guests</p>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+
+                                </lightning-layout-item>
+                                <template if:true={room.isAvailable}>
+                                    <lightning-layout-item class="room-price-button" size="12" small-device-size="12"
+                                        medium-device-size="3" large-device-size="3">
+                                        <p class="room-price slds-m-bottom_large">$ {room.Product_Unit_Price__c}</p>
+                                        <lightning-layout class="adult-container">
+                                            <button class="counter" data-id={room.Id} onclick={handleDecrement}
+                                                disabled={room.disabledDecrement}>-</button>
+                                            <input type="number" class="adult-value" value={room.count} min="0"
+                                                max={room.emptySlot} disabled></input>
+                                            <button class="counter" data-id={room.Id} onclick={handleIncrement}
+                                                disabled={room.disabledIncrement}>+</button>
+                                        </lightning-layout>
                                     </lightning-layout-item>
-                                    <lightning-layout-item size="12" class="svg-icon-holder">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"
-                                            viewBox="0 0 24 24" fill="none" stroke="#b88917" stroke-width="3"
-                                            stroke-linecap="round" stroke-linejoin="arcs">
-                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="9" cy="7" r="4"></circle>
-                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                        </svg>
-                                        <p class="room-facility-name">Upto {room.Max_No_Of_Guest__c} guests</p>
+                                </template>
+                                <template if:false={room.isAvailable}>
+                                    <lightning-layout-item class="room-price-button" size="12" small-device-size="12"
+                                        medium-device-size="3" large-device-size="3">
+                                        <p class="room-price slds-m-bottom_large">$ {room.Product_Unit_Price__c}</p>
+                                        <p class="room-description">The room is not available during the selected time
+                                            period.</p>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </template>
+                    </lightning-layout-item>
+                </template>
+
+                <template if:true={onDetails}>
+                    <lightning-layout-item size="12" small-device-size="12" large-device-size="9"
+                        medium-device-size="10" class="slds-m-bottom_x-large room-info-container">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12">
+                                <lightning-layout class="details" multiple-rows>
+                                    <lightning-layout-item size="1">
+                                        <c-res-input class="slds-m-vertical_small child-input" input-type="text"
+                                            field-label="Salutation" field-name="title"
+                                            onchange={handleChange}></c-res-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="4">
+                                        <c-res-input class="slds-m-vertical_small child-input" input-type="text"
+                                            field-label="First Name" field-name="firstName"
+                                            onchange={handleChange}></c-res-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="4">
+                                        <c-res-input class="slds-m-vertical_small child-input" input-type="text"
+                                            field-label="Last Name" field-name="lastName"
+                                            onchange={handleChange}></c-res-input>
                                     </lightning-layout-item>
                                 </lightning-layout>
-
                             </lightning-layout-item>
-                            <template if:true={room.isAvailable}>
-                                <lightning-layout-item class="room-price-button" size="12" small-device-size="12"
-                                    medium-device-size="3" large-device-size="3">
-                                    <p class="room-price slds-m-bottom_large">$ {room.Product_Unit_Price__c}</p>
-                                    <lightning-layout class="adult-container">
-                                        <button class="counter" data-id={room.Id} onclick={handleDecrement} disabled={room.disabledDecrement}>-</button>
-                                        <input type="number" class="adult-value" value={room.count}
-                                            min="0" max={room.emptySlot} disabled></input>
-                                        <button class="counter" data-id={room.Id} onclick={handleIncrement} disabled={room.disabledIncrement}>+</button>
-                                    </lightning-layout>
-                                </lightning-layout-item>
-                            </template>
-                            <template if:false={room.isAvailable}>
-                                <lightning-layout-item class="room-price-button" size="12" small-device-size="12"
-                                    medium-device-size="3" large-device-size="3">
-                                    <p class="room-price slds-m-bottom_large">$ {room.Product_Unit_Price__c}</p>
-                                    <p class="room-description">The room is not available during the selected time period.</p>
-                                </lightning-layout-item>
-                            </template>
+                            <lightning-layout-item size="12">
+                                <lightning-layout class="details" multiple-rows>
+                                    <lightning-layout-item size="5">
+                                        <c-res-input class="slds-m-vertical_small child-input" input-type="email"
+                                            field-label="Email" field-name="email"
+                                            onchange={handleChange}></c-res-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="5">
+                                        <c-res-input class="slds-m-vertical_small child-input" input-type="phone"
+                                            field-label="Phone" field-name="phone"
+                                            onchange={handleChange}></c-res-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12">
+                                <lightning-layout class="details" multiple-rows>
+                                    <lightning-layout-item size="5">
+                                        <c-res-input class="slds-m-vertical_small child-input" input-type="text"
+                                            field-label="Special Request" field-name="spReq"
+                                            onchange={handleChange}></c-res-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12">
+                                <lightning-layout class="details" multiple-rows>
+                                    <c-res-input class="slds-m-vertical_small child-input check" input-type="checkbox"
+                                        field-label="Agree to terms and condition" field-name="agreement"
+                                        onchange={handleChange}></c-res-input>
+                                </lightning-layout>
+                            </lightning-layout-item>
                         </lightning-layout>
-                    </template>
-                </lightning-layout-item>
+                    </lightning-layout-item>
+                </template>
+
             </lightning-layout>
         </lightning-layout-item>
     </lightning-layout>
+    <!-- <lightning-layout class="personal-details" multiple-rows>
+    </lightning-layout> -->
 </template>

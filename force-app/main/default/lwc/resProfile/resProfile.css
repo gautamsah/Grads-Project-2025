@@ -1,4 +1,53 @@
-.main{
+.res-profile-container{
+    width: 80%;
+    margin: 25px auto;
+}
+.pointer-events-disabled{
+    pointer-events: none;
+}
+.res-firstname-input{
+    padding: 10px;
+    max-width: 200px; 
+}
+.res-lastname-input{
+    padding: 10px;
+    max-width: 200px; 
+}
+.res-email-input{
+    padding: 10px;
+    max-width: 200px; 
+}
+.res-contact-input{
+    padding: 10px;
+    max-width: 200px; 
+}
+.res-user-details-input-item{
+    justify-content: space-between;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    margin: 10px 0;
+}
+.res-user-details-buttons{
+    padding: 0 20px;
+}
+.res-profile-menu{
+    flex-direction: column;
+    justify-content: space-between;
+}
+.res-bookings-card{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+
+/* DONT INCLUDE */
+
+
+.room{
     width: 80%;
     margin: auto;
 }
@@ -166,21 +215,13 @@
 
 .proceed-button{
     background-color: #B88917;
-    width: 94%;
+    width: 100%;
     border-radius: 15px;
     padding: 10px;
     border: none;
     color: white;
     cursor: pointer;
     margin: 12px 9px;
-}
-
-/* ----------------------------------------------------------- */
-
-.details{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 /* ----------------------------------------------------------- */
@@ -228,6 +269,72 @@
     background-color: #8B6F26;
 }
 
+
+/* mine================= */
+
+.random-dummy{
+    margin: 60px 0 0 0;
+}
+.payment-container-right-part{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 30px;
+}
+.payment-container-left-part{
+    background-color: #fffdf8;
+    padding: 10px;
+    text-align: center;
+}
+.total-cost{
+    font-family: 'TerminaRegular';
+    font-size: 30px;
+    float: right;
+
+}
+.payment-container{
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 24px 0;
+}
+.payment-wallet-current-money{
+    font-size: 20px;
+    font-family: 'TerminaRegular';
+    display: inline-block;
+}
+.current-money-value{
+    font-size: 20px;
+    font-family: 'TerminaBold';
+    display: inline-block;
+}
+.payment-container-layout{
+    min-height: 350px;
+}
+.wallet-icon{
+    width: 100%;
+    --lwc-colorTextIconDefault : #b38a24;
+}
+.wallet-name{
+    color : #B38A24;
+    font-size: 18px;
+}
+.payment-wallet-current-balance-container{
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+.payment-add-money{
+    color: #b38a24;
+    font-size: 16px;
+    font-weight: 600;
+    float: right;
+}
+.payment-method{
+    text-decoration: none;
+}
 @media screen and (max-width: 769px) {
     .room-price{
         padding-top: 15px;

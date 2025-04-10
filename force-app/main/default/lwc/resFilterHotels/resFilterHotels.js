@@ -11,15 +11,12 @@ export default class ResFilterHotels extends LightningElement {
     error;
     filterRooms;
 
-    cityFlag = false;
-    city = localStorage.getItem("selectedCity")? localStorage.getItem("selectedCity") : '';
-
     d = new Date();
     tomorrow  = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-    // checkoutDate = '2025-05-16';
-    // checkinDate = '2025-05-08';
-    checkinDate = localStorage.getItem("checkinDate") ? localStorage.getItem("checkinDate") : this.formatDate(this.d.getFullYear(), (this.d.getMonth() + 1), this.d.getDate());
-    checkoutDate = localStorage.getItem("checkoutDate") ? localStorage.getItem("checkoutDate") : this.formatDate(this.tomorrow.getFullYear(), (this.tomorrow.getMonth() + 1), this.tomorrow.getDate());
+    checkoutDate = '2025-05-16';
+    checkinDate = '2025-05-08';
+    // checkinDate = localStorage.getItem("checkinDate") ? localStorage.getItem("checkinDate") : this.formatDate(this.d.getFullYear(), (this.d.getMonth() + 1), this.d.getDate());
+    // checkoutDate = localStorage.getItem("checkoutDate") ? localStorage.getItem("checkoutDate") : this.formatDate(this.tomorrow.getFullYear(), (this.tomorrow.getMonth() + 1), this.tomorrow.getDate());
     
     // localCheckinDates = localStorage.getItem("checkinDate")? localStorage.getItem("checkinDate") : '2025-04-08';
     // localCheckoutDates = localStorage.getItem("checkoutDate")? localStorage.getItem("checkoutDate") : '2025-04-14';
@@ -36,15 +33,6 @@ export default class ResFilterHotels extends LightningElement {
         return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     }
     connectedCallback(){
-        
-        // this.hotels = {};
-        //  this.filtertour = [];
-        //  this.rooms;
-        //  this.error;
-        //  this.filterRooms;
-        //  this.hotelMap = new Map();
-        //  this.filterHotel;
-        //  this.finalFilterHotel = [];
         // getAllHotelsProducts({startDate : this.checkinDate, endDate : this.checkoutDate}).then(result =>{
         //     console.log('Hotel Results');
         //     this.rooms = result;
@@ -54,161 +42,145 @@ export default class ResFilterHotels extends LightningElement {
         // }).catch(error =>{
         //     console.error('Error fetching All Hotels Data with availibility:', error);
         // })
-        //  console.log('Inside connected Callback');
-        //  console.log('Checkin Date is => '+this.checkoutDate);
-        //  console.log('Checkout Date is => '+this.checkinDate);
-        //  console.log('Checkout Date is split => '+this.checkinSplit);
-        //  console.log('Checkout Date is split => '+this.checkoutSplit);
-        //  console.log('City is => '+this.city);
+    //  console.log('Inside connected Callback');
+    //  console.log('Checkin Date is => '+this.checkoutDate);
+    //  console.log('Checkout Date is => '+this.checkinDate);
+    //  console.log('Checkout Date is split => '+this.checkinSplit);
+    //  console.log('Checkout Date is split => '+this.checkoutSplit);
+    //  console.log('City is => '+this.city);
         if(this.city != '' && this.checkinDate != '' && this.checkoutDate != ''){
-            let getAvailibity = [];
-            getAllHotelsProducts({city : this.city, startDate : this.checkinDate, endDate : this.checkoutDate}).then(result =>{
-                this.hotels = result;
-                this.cityFlag = true;
-                // console.log('Hotel Data Type => '+typeof(this.hotels));
-                // console.log('Hotel Data Type => '+typeof(Array.from(this.hotels)));
-                // function logMapElements(value, key, map) {
-                //     console.log(`m[${key}] = ${value}`);
-                //   }
-                  
-                //  this.hotels.forEach(hotel =>{
-                //     console.log(this.hotels[hotel]);
-                //  });
-
-                // console.log('Hotel Map => '+JSON.parse(JSON.stringify(this.hotels)));
-                // console.log('All Hotels => '+Object.keys(result));
-                this.filterHotel = Object.keys(result);
-
-                // console.log(typeof(Object.keys(result)));
-                
-                // console.log(typeof(this.filterHotel));
-                
-                // console.log('Inside all hotel ');
-
-                // console.log(this.filterHotel[0]);
-                
-                this.filterHotel.forEach(hotelStr => {
-                    // console.log('Inside loop of the filter hotels ');
-                    // console.log('City of for loop is => '+this.city);
-                    console.log('Value of Hotel => '+this.hotels[hotelStr]);
-                    let oneHotelObj = {};
-                    let oneHotelStr = hotelStr.slice(11, -2);
-                    let oneHotelStrList = oneHotelStr.split(', ');
-                    oneHotelStrList.forEach(hotelField => {
-                        
-                        let oneHotelField = hotelField.split(':');
-                        if (oneHotelField[0] == 'Banner_Photo_Url__c') {
-                            let result = oneHotelField[1].concat(":",oneHotelField[2]);
-                            oneHotelField[1] = result;
-                            
-                        }
-                        try{
-                            let key = oneHotelField[0];
-                            let value = oneHotelField[1];
-                            oneHotelObj[key] = value;
-                        }
-                        catch(error){
-                            console.log('obj errrror ',error.message);
-                            
-                        }
-                        
-                    });
-                    this.finalFilterHotel.push(oneHotelObj);
-
-                    console.log(typeof(this.finalFilterHotel));
-
-                    // function getAvailibity(){
-                    //     if(this.hotels[hotelStr] == true){
-                    //         return true;
-                    //     }else{
-                    //         return false;
-                    //     }
-                    // }
-
-                    this.filtertour = this.finalFilterHotel.map(hotel =>{
-                        let isAvailable = this.hotels[hotelStr];
-                        console.log('Check Availibility =>  '+isAvailable);
-                        return{
-                            ...hotel,
-                            isAvailable : isAvailable
-                        }
-                    });
-                    console.log('City => '+this.city);
+        
+            getAllHotelsProducts({startDate : this.checkinDate, endDate : this.checkoutDate}).then(result =>{
+                    console.log('Hotel Results');
+                    this.hotelMap = result;
+                    this.filtertour = Object.keys(result);
+                    // console.log('All Hotel Map => '+Object.keys(result));
+                    // console.log('Hotel Map => '+this.hotelMap);
+                    // this.filtertour = [...this.hotelMap.entries()];
+                    // result.map(hotel => {
+                    //     this.filtertour.push(hotel);
+                    //   });
                    
-                });
-                this.fetchDataFromURL();
+                      
+                    // console.log('Filter Tours => '+this.filtertour);
+                    // this.filtertour.forEach(hotel  => {
+                    //     console.log('Hotel Name in parent => '+hotel.Name);
+                    // });
+                    
+                    
+                    
                 }).catch(error =>{
-                    console.error('Error fetching All Hotels Data with availibility:', JSON.stringify(error.message));
+                    console.error('Error fetching All Hotels Data with availibility:', error.message);
                 })
         }else{
             getAllHotels().then(result =>{
                 this.hotels = result;
-                console.log(typeof(this.hotels));
-                // function logMapElements(value, key, map) {
-                //     console.log(`m[${key}] = ${value}`);
-                //   }
-                  
-                //  this.hotels.forEach(hotel =>{
-                //     console.log(this.hotels[hotel]);
-                //  });
-
-                // console.log('Hotel Map => '+JSON.parse(JSON.stringify(this.hotels)));
-                // console.log('All Hotels => '+Object.keys(result));
+                console.log('All Hotels => '+Object.keys(result));
                 this.filterHotel = Object.keys(result);
 
-                // console.log(typeof(Object.keys(result)));
+                console.log(typeof(Object.keys(result)));
                 
-                // console.log(typeof(this.filterHotel));
+                console.log(typeof(this.filterHotel));
                 
-                // console.log('Inside all hotel ');
+                console.log('Inside all hotel ');
 
-                // console.log(this.filterHotel[0]);
-                
+                console.log(this.filterHotel[0]);
+
                 this.filterHotel.forEach(hotelStr => {
-                    // console.log('Value of Hotel => '+this.hotels[hotelStr]);
-                    let oneHotelObj = {};
                     let oneHotelStr = hotelStr.slice(11, -2);
                     let oneHotelStrList = oneHotelStr.split(', ');
-                    oneHotelStrList.forEach(hotelField => {
-                        
-                        let oneHotelField = hotelField.split(':');
-                        if (oneHotelField[0] == 'Banner_Photo_Url__c') {
-                            let result = oneHotelField[1].concat(":",oneHotelField[2]);
-                            oneHotelField[1] = result;
-                            
-                        }
-                        try{
-                            let key = oneHotelField[0];
-                            let value = oneHotelField[1];
-                            oneHotelObj[key] = value;
-                        }
-                        catch(error){
-                            console.log('obj errrror ',error.message);
-                            
-                        }
-                        
-                    });
-                    this.finalFilterHotel.push(oneHotelObj);
-
-                    this.filtertour = this.finalFilterHotel.map(hotel =>{
-                        let isAvailable = false;
-    
-                        isAvailable = this.hotels[hotelStr];
-                        return{
-                            ...hotel,
-                            isAvailable : isAvailable
-                        }
-                    });
+                    console.log(JSON.stringify(oneHotelStrList));
                     
                 });
-                this.fetchDataFromURL();
+
+                // function parseMultipleHotels(str) {
+                //     const hotelEntries = str.match(/Hotel__c\s+\(([^)]+)\)/g);
+                //     const hotels = [];
+                  
+                //     hotelEntries.forEach(entry => {
+                //       const cleaned = entry.replace(/^Hotel__c\s+\(/, '').replace(/\)$/, '');
+                //       const pairs = cleaned.match(/(\w+:[^,]+(?:https?:\/\/[^,]+)?)/g);
+                //       const hotel = {};
+                  
+                //       pairs.forEach(pair => {
+                //         const [key, ...valParts] = pair.split(':');
+                //         const value = valParts.join(':').trim();
+                //         const numberVal = Number(value);
+                //         hotel[key.trim()] = isNaN(numberVal) || value.includes(':') ? value : numberVal;
+                //       });
+                  
+                //       hotels.push(hotel);
+                //     });
+                  
+                //     return hotels;
+                // }
+
+                this.filtertour = parseMultipleHotels(this.filterHotel);
+                
+                // this.fetchDataFromURL();
             }).catch(error => {
                 console.error('Error fetching All Hotels Data:', JSON.stringify(error.message));
             });
         }
        
-    }
 
+        
+        // getAllHotelsProducts(this.checkinDate,this.checkoutDate).then(result => {
+            
+            
+        //     console.log('Inside Data fetch')
+        //     console.log(result);
+        //     for(var key in result){
+        //         // console.log('key => '+key +'   '+'result '+result[key]);
+        //         // this.mapData.set(key,result[key]);
+        //         // if(result[key] == this.hotels)
+        //         // console.log(result[key]);
+        //         this.checkBooking.push(result[key]);
+        //     }
+
+        //     // for(var hotel in this.hotels){
+        //     //     if(hotels[hotel].Id == this.mapData.get(hotel)){
+        //     //         checkbooking = this.result[hotel];
+        //     //     }
+        //     // }
+        //     console.log(this.mapData);
+        //     // this.filtertour = this.mapData;
+        //     // maphotels = result;
+        //     // console.log(maphotels);
+        //     // for(var key in maphotels){
+        //     //     this.mapData.push({value:maphotels[key],key:key});
+        //     // }
+        //     // this.filtertour = this.maphotels;
+        //     // for(var key in this.mapData){
+        //     //     console.log(JSON.parse(JSON.stringify(this.mapData[key])));
+        //     // }
+        //     // console.log(this.mapData);
+        //     console.log('Data set in maphotels');
+        // }).catch(error => {
+        //     console.error('Error fetching test4 names:', error);
+        // });
+        
+    // }
+    
+    // filterHotels = new Map();
+    // this.rooms.forEach(this.addValueInMap);
+
+    // addValueInMap(item,index){
+    //     this.filterHotels.set();
+    // }
+
+    // checkin;
+    // chekout;
+    // filterHotelAvailibility(){
+    //     this.filterRooms = this.rooms.filter(room =>{
+            
+    //     return (room.Booked_Dates__r.Start_Date__c >= this.checkinDate)  &&
+    //         (room.Booked_Dates__r.End_Date__c < this.checkoutDate);
+    //     })   
+    }
+    
+    cityFlag = false;
+    city = localStorage.getItem("selectedCity")? localStorage.getItem("selectedCity") : '';
     fetchDataFromURL(){
         if(this.city != ''){
             this.cityFlag = true;
@@ -251,22 +223,18 @@ export default class ResFilterHotels extends LightningElement {
         this.finalFilter();
     }
     
-    
+
     finalFilter(){
         console.log('Inside the final filter ');
-        this.filtertour = this.finalFilterHotel.filter(tour =>{
-            try {
-                return (this.searchFlag? tour.Name.toLowerCase().includes(this.searchedValue.toLowerCase()): true)  &&
+        this.filtertour = this.hotels.filter(tour =>{
+            
+            return (this.searchFlag? tour.Name.toLowerCase().includes(this.searchedValue.toLowerCase()): true)  &&
             (this.reviewFlag? tour.Overall_Rating__c >= this.reviewItems : true)
                 &&
                 (this.priceFlag? tour.Price__c <= this.priceValue : true)
                 &&
                 (this.cityFlag? tour.City__c == this.city : true);
-            } catch (error) {
-                console.log(JSON.stringify(error.message));
-            }
-            
-        });   
+        })   
     }
     
 }

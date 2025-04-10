@@ -2,20 +2,6 @@
     font-family: 'TerminaRegular';
 }
 
-.hotel-details{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.hotel-book-button{
-    background-color: #B88917;
-    border-radius: 15px;
-    padding: 10px 46px;
-    border: none;
-    color: white;
-}
-
 .detail-holder{
     width: 80%;
     margin: 0 auto;
@@ -35,17 +21,8 @@
     scale: 0.7;
 }
 
-.hotel-image-holder {
-    padding-top: 15px;
-}
-
-.activity-holder{
-    background-color: #f6f5f5;
-}
-
-.activity{
-    width: 80%;
-    margin: auto;
+.hotel-image-holder img{
+    border-radius: 10px;
 }
 
 .activity-img-holder{
@@ -79,14 +56,6 @@ a{
     font-weight: bold;
 }
 
-.item1, .item2{
-    padding-right: 20px;
-}
-
-.activity{
-    background-color: #f6f5f5;
-}
-
 .vtcl-img-holder {
     display: flex;
     justify-content: space-between;
@@ -96,7 +65,6 @@ a{
 }
 
 .vtcl-img{
-    border-radius: 10px;
     height: 100%;
     cursor: pointer;
 }
@@ -123,19 +91,9 @@ a{
 }
 
 .content-heading{
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 600;
     color: #B88917;
-}
-
-.content-heading::before{
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    width: 2.08333vw;
-    /* background-color: #B88917; */
-    border-bottom: 1px solid #B88917;
-    margin-right: 5px;
 }
 
 .content-text{
@@ -152,12 +110,9 @@ a{
 }
 
 .location-map, .safety, .activity, .includes{
+    border-top: 0.0625rem solid rgba(75, 69, 69, 0.2);
     padding-top: 30px;
     padding-bottom: 30px;
-}
-
-.location-map, .safety{
-    border-top: 0.0625rem solid rgba(75, 69, 69, 0.2);
 }
 
 ul {
@@ -192,16 +147,13 @@ li::marker{
     border: 1px solid #f8eed6;
     border-radius: 5px;
     background-color: #fffdf8;
+    align-items: center;
     padding: 10px;
 }
 
-@media screen and (max-width: 425px) {
+@media only screen and (max-width: 425px) {
     .hotel-name{
         font-size: x-large;
-    }
-
-    .hotel-book-button {
-        padding: 3px 5px;
     }
     
     .location-review-holder, .description-text{
@@ -211,44 +163,10 @@ li::marker{
     .content-heading{
         font-size: large;
     }
-
-    .activity img{
-        width: 322px;
-    }
-
-    .activity-text{
-        font-size: 14px;
-        padding-top: 5px;
-        padding-bottom: 17px;
-    }
-
-    .location-text{
-        padding-top: 20px;
-    }
-
-    .list-header{
-        font-size: 15px;
-    }
-
-    .content-text{
-        font-size: 12px;
-    }
-
-    .item1, .item2{
-        padding-right: 0px;
-    }
 }
 
-@media screen and (max-width: 768px){
+@media only screen and (max-width: 768px){
     .detail-holder{
         width: 90%;
-    }
-
-    .hotel-book-button {
-        padding: 10px 20px;
-    }
-
-    .item3{
-        padding-right: 20px;
     }
 }

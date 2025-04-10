@@ -45,7 +45,7 @@ public without sharing class RES_Utility {
     ********************************************************
 	*/
     @AuraEnabled
-    public static Map<Hotel__c,Boolean> getAllHotelsProductsWithRoomAvailibility(String city, Date startDate, Date endDate) {
+    public static Map<Hotel__c,Boolean> getAllHotelsProductsWithRoomAvailibility(Date startDate, Date endDate) {
         Set<Id> hotelIds = new Set<Id>();
 
 
@@ -87,7 +87,7 @@ public without sharing class RES_Utility {
                 }
             }
             if(!hotelIds.isEmpty()) {
-                hotelDetailsResult = [SELECT Id,Name,City__c,State__c,Banner_Photo_Url__c,Price__c,Overall_Rating__c,Unique_Hotel_Name__c,Number_Of_Rooms__c,Rooms_With_Capacity_Of__c FROM Hotel__c WHERE City__c =: city ORDER BY Rating__c DESC];
+                hotelDetailsResult = [SELECT Id,Name,City__c,State__c,Banner_Photo_Url__c,Price__c,Overall_Rating__c,Unique_Hotel_Name__c,Number_Of_Rooms__c,Rooms_With_Capacity_Of__c FROM Hotel__c ORDER BY Rating__c DESC];
                 for(Hotel__c hotel : hotelDetailsResult){
                     if(hotelIds.contains(hotel.Id)){
                         hotelDetailsResultMap.put(hotel,true);
