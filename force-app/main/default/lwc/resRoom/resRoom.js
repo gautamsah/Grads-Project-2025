@@ -5,20 +5,36 @@ import { getPicklistValues, getObjectInfo } from 'lightning/uiObjectInfoApi';
 import PICKLIST_FIELD from '@salesforce/schema/Product2.Related_Hotel__c';
 import roomObj from '@salesforce/schema/Product2';
 import tax from "@salesforce/label/c.Respira_Room_Tax";
+import createOrderAndOrderItem from '@salesforce/apex/RESOrderAndOrderItemController.createOrderAndOrderItem';
+import userId from '@salesforce/user/Id';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class ResRoom extends NavigationMixin(LightningElement) {
     formatDate(year, month, day) {
         return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     }
 
-    onDetails = true;
-    onRoom = false;
+    userDetails = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        spReq: '',
+        agreement: false,
+    };
+    onDetails = false;
+    onPayment = false;
+    onRoom = true;
     hotelName;
     hotelUniqueName;
     @track rooms = [];
     @track selectedRooms = [];
     roomTax = tax;
-    @track taxAmount = 0;
+    haveError = false;
+    firstNameError = false;
+    lastNameError = false;
+    errorMessageCssClass = 'hide-error';
+    taxAmount = 0;
     name;
     city;
     reviews;
@@ -29,10 +45,10 @@ export default class ResRoom extends NavigationMixin(LightningElement) {
     placeholder = 'Search Hotels';
     hotels = [];
     d = new Date();
-    tomorrow  = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
     startDate = localStorage.getItem("checkinDate") ? localStorage.getItem("checkinDate") : this.formatDate(this.d.getFullYear(), (this.d.getMonth() + 1), this.d.getDate());
     endDate = localStorage.getItem("checkoutDate") ? localStorage.getItem("checkoutDate") : this.formatDate(this.tomorrow.getFullYear(), (this.tomorrow.getMonth() + 1), this.tomorrow.getDate());
-    
+
     @wire(getObjectInfo, { objectApiName: roomObj })
     roomInfo;
     @wire(getPicklistValues, { recordTypeId: '$roomInfo.data.defaultRecordTypeId', fieldApiName: PICKLIST_FIELD })
@@ -70,7 +86,7 @@ export default class ResRoom extends NavigationMixin(LightningElement) {
     }
 
     isRoomAvailable(bookedDates) {
-        return(bookedDates.Available_Slots__c != 0);
+        return (bookedDates.Available_Slots__c != 0);
     }
 
     // ************************************************************************************************
@@ -82,52 +98,52 @@ export default class ResRoom extends NavigationMixin(LightningElement) {
         this.hotelName = actualUrl.get('hotelUniqueName');
         console.log('SDate:', this.startDate);
         console.log('EDate:', this.endDate);
-        
 
-        getRooms({ hotelName: this.hotelName, startDate : this.startDate, endDate : this.endDate })
+
+        getRooms({ hotelName: this.hotelName, startDate: this.startDate, endDate: this.endDate })
             .then(result => {
 
-                this.rooms = result.map(room => {   
+                this.rooms = result.map(room => {
                     console.log('room is: ', room);
-                    console.log('room dates:',JSON.stringify(room.Booked_Dates__r));
+                    console.log('room dates:', JSON.stringify(room.Booked_Dates__r));
                     let isAvailable = false;
                     let availableSlot = 0;
-                    if(room.Booked_Dates__r){
-                        room.Booked_Dates__r.map(day =>{
+                    if (room.Booked_Dates__r) {
+                        room.Booked_Dates__r.map(day => {
                             isAvailable = this.isRoomAvailable(day);
                             availableSlot = day.Available_Slots__c;
                         });
-                    } else{
+                    } else {
                         isAvailable = true;
                         availableSlot = room.Total_Quantity__c;
                     }
-                    
+
                     return {
                         ...room,
-                        isAvailable : isAvailable,
-                        emptySlot : availableSlot,
+                        isAvailable: isAvailable,
+                        emptySlot: availableSlot,
                         count: 0,
                         disabledIncrement: false,
                         disabledDecrement: true,
                     };
-                    
+
                 });
                 if (this.rooms.length > 0) {
                     this.name = this.rooms[0].Hotel__r.Name;
                     this.city = this.rooms[0].Hotel__r.City__c;
                     this.reviews = this.rooms[0].Hotel__r.Total_Reviews__c;
                     this.rating = this.rooms[0].Hotel__r.Overall_Rating__c;
-                    console.log('Room:',JSON.stringify(this.rooms));
-                    
+                    console.log('Room:', JSON.stringify(this.rooms));
+
                 }
                 this.updateSelectedRooms();
                 this.calculateTotals();
-                
+
             })
             .catch(error => {
                 console.log('Got error while getting room records!', error.message);
             });
-    }   
+    }
 
 
     //*****************************************************************************************************************
@@ -135,6 +151,8 @@ export default class ResRoom extends NavigationMixin(LightningElement) {
     handleIncrement(event) {
         const roomId = event.currentTarget.dataset.id;
         this.updateRoomCount(roomId, 1);
+        console.log(JSON.stringify(this.selectedRooms));
+
     }
 
     handleDecrement(event) {
@@ -182,14 +200,123 @@ export default class ResRoom extends NavigationMixin(LightningElement) {
 
     calculateTotals() {
         this.totalRooms = this.selectedRooms.reduce((total, room) => total + room.count, 0);
-        this.totalAmount = this.selectedRooms.reduce((total, room) => total + room.calculatedPrice +(room.calculatedPrice*this.roomTax)/100, 0);
-        this.taxAmount = this.selectedRooms.reduce((total, room) => total + (room.calculatedPrice*this.roomTax)/100);
+        this.totalAmount = this.selectedRooms.reduce((total, room) => total + room.calculatedPrice + (room.calculatedPrice * this.roomTax) / 100, 0);
+        this.taxAmount = this.selectedRooms.reduce((total, room) => total + (room.calculatedPrice * this.roomTax) / 100, 0);
     }
 
     //*****************************************************************************************************************
 
-    handleProceedButton(event){
+    handleProceedButton() {
+        //handle session management for rooms data
+        this.onRoom = false;
+        this.onDetails = true;
+        this.onPayment = false;
+    }
+
+    onDetailBackClick() {
+        this.onRoom = true;
+        this.onDetails = false;
+        this.onPayment = false;
+    }
+
+
+    handleChange(event) {
+        let { fieldName, fieldValue } = event.detail;
+        this.userDetails = { ...this.userDetails, [fieldName]: fieldValue };
+    }
+    get errorMessageNameCssClass(){
+        if(this.firstNameError || this.lastNameError){
+            return 'show-name-error';
+        } else {
+            return 'hide-name-error';
+        }
+    }
+
+    onSignUpClick() {
+        //handle session management for personal details
+        this.template.querySelectorAll('c-res-input').forEach((c) => {
+            this.haveError = c.validationCheck();
+            if (this.haveError) {
+                this.count = this.count + 1;
+            }
+            console.log(this.count);
+        });
+        if (this.count == 0) {
+            let hasError = false;
+            if (!this.userDetails.agreement) {
+                hasError = true;
+                this.errorMessageCssClass = 'show-error';
+            } else {
+                this.errorMessageCssClass = 'hide-error';
+            }
+            if (hasError) {
+                return;
+            } else {
+                this.errorMessageCssClass = 'hide-error';
+                this.onRoom = false;
+                this.onDetails = false;
+                this.onPayment = true;
+            }
+        }
+        else {
+            this.count = 0;
+        }
 
     }
+
+
+
+    //================ Milin's Code=========================
+    onProceedPayment(){
+
+        if(this.startDate && this.endDate && userId){
+            let myObject = {
+                userId: userId,
+                rooms: this.selectedRooms,
+                checkinDate: this.startDate,
+                checkoutDate: this.endDate,
+            }
+            let str = JSON.stringify(myObject);
+            console.log('json.stringify : ', str);
+            console.log('json.stringify : ', typeof (str));
+    
+            createOrderAndOrderItem({ myObjectJson: JSON.stringify(myObject) }).then(result => {
+                console.log('success: ', result);
+    
+            }).catch(error => {
+                console.log('error : ', JSON.stringify(error));
+    
+            });
+        }
+        else if(!userId){
+            //navigation mixin to login page + session management
+            this[NavigationMixin.Navigate]({
+                type: 'standard__webPage',
+                attributes: {
+                url: `https://respira-dev.my.site.com/respira/s/loginpage`,
+                target:'_self',
+                }
+            }); 
+        }
+        else if(!this.startDate || !this.endDate){
+            // toast enter start date and end date
+            this.showToast('Please enter start date and end date');
+        }
+    }
+
+    showToast(message) {
+        const event = new ShowToastEvent({
+            title: 'Get Help',
+            message:message,
+        });
+        this.dispatchEvent(event);
+    }
+    onPaymentBackClick() {
+        this.onRoom = false;
+        this.onDetails = true;
+        this.onPayment = false;
+        
+    }
+
 
 }

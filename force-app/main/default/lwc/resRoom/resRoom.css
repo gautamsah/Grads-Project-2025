@@ -1,153 +1,163 @@
-.main{
+.main {
     width: 80%;
     margin: auto;
 }
 
-.search{
+.search {
     position: sticky;
     top: 0;
     background-color: #fffdf8;
     margin-bottom: 20px;
+    z-index: 999;
 }
 
-.search-container{
+.search-container {
     width: 80%;
     margin: auto;
 }
 
-.hotel-name{
+.hotel-name {
     font-size: 40px;
     font-family: 'TerminaBold';
 }
 
-.hotel-city, .hotel-review{
+.heading {
+    font-size: 40px;
+    font-family: 'TerminaMedium';
+    padding-left: 10px;
+}
+
+.hotel-city,
+.hotel-review {
     font-size: 20px;
     font-family: 'TerminaLight';
     margin-bottom: 20px;
 }
 
-.rating-star{
+.rating-star {
     padding-left: 12px;
     height: 27px;
     width: 110px;
 }
 
-.hotel-city{
+.hotel-city {
     border-right: 1px solid #b38a24;
 }
 
-.city-review{
+.city-review {
     display: flex;
 }
 
-.hotel-room-text{
+.hotel-room-text {
     margin-top: 20px;
     font-size: 20px;
     font-family: 'TerminaBold';
 }
 
-.room-cart-container{
+.room-cart-container {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
 }
 
-.cart{
-    border: 1px solid #b38a24;
+.cart {
+    box-shadow: 0px 0px 7px 1px rgba(219, 219, 219, 1);
+    border-radius: 10px;
     flex-grow: 0.5;
     position: sticky;
     top: 100px;
-    z-index: -1;
     margin-bottom: 65px;
 }
 
-.top-border{
+.top-border {
     border-top: 1px solid #ae8b2d;
 }
 
-.fields-value-container{
+.fields-value-container {
     display: flex;
     justify-content: space-between;
     padding: 12px 15px;
 }
 
-.cart-heading{
+.cart-heading {
     padding: 10px 16px;
 }
 
-.room{
+.room {
     display: flex;
     align-items: normal;
-    box-shadow: 0px 0px 7px 0px rgba(219,219,219,1);
+    box-shadow: 0px 0px 7px 0px rgba(219, 219, 219, 1);
     border-radius: 18px;
     margin-bottom: 30px;
 }
 
-.room-img{
+.room-img {
     height: 100%;
     width: -webkit-fill-available;
     object-fit: cover;
     border-radius: 18px 0 0 18px;
 }
 
-.room-info{
+.room-info {
     display: flex;
     flex-direction: column;
 }
 
-.room-info-holder{
+.room-info-holder {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 }
 
-.room-info{
+.room-info {
     padding: 15px 30px;
     background-color: #ffffff;
 }
-.room-price-button{
+
+.room-price-button {
     padding: 0 30px;
     margin: 15px 0;
     background-color: #ffffff;
 }
 
-.room-name{
+.room-name {
     font-size: 25px;
     font-family: 'TerminaRegular';
 }
 
-.svg-icon-holder{
+.svg-icon-holder {
     display: flex;
     align-items: center;
     padding: 5px 0;
 }
 
-.room-description{
+.room-description {
     font-family: 'TerminaLight';
     font-size: 16px;
 }
 
-.room-facility-name, .room-facility-name-area{
+.room-facility-name,
+.room-facility-name-area {
     font-family: 'TerminaLight';
     font-size: 16px;
     padding-left: 10px;
 }
 
-.room-facility-name-area{
+.room-facility-name-area {
     padding-left: 5px;
 }
 
-.room-price-button{
+.room-price-button {
     border-radius: 0 18px 18px 0;
     border-left: 0.0625rem dashed rgba(75, 69, 69, 0.2);
 }
 
-.room-price{
+.room-price {
     font-family: 'TerminaBold';
     font-size: 25px;
 }
 
-.room-button{
+.room-button {
     background-color: #b38a24;
     padding: 10px;
     font-size: 18px;
@@ -158,16 +168,16 @@
     text-transform: uppercase;
 }
 
-.room-button:disabled{
+.room-button:disabled {
     background-color: #9f9d9d;
     color: black;
     cursor: not-allowed;
 }
 
-.proceed-button{
+.proceed-button {
     background-color: #B88917;
     width: 94%;
-    border-radius: 15px;
+    border-radius: 28px;
     padding: 10px;
     border: none;
     color: white;
@@ -177,15 +187,143 @@
 
 /* ----------------------------------------------------------- */
 
-.details{
+.details {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+.inputField {
+    padding-left: 10px;
+}
+
+.hide-error {
+    display: none;
+}
+
+.show-error {
+    position: absolute;
+    display: block;
+    color: red;
+}
+
+.show-name-error{
+    border-bottom: 1px solid red !important;
+}
+
+
+.hide-name-error{
+    border-bottom: 1px solid #b38a24;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #b38a24;
+    background-color: #f6f5f5;
+}
+
+textarea::placeholder{
+    color: #666666;
+    font-size: medium;
+}
+
+.input-label {
+    font-size: medium;
+    padding-left: 10px;
+}
+
+/* MILIN */
+
+.payment-container-right-part {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 30px;
+}
+
+.payment-container-left-part {
+    background-color: #fffdf8;
+    padding: 10px;
+    text-align: center;
+    height: 100%;
+}
+
+.total-cost {
+    font-family: 'TerminaRegular';
+    font-size: 30px;
+    float: right;
+
+}
+
+.payment-container {
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 24px 0;
+}
+
+.payment-wallet-current-money {
+    font-size: 20px;
+    font-family: 'TerminaRegular';
+    display: inline-block;
+}
+
+.current-money-value {
+    font-size: 20px;
+    font-family: 'TerminaBold';
+    display: inline-block;
+}
+
+.payment-container-layout {
+    height: 350px;
+}
+
+.wallet-icon {
+    margin-right: 12px;
+    --lwc-colorTextIconDefault: #b38a24;
+}
+.wallet-icon-active{
+    --lwc-colorTextIconDefault: #ffffff;
+}
+
+.wallet-name {
+    color: #B38A24;
+    font-size: 14px;
+}
+.wallet-name-active {
+    color: #ffffff;
+}
+
+.payment-wallet-current-balance-container {
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+.payment-add-money {
+    color: #b38a24;
+    font-size: 16px;
+    font-weight: 600;
+    float: right;
+}
+
+.payment-method {
+    text-decoration: none;
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+    align-items: center;
+    padding: 10px 0 10px 40px;
+}
+
 /* ----------------------------------------------------------- */
 
-.adult-value{
+.adult-value {
     display: block;
     width: 60%;
     height: 32px;
@@ -195,7 +333,8 @@
     text-align: center;
     border: none;
 }
-.counter{
+
+.counter {
     display: block;
     height: 32px;
     width: 50px;
@@ -209,7 +348,7 @@
     border: none;
 }
 
-.counter:disabled{
+.counter:disabled {
     background-color: #B38A24;
     color: white;
     cursor: not-allowed;
@@ -224,51 +363,53 @@
     border: none;
 }
 
-.counter:hover{
+.counter:hover {
     background-color: #8B6F26;
 }
 
 @media screen and (max-width: 769px) {
-    .room-price{
+    .room-price {
         padding-top: 15px;
         border-top: 0.0625rem dashed rgba(75, 69, 69, 0.2);
     }
 
-    .room-cart-container{
+    .room-cart-container {
         flex-direction: row;
         justify-content: center;
     }
 
-    .room-info-container{
+    .room-info-container {
         margin-top: 25px;
     }
 
-    .room-price-button{
+    .room-price-button {
         border-left: none;
     }
 
-    .cart{
+    .cart {
         position: static;
     }
 
-    .hotel-name{
+    .hotel-name {
         font-size: 35px;
     }
 
-    .hotel-city, .hotel-review{
+    .hotel-city,
+    .hotel-review {
         font-size: 13px;
         margin-top: 20px;
     }
 
-    .counter, .counter:disabled{
+    .counter,
+    .counter:disabled {
         font-size: 32px;
     }
 
-    .adult-value{
+    .adult-value {
         font-size: 19px;
     }
 
-    .city-review{
+    .city-review {
         align-items: center;
     }
 

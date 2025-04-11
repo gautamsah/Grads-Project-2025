@@ -1,23 +1,22 @@
 <template>
     <lightning-layout multiple-rows class="res-profile-container">
-        <lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="3">
-            <lightning-layout multiple-rows class="res-profile-menu">
-                <lightning-layout-item>
-                    <a onclick={handleUserDetails}>
-                        User Details
-                    </a>
-                </lightning-layout-item>
-                <lightning-layout-item>
-                    <a onclick={handleBookings}>
-                        Bookings
-                    </a>
-                </lightning-layout-item>
-                <lightning-layout-item>
-                    <a onclick={handleSupportTickets}>
-                        Support tickets
-                    </a>
-                </lightning-layout-item>
-            </lightning-layout>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="res-profile-container-left-part">
+                <a class="res-profile-tab" onclick={handleUserDetails}>
+                    <lightning-icon icon-name="utility:user" alternative-text="User-Icon" title="User Details" class={userDetailsIconClass}></lightning-icon>
+                    <p class={userDetailsNameClass}>User Details</p>
+                </a>
+                <a class="res-profile-tab" onclick={handleBookings}>
+                    <lightning-icon icon-name="utility:survey" alternative-text="Bookings-icon" title="Bookings" class={bookingsIconClass}></lightning-icon>
+                    <p class={bookingsNameClass}>Bookings</p>
+                </a>
+                <a class="res-profile-tab" onclick={handleWallet}>
+                    <lightning-icon icon-name="utility:money" alternative-text="Wallet-Icon" title="Wallet" class={walletIconClass}></lightning-icon>
+                    <p class={walletNameClass}>Wallet</p>
+                </a>
+                <a class="res-profile-tab" onclick={handleSupportTickets}>
+                    <lightning-icon icon-name="utility:comments" alternative-text="Support-Tickets-Icon" title="Support Ticket" class={supportTicketsIconClass}></lightning-icon>
+                    <p class={supportTicketsNameClass}>Support Tickets</p>
+                </a>
         </lightning-layout-item>
         <lightning-layout-item size="12" small-device-size="12" medium-device-size="9" large-device-size="9">
             <template if:true={showUserDetails}>
@@ -33,19 +32,28 @@
                     </lightning-layout-item>
                     <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="6" class="res-user-details-input-item">
                         <label for="firstNameInput">First Name</label>
-                        <input type="text" value={firstNameInput} name="firstNameInput" onchange={handleFirstNameInputChange} class={firstNameInputClass}>
+                        <!-- <input type="text" value={firstNameInput} name="firstNameInput" onchange={handleFirstNameInputChange} class={firstNameInputClass}> -->
+                        <c-res-input  input-type="text" required="true"
+                        field-label="First Name" field-name="firstName" onchange={handleChange}
+                        field-value={userDetails.firstName} class={firstNameInputClass}></c-res-input>
                     </lightning-layout-item>
                     <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="6" class="res-user-details-input-item">
                         <label for="lastNameInput">Last Name</label>
-                        <input type="text" value={lastNameInput} name="lastNameInput" onchange={handleLastNameInputChange} class={lastNameInputClass}>
+                        <c-res-input  input-type="text" required="true"
+                        field-label="Last Name" field-name="lastName" onchange={handleChange}
+                        field-value={userDetails.lastName} class={lastNameInputClass}></c-res-input>
                     </lightning-layout-item>
                     <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="6" class="res-user-details-input-item">
                         <label for="emailInput">Email</label>
-                        <input type="email" value={emailInput} name="emailInput" onchange={handleEmailInputChange} class={emailInputClass}>
+                        <c-res-input  input-type="text" required="true"
+                        field-label="Email" field-name="email" onchange={handleChange}
+                        field-value={userDetails.email} class={emailInputClass}></c-res-input>
                     </lightning-layout-item>
                     <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="6" class="res-user-details-input-item">
                         <label for="contactInput">Contact</label>
-                        <input type="tel" value={contactInput} name="contactInput" onchange={handleContactInputChange} class={contactInputClass}>
+                        <c-res-input  input-type="text" required="true"
+                        field-label="Contact" field-name="contact" onchange={handleChange}
+                        field-value={userDetails.contact} class={contactInputClass}></c-res-input>
                     </lightning-layout-item>
                 </lightning-layout>
             </template>
@@ -148,94 +156,12 @@
                     </lightning-layout-item>
                 </lightning-layout>
             </template>
+            <template if:true={showWallet}>
+                Wallet
+            </template>
             <template if:true={showSupportTickets}>
                 Support Tickets
             </template>
-        </lightning-layout-item>
-        <lightning-layout-item size="12" class="random-dummy">
-            <lightning-layout multiple-rows class="room-cart-container">
-                <lightning-layout-item size="12" small-device-size="12" large-device-size="2" medium-device-size="1" class="cart">
-                    <p class="cart-heading">Your Selections:</p>
-                    <template for:each={selectedRooms} for:item="selectedRoom">
-                        <lightning-layout key={selectedRoom.Id} class="fields-value-container top-border" multiple-rows>
-                            <p>Room :</p>
-                            <p>{selectedRoom.Name}</p>
-                        </lightning-layout>
-                        <lightning-layout key={selectedRoom.Id} class="fields-value-container" multiple-rows>
-                            <p>Price :</p>
-                            <p>
-                                $ {selectedRoom.Product_Unit_Price__c} x {selectedRoom.count}
-                            </p>
-                        </lightning-layout>
-                    </template>
-                    <template if:true={selectedRooms.length}>
-                        <lightning-layout class="fields-value-container top-border" multiple-rows>
-                            <p>Total Rooms:</p>
-                            <p>{totalRooms}</p>
-                        </lightning-layout>
-                        <lightning-layout class="fields-value-container" multiple-rows>
-                            <p>Tax:</p>
-                            <p>GST({roomTax}%)</p>
-                        </lightning-layout>
-                        <lightning-layout class="fields-value-container" multiple-rows>
-                            <p>Total Amount:</p>
-                            <p>$ {totalAmount}</p>
-                        </lightning-layout>
-                        <button class="proceed-button" onclick={handleProceedButton}>Procced</button>
-                    </template>
-                    <template if:false={selectedRooms.length}>
-                        <lightning-layout class="fields-value-container top-border" multiple-rows>
-                            <p>No rooms selected yet.</p>
-                        </lightning-layout>
-                    </template>
-                </lightning-layout-item>
-                <lightning-layout-item size="12" small-device-size="12" large-device-size="9" medium-device-size="10" class="slds-m-bottom_x-large room-info-container">
-                    <lightning-layout multiple-rows>
-                        <lightning-layout-item size="6">
-                            <p class="hotel-name">Payment</p>
-                        </lightning-layout-item>
-                        <lightning-layout-item size="6">
-                            <p class="total-cost">Total to Pay : $2323.00</p>
-                        </lightning-layout-item>
-                        <lightning-layout-item size="12" class="payment-container">
-                            <lightning-layout multiple-rows class="payment-container-layout">
-                                <lightning-layout-item size="3" class="payment-container-left-part">
-                                    <a class="payment-method">
-                                        <lightning-icon icon-name="utility:money" alternative-text="Wallet-Icon!" title="Money" class="wallet-icon"></lightning-icon>
-                                        <p class="wallet-name">Wallet</p>
-                                    </a>
-                                    <a class="payment-method">
-                                        <lightning-icon icon-name="utility:toggle_panel_bottom" alternative-text="Wallet-Icon!" title="Money" class="wallet-icon"></lightning-icon>
-                                        <p class="wallet-name">Credit Card</p>
-                                    </a>
-                                    <a class="payment-method">
-                                        <lightning-icon icon-name="utility:macros" alternative-text="UPI" title="UPI" class="wallet-icon"></lightning-icon>
-                                        <p class="wallet-name">UPI</p>
-                                    </a>
-                                    <a class="payment-method">
-                                        <lightning-icon icon-name="utility:desktop" alternative-text="Net-banking" title="Net Banking" class="wallet-icon"></lightning-icon>
-                                        <p class="wallet-name">Net Banking</p>
-                                    </a>
-                                </lightning-layout-item>
-                                <lightning-layout-item size="9" class="payment-container-right-part">
-                                    <lightning-layout multiple-rows class="payment-wallet-current-balance-container">
-                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="4" >
-                                            <a class="payment-add-money">Add money to wallet</a>
-                                        </lightning-layout-item>
-                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="8">
-                                            <p class="payment-wallet-current-money">Current Balance in Wallet : <span class="current-money-value">$5000.00</span></p>
-                                        </lightning-layout-item>
-                                    </lightning-layout>
-                                    <c-res-button variant='details-page-button'
-                                class="slds-m-vertical_large sign-up-button"
-                                button-label="Proceed to Pay" onpress={onSignUpClick}></c-res-button>
-                                </lightning-layout-item>
-                            </lightning-layout>
-                        </lightning-layout-item>
-                        
-                    </lightning-layout>
-                </lightning-layout-item>
-            </lightning-layout>
         </lightning-layout-item>
     </lightning-layout>
 </template>
