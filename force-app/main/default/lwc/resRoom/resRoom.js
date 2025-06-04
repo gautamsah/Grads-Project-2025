@@ -283,7 +283,6 @@ export default class ResRoom extends NavigationMixin(LightningElement) {
     //*****************************************************************************************************************
 
     handleProceedButton() {
-
         //handle session management for rooms data
         this.onRoom = false;
         this.onDetails = true;
