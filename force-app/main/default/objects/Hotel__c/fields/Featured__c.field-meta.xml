@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Featured__c</fullName>
-    <defaultValue>false</defaultValue>
-    <description>This Field is Accessible for Admin Only and This will help to sort the hotels on the basis of the Checkbox.</description>
-    <label>Featured</label>
-    <trackTrending>false</trackTrending>
-    <type>Checkbox</type>
-</CustomField>

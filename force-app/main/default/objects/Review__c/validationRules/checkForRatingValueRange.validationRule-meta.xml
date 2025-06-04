@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>checkForRatingValueRange</fullName>
-    <active>true</active>
-    <description>This validation rule checks for the rating value range if it is from 1 to 5</description>
-    <errorConditionFormula>OR ( Cleanliness_And_Hygiene__c &gt; 5, Cleanliness_And_Hygiene__c &lt; 1, Food_Quality__c &gt; 5, Food_Quality__c &lt; 1, Hospitality__c &gt; 5, Hospitality__c &lt; 1, Value_For_Money__c &gt; 5, Value_For_Money__c &lt; 1)</errorConditionFormula>
-    <errorMessage>Please fill all the ratings value in the range of 1 to 5</errorMessage>
-</ValidationRule>
