@@ -12,7 +12,7 @@ permissions:
   security-events: write
 
 jobs:
-  validate-pr-to-prod:
+  validate-pr-to-qa:
     runs-on: ubuntu-latest
     environment: prod
     steps:
