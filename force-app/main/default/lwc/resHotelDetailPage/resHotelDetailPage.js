@@ -1,6 +1,8 @@
-import { api, LightningElement, track, wire } from 'lwc';
+import { api, LightningElement, track} from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import getHotelDetail from '@salesforce/apex/RES_Utility.getHotelWithRating';
-export default class ResHotelDetailPage extends LightningElement {
+import userId from '@salesforce/user/Id';
+export default class ResHotelDetailPage extends NavigationMixin(LightningElement) {
 
     img1;
     img2;
@@ -9,21 +11,32 @@ export default class ResHotelDetailPage extends LightningElement {
     @api hotelName;
     hotelDetails = [];
     includes = [];
-    notIncludes = [];
-    safety = [];
+    ac = false;
+    veg = false;
+    tv = false;
+    pet = false;
+    parkspace = false;
+    free = false;
+    roomservice = false;
+    telephone = false;
+    foodorder = false;
+    nonveg = false;
     activities = [];
+    showLoadingSpinner = false;
 
     center = {};
     mapMarkers = []
 
     connectedCallback() {
+        this.showLoadingSpinner = true;
         let basicUrl = window.location.href;
         let actualUrl = new URL(basicUrl).searchParams;
         this.hotelName = actualUrl.get('hotelUniqueName');
-        
+
         if (this.hotelName) {
             getHotelDetail({ hotelName: this.hotelName })
                 .then(result => {
+                    this.showLoadingSpinner = false;
                     this.hotelDetails = result;
                     console.log(result);
                     if (this.hotelDetails && this.hotelDetails.length > 0 && this.hotelDetails[0].hotelRecord) {
@@ -36,12 +49,7 @@ export default class ResHotelDetailPage extends LightningElement {
                         }
                         if (this.hotelDetails[0].hotelRecord.Includes__c) {
                             this.includes = this.hotelDetails[0].hotelRecord.Includes__c.split(';');
-                        }
-                        if (this.hotelDetails[0].hotelRecord.Not_Includes__c) {
-                            this.notIncludes = this.hotelDetails[0].hotelRecord.Not_Includes__c.split(';');
-                        }
-                        if (this.hotelDetails[0].hotelRecord.Safety_Rules__c) {
-                            this.safety = this.hotelDetails[0].hotelRecord.Safety_Rules__c.split(';');
+                            this.processFacilities();
                         }
                         if (this.hotelDetails[0].hotelRecord.Location__c.latitude && this.hotelDetails[0].hotelRecord.Location__c.longitude) {
 
@@ -64,21 +72,49 @@ export default class ResHotelDetailPage extends LightningElement {
                                 },
                             ];
                         }
+                        console.log('Facilities:',JSON.stringify(this.includes));
                     }
                     else {
                         console.log('Includes__c is null or undefined.');
                     }
                 })
                 .catch(error => {
+                    this.showLoadingSpinner = false;
                     console.error('Error fetching hotel details:', error.message);
                 });
+        }
+    }
+
+    processFacilities() {
+        if (this.includes && this.includes.length > 0) {
+            this.ac = this.includes.includes('A.C.');
+            this.veg = this.includes.includes('Veg. Food');
+            this.tv = this.includes.includes('Television');
+            this.pet = this.includes.includes('Pets');
+            this.parkspace = this.includes.includes('Parking Space');
+            this.free = this.includes.includes('Free Breakfast');
+            this.roomservice = this.includes.includes('Room Service');
+            this.telephone = this.includes.includes('Telephone');
+            this.foodorder = this.includes.includes('Food Order');
+            this.nonveg = this.includes.includes('Non-veg. Food');
+        } else {
+            // this.ac = false;
+            // this.veg = false;
+            // this.tv = false;
+            // this.pet = false;
+            // this.parkspace = false;
+            // this.free = false;
+            // this.roomservice = false;
+            // this.telephone = false;
+            // this.foodorder = false;
+            // this.nonveg = false;
         }
     }
 
     handleImageChange(event) {
         const clickedImgId = event.target.dataset.id;
 
-        const updatedHotelDetails = JSON.parse(JSON.stringify(this.hotelDetails));if (clickedImgId == '1') {
+        const updatedHotelDetails = JSON.parse(JSON.stringify(this.hotelDetails)); if (clickedImgId == '1') {
             this.bannerImg = this.img1;
         } else if (clickedImgId == '2') {
             this.bannerImg = this.img2;
@@ -86,6 +122,27 @@ export default class ResHotelDetailPage extends LightningElement {
             this.bannerImg = this.img3;
         }
         this.hotelDetails = updatedHotelDetails;
+    }
+
+    handleBookNow() {
+        if (!userId) {
+            //navigation mixin to login page + session management
+            this[NavigationMixin.Navigate]({
+                type: 'standard__webPage',
+                attributes: {
+                    url: `https://respira-dev.my.site.com/respira/s/loginpage`,
+                    target: '_self',
+                }
+            });
+            return;
+        }
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: `https://respira-dev.my.site.com/respira/s/room?hotelUniqueName=${this.hotelName}`,
+                target: '_self',
+            }
+        });
     }
 
 }

@@ -44,19 +44,23 @@ public without sharing class RES_Utility {
 	@JIRA			: GT25-
     ********************************************************
 	*/
-    @AuraEnabled
-    public static Map<Hotel__c,Boolean> getAllHotelsProductsWithRoomAvailibility(Date startDate, Date endDate) {
+    @AuraEnabled(cacheable=true)
+    public static List<hotelDetail> getAllHotelsProductsWithRoomAvailibility(Date startDate, Date endDate) {
+
+        List<hotelDetail> hotelList = new List<hotelDetail>();
         Set<Id> hotelIds = new Set<Id>();
 
 
         Map<Hotel__c,Boolean> hotelDetailsResultMap = new Map<Hotel__c,Boolean>();
         List<Hotel__c> hotelDetailsResult = new List<Hotel__c>();
         Boolean isRoomFull = false;
+
         List<Product2> roomDetails = [SELECT Id, Name, ProductCode, Hotel__c, Hotel__r.Overall_Rating__c, Hotel__r.Unique_Hotel_Name__c, Hotel__r.Name, Hotel__r.City__c, Hotel__r.Total_Reviews__c, Room_Type__c, Hotel_Product_Type__c, Product_Unit_Price__c, Image_URL__c, Room_Area__c, Total_Quantity__c, Max_No_Of_Guest__c, Description , (SELECT Id,Available_Slots__c FROM Booked_Dates__r  WHERE Start_Date__c >= :startDate AND End_Date__c <= :endDate) FROM Product2 WHERE Hotel_Product_Type__c = 'Room'];
 
         System.debug('Start Date...'+startDate);
         System.debug('ended Date...'+endDate);
         System.debug('Room Details...'+roomDetails);
+        
         if(!roomDetails.isEmpty()){
             For(Product2 room : roomDetails){
                 System.debug('roomDetails' + roomDetails);
@@ -89,18 +93,30 @@ public without sharing class RES_Utility {
             if(!hotelIds.isEmpty()) {
                 hotelDetailsResult = [SELECT Id,Name,City__c,State__c,Banner_Photo_Url__c,Price__c,Overall_Rating__c,Unique_Hotel_Name__c,Number_Of_Rooms__c,Rooms_With_Capacity_Of__c FROM Hotel__c ORDER BY Rating__c DESC];
                 for(Hotel__c hotel : hotelDetailsResult){
+                    hotelDetail hotelRecord = new hotelDetail();
+                    hotelRecord.details = hotel;
                     if(hotelIds.contains(hotel.Id)){
                         hotelDetailsResultMap.put(hotel,true);
+                        hotelRecord.availability = true;
                     }
                     else{
                         hotelDetailsResultMap.put(hotel,false);
+                        hotelRecord.availability = false;
                     }
+                    hotelList.add(hotelRecord);
                 }
             }
         }
         
 
-        return hotelDetailsResultMap;
+        return hotelList;
+    }
+
+
+
+    public class hotelDetail {
+        @AuraEnabled public Hotel__c details;
+        @AuraEnabled public Boolean availability;
     }
      /*
     *********************************************************
@@ -169,7 +185,7 @@ public without sharing class RES_Utility {
     public static List<HotelWrapperData> getHotelWithRating(String hotelName){
         try {
             List<HotelWrapperData> hotelWrapList = new List<HotelWrapperData>();
-            Hotel__c hotelList = [SELECT Id, Name, Banner_Photo_Url__c,Activities__c, Address__c, Front_Img__c,Location__c, Includes__c, Not_Includes__c, Peripheral_Img__c, Safety_Rules__c,  Total_Reviews__c, Avg_Value_For_Money__c, Avg_Hospitality__c, Avg_Food_Quality__c, Avg_Cleanliness_And_Hygiene__c, Overall_Rating__c, City__c, State__c, Description__c, Unique_Hotel_Name__c, (SELECT Id, Avg_Rating__c, Reviewer_Name__c, CreatedDate, Review_Title__c, Description__c FROM Reviews__r) FROM Hotel__c WHERE Unique_Hotel_Name__c = :hotelName];
+            Hotel__c hotelList = [SELECT Id, Name, Banner_Photo_Url__c,Activities__c, Highlights__c, Google_Map_Link__c, Activity_One_Img__c, Activity_One_Name__c, Activity_Three_Img__c, Activity_Three_Name__c, Activity_Two_Img__c, Activity_Two_Name__c, Address__c, Front_Img__c,Location__c, Includes__c, Not_Includes__c, Peripheral_Img__c, Safety_Rules__c,  Total_Reviews__c, Avg_Value_For_Money__c, Avg_Hospitality__c, Avg_Food_Quality__c, Avg_Cleanliness_And_Hygiene__c, Overall_Rating__c, City__c, State__c, Description__c, Unique_Hotel_Name__c, (SELECT Id, Avg_Rating__c, Reviewer_Name__c, CreatedDate, Review_Title__c, Description__c FROM Reviews__r) FROM Hotel__c WHERE Unique_Hotel_Name__c = :hotelName];
 
             hotelWrapList.add(new HotelWrapperData(hotelList, hotelList.Reviews__r));
             return hotelWrapList;
@@ -225,4 +241,18 @@ public without sharing class RES_Utility {
 
         return roomDetails;
     }
+
+    /*
+    *********************************************************
+    @Method Name    : getHotelRooms
+    @author         : Pritkumar Prajapati
+    @description    : method to is used for fetching rooms according to hotelname
+    @param          : hotelname
+    @return         : List<Product2>
+	@date			: April 4, 2025
+	@JIRA			: GT25-32
+    ********************************************************
+	*/
+
+    
 }

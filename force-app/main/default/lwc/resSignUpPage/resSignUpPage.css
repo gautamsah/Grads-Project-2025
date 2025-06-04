@@ -45,6 +45,27 @@ a {
 button:hover {
     background-color: #066bd6;
 }
+.signupModalFullScreen{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+.signupModal{
+    width: 50%;
+    background-color: white;
+    min-height: 150px;
+    font-size: 24px;
+    border-radius: 10px;
+    text-align: center;
+    align-content: center;
+}
 
 @media screen and (max-width: 425px) {
     .quote {
@@ -55,6 +76,9 @@ button:hover {
     .quote-comma {
         font-size: xx-large;
         font-weight: 600;
+    }
+    .signupModal{
+        width: 90%;
     }
 
 }

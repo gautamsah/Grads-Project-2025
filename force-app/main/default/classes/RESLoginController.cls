@@ -28,33 +28,24 @@ public with sharing class RESLoginController {
     @AuraEnabled
     public static String login(String username, String password, String startUrl) {
         try {
-            PageReference loginPage = Site.login(username, password, startUrl);
-            if (loginPage != null) {
-                return 'https://respira-dev.my.site.com/respira';
-            } else {
-                throw new AuraHandledException('Invalid credentials');
+            ApexPages.PageReference lgn = Site.login(username, password, startUrl);          
+            if (lgn != null) {
+
+                System.debug('[Apex] Login successful! Redirecting to: ' + lgn.getUrl());
+
+                return lgn.getUrl();
+
             }
-        } catch (Exception e) {
-            throw new AuraHandledException('Error during login: ' + e.getMessage());
-        }
-    }
-	 /*
-    *********************************************************
-    @Method Name    : forgotPassword
-    @author         : Jay Patel
-    @description    : method to is used for Forgot Password in salesforce Enviroment
-    @param          : String username
-    @return         : Boolean
-	@date			: March 20, 2025
-	@JIRA			: GT25-3
-    ********************************************************
-	*/
-    @AuraEnabled
-    public static Boolean forgotPassword(String username) {
-        try {
-            return Site.forgotPassword(username);
-        }catch(Exception e){
-            throw new AuraHandledException('Error on forgot password: ' + e.getMessage());
+
+            
+
+            return 'Invalid login credentials. Please check your username and password.';
+
+        } catch (Exception ex) {
+
+            System.debug('[Apex] Login failed: ' + ex.getMessage());
+
+            return 'An error occurred during login: ' + ex.getMessage();
         }
     }
 }

@@ -51,4 +51,3 @@ export default class ResHomePageSearch extends NavigationMixin(LightningElement)
     connectedCallback(){
     }
 }
-

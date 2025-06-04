@@ -1,8 +1,9 @@
 .star-container{
     height: 100%;
 }
+
 img{
-    width: auto;
+    width: 85%;
     height: 100%;
     display: block;
 }
@@ -11,3 +12,42 @@ span{
     align-items: center;
     display: block;
 }
+
+
+/* * {
+    box-sizing: border-box;
+  }
+  
+  .rating {
+    width: 120px;
+    height: 24px;
+    position: relative;
+    background-color: gray;
+  }
+  
+  .rating progress.rating-bg {
+    -webkit-appearance: none;
+    -moz-appearence: none;
+    appearance: none;
+    border: none;
+    display: inline-block;
+    height: 24px;
+    width: 100%;
+    color: orange;
+  }
+  
+  .rating progress.rating-bg::-webkit-progress-value {
+    background-color: orange;
+  }
+  
+  .rating progress.rating-bg::-moz-progress-bar {
+    background-color: orange;
+  }
+  
+  .rating svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  } */

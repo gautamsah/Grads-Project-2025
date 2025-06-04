@@ -7,7 +7,7 @@
             <div class="review-details-summary-part">
                 <div class="review-details-overall">
                     <div class="review-details-overall-content">
-                        <span class="review-details-overall-rating">{hotelDetails.Overall_Rating__c}</span>
+                        <span class="review-details-overall-rating">{overallRating}</span>
                         <span class="review-details-total-review"> {hotelDetails.Total_Reviews__c} Reviews</span>
                     </div>
                     <div class="review-details-overall-stars">
@@ -93,7 +93,12 @@
                 <div key={hotelReview.Id} class="review-details-reviews-container">
                     <div class="review-details-review-left">
                         <div class="review-details-review-person-img">
-                            <img src="https://raw.githubusercontent.com/milinkapatel/Respira-Images/refs/heads/main/person%20(2).jpg" alt="person-img">
+                            <!-- <svg width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle opacity="1" cx="12" cy="9" r="3" stroke="#123458" stroke-width="1.5"/>
+                                <circle cx="12" cy="12" r="10" stroke="#123458" stroke-width="1.5"/>
+                                <path opacity="1" d="M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20" stroke="#123458" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg> -->
+                            <img src={hotelReview.personImg} alt="person-img">
                         </div>
                         <div class="review-details-review-star-name-date">
                             <div class="review-details-review-star">

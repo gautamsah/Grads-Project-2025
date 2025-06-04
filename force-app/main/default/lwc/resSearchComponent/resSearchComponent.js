@@ -9,11 +9,14 @@ export default class ResSearchComponent extends LightningElement {
     @api localStorageEndDate;
     @api localStorageInput;
     @api placeholderText;
+    @api buttonLabel;
     currentDate = this.d.getDate();
     currentMonth = this.d.getMonth();
     currentYear = this.d.getFullYear();
     @track selectedMonth = this.currentMonth;
     @track selectedMonthString = this.months[this.selectedMonth];
+    @track searchLabelClass = 'searchLabelClass active';
+    @track dateLabelClass = 'dateLabelClass active';
     selectedYear = this.currentYear;
     noOfDaysInTheMonth;
     daysAtBegin;
@@ -30,15 +33,51 @@ export default class ResSearchComponent extends LightningElement {
     firstLoadInput = true;
     firstLoadDate = true;
     // @track currentStartDate = this.localStorageStartDate ? this.localStorageStartDate : this.formatDate(this.d.getFullYear(), (this.d.getMonth() + 1), this.d.getDate());
-    @track currentStartDate = this.formatDate(this.d.getFullYear(), (this.d.getMonth() + 1), this.d.getDate());
+    @track currentStartDate = this.formatDate(this.d.getFullYear(), (this.d.getMonth() ), this.d.getDate());
     // @track currentEndDate = this.localStorageEndDate ? this.localStorageEndDate : this.formatDate(this.tomorrow.getFullYear(), (this.tomorrow.getMonth() + 1), this.tomorrow.getDate());
-    @track currentEndDate = this.formatDate(this.tomorrow.getFullYear(), (this.tomorrow.getMonth() + 1), this.tomorrow.getDate());
+    @track currentEndDate = this.formatDate(this.tomorrow.getFullYear(), (this.tomorrow.getMonth() ), this.tomorrow.getDate());
     get ErrorMsgCss(){
         if(this.showErrorMsg){
             return "res-search-error-msg";
         }
         else{
             return 'res-search-error-msg-hidden';
+        }
+    }
+    handleSearchInputFocus() {
+        this.searchLabelClass = 'searchLabelClass active';
+    }
+
+    handleSearchInputBlur(event) {
+        const inputValue = event.target.value;
+        if (!inputValue) {
+            this.searchLabelClass = 'searchLabelClass';
+        }
+    }
+
+    handleSearchInputInput(event) {
+        this.searchInput = event.target.value;
+        if (this.searchInput !== '') {
+            this.searchLabelClass = 'searchLabelClass active';
+        } else {
+            this.searchLabelClass = 'searchLabelClass active';
+        }
+    }
+    handleDateInputFocus(){
+        this.dateLabelClass = 'dateLabelClass active';
+    }
+    handleDateInputBlur(event){
+        const inputValue = event.target.value;
+        if (!inputValue) {
+            this.dateLabelClass = 'dateLabelClass';
+        }
+    }
+    handleDateInputInput(){
+        this.dateInput = event.target.value;
+        if (this.dateInput !== '') {
+            this.dateLabelClass = 'dateLabelClass active';
+        } else {
+            this.dateLabelClass = 'dateLabelClass active';
         }
     }
     get placeholder(){
@@ -48,13 +87,13 @@ export default class ResSearchComponent extends LightningElement {
         return this.firstLoadInput ? (this.localStorageInput ? this.localStorageInput:'') : this.inputText ? this.inputText : '';
     }
     get startDate(){
-        return this.localStorageStartDate ? (this.firstLoadDate ? this.localStorageStartDate : this.currentStartDate) : this.currentStartDate;
+        return this.localStorageStartDate ? (this.firstLoadDate ? ((new Date(this.localStorageStartDate) >= new Date(this.currentStartDate)) ? this.localStorageStartDate : this.currentStartDate) : this.currentStartDate)  : this.currentStartDate;
     }
     set startDate(value){
         this.currentStartDate = value;
     }
     get endDate(){
-        return this.localStorageStartDate ? (this.firstLoadDate ? this.localStorageEndDate : this.currentEndDate) : this.currentEndDate;
+        return this.localStorageEndDate ? (this.firstLoadDate ? ((new Date(this.localStorageEndDate) >= new Date(this.currentStartDate)) ? this.localStorageEndDate : this.currentEndDate) : this.currentEndDate) : this.currentEndDate;
     }
     set endDate(value){
         this.currentEndDate = value;
@@ -70,8 +109,7 @@ export default class ResSearchComponent extends LightningElement {
         this.selectedMonthString = this.months[this.selectedMonth];
         this.handleMonthChange();
     }
-    handleBlur() {
-        
+    handleBlur(event) {
         this.showCalendar = false;
     }
     toggleCalendar(event) {
@@ -109,7 +147,7 @@ export default class ResSearchComponent extends LightningElement {
             let className = 'res-calendar-grid-item';
             
             if(selectedDate < currentDate){
-                className += ' selectNone pointerDisabled';
+                className += ' selectNone pointerDisabled colorLight';
             }
 
             if (this.startDate && this.endDate && dateKey >= this.startDate && dateKey <= this.endDate) {

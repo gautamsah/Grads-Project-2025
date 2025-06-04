@@ -4,6 +4,7 @@ import hoteldetail from '@salesforce/apex/RES_Utility.getRatingHotelCards';
 export default class ResHotelCard extends LightningElement{
     getHotels;
     hasRenderd = false;
+    trueValue = true;
     connectedCallback(){
         hoteldetail().then(result => {
             this.getHotels = result;

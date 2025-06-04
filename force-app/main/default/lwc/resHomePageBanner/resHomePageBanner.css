@@ -1,10 +1,9 @@
-
-
+@import "c/resStyleSheet";
 .hero-banner{
     width: 100%;
-    height: 600px;
+    height: 104vh;
     position: relative;
-    overflow: hidden;
+    top: -104px;
 }
 .background-img{
     width: 100%;
@@ -24,27 +23,26 @@
     text-align: center;
     width: 75%;
     height: auto;
-    color: white;
-
-    font-family: 'TerminaRegular';
+    color: var(--lightFontColor);
+    font-family: var(--resRegularFont);
 
 }
 .caption-text{
     font-size: 1.5rem;
 
-    font-family: 'TerminaLight';
+    font-family: var(--resRegularFont);
 }
 .title-text{
     font-size: 3.5rem;
 
     margin-top: 12px;
-    font-family: 'TerminaBold';
+    font-family: var(--resBoldFont);
 }
 .subtitle-text{
     font-size: 1.5rem;
     margin-top: 18px;
 
-    font-family: 'TerminaMedium';
+    font-family: var(--resMediumFont);
 }
 
 .welcome-msg-hidden{

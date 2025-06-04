@@ -3,9 +3,9 @@ import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import createSiteUser from '@salesforce/apex/RESSignUpController.createSiteUser';
 export default class ResSignUpPage extends NavigationMixin(LightningElement) {
-
-
+    @track showModal = false;
     userDetails = {
+        
         firstName: '',
         lastName: '',
         email: '',
@@ -57,8 +57,19 @@ export default class ResSignUpPage extends NavigationMixin(LightningElement) {
                 createSiteUser({
                     firstName: this.userDetails.firstName, lastName: this.userDetails.lastName, email: this.userDetails.email, phone: this.userDetails.phone
                 }).then(() => {
+
                     this.showToast('success', 'User Creation Successful', 'The user has been created!');
                     Object.entries(this.userDetails).some(([, value]) => value = undefined);
+                    this.showModal = true;
+                    setTimeout(() => {
+                        this[NavigationMixin.Navigate]({
+                            type: 'standard__webPage',
+                            attributes: {
+                                url: 'https://respira-dev.my.site.com/respira/s/loginpage'
+                            }
+                        });
+                    }, 8000);
+                    
                 }).catch(error => {
                     this.showToast('error', 'User Creation Failed ', JSON.stringify(error.body.message));
                 })

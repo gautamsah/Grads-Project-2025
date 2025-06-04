@@ -10,7 +10,6 @@ Created Date       : March 18, 2025
 Revision Log:
 Ver   Date         Author                               Modification
 1.0   18-03-2025   Milin Kapatel                      Initial Version
-2.0   24-03-2025   Pritkumar Prajapati(GT25-4)        Added getQuote() method for retrieveing quote records.
 *********************************************************
 */
 public without sharing class RESSignUpController {
@@ -44,6 +43,8 @@ public without sharing class RESSignUpController {
         Savepoint sp = Database.setSavepoint();
         try{
             Boolean isAccountCreated;
+            Boolean isCommunityUser;
+            Boolean isPersonAccount;
             Account accAfterInsert;
             isAccountCreated = createPersonAccount(firstName, lastName, email, phone);
             
@@ -104,7 +105,7 @@ public without sharing class RESSignUpController {
         try {
             Integer cnt = [select count() from Account where PersonEmail = :email];
             if(cnt == 0){
-                Account  acc = new Account(FirstName = firstName, LastName = lastName, PersonEmail = email, Phone = phone, RecordTypeId = personAccountRecordTypeId);
+                Account  acc = new Account(FirstName = firstName, LastName = lastName, PersonEmail = email, Phone = phone, RecordTypeId = personAccountRecordTypeId,isCommunityUser__c=true);
                 
                 try {
                     insert acc;   
@@ -115,8 +116,20 @@ public without sharing class RESSignUpController {
                 }
             }
             else {
-                isAccountCreated = false;
-                throw new RESSignUpException('Account already exists');
+                List<Account> acc = [select Id,isCommunityUser__c,PersonEmail from Account where PersonEmail = :email limit 1];
+                if(acc[0].isCommunityUser__c == false){
+                    acc[0].OwnerId = '005Hr00000IRd7pIAD';
+                    acc[0].isCommunityUser__c = true;
+                    acc[0].FirstName = firstName;
+                    acc[0].LastName = lastName;
+                    acc[0].Phone = phone;
+                    update acc;
+                    isAccountCreated = true;
+                }
+                else {
+                    isAccountCreated = false;
+                    throw new RESSignUpException('Account already exists');
+                }
             }
         }
         catch (Exception e) {
@@ -125,6 +138,7 @@ public without sharing class RESSignUpController {
         }
         return isAccountCreated;
     }
+    
     /*
     *********************************************************
     @Method Name    : createUser

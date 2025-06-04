@@ -25,7 +25,7 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordCreates>
-        <description>Creates the record for Error Logger Object</description>
+        <description>This element creates the record for error logger object.</description>
         <name>Create_Error_Logger_Record</name>
         <label>Create Error Logger Record</label>
         <locationX>176</locationX>
@@ -70,7 +70,7 @@
             <targetReference>Create_Error_Logger_Record</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <description>Holds the error message occurred.</description>
         <name>errorMessage</name>

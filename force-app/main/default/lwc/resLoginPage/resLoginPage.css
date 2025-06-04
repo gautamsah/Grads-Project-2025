@@ -1,12 +1,24 @@
 /* *{
     background-color: #fefef4;
 } */
-.child-input .details {
+.login-outer-container{
+    margin: 52px 10px;
+}
+.child-input {
     color: rgba(102, 102, 102, 1);
+    width: 100%;
+    outline: none;
+    line-height: 25px;
+    font-size: 18px;
+    font-family: sans-serif;
+    box-shadow: none;
+    border: none;
+    background-color: rgb(214, 214, 214);
+    border-bottom: 1px solid var(--primaryColor);
 }
 
 a {
-    color: blue;
+    color: var(--primaryColor);
 }
 
 .header {
@@ -47,7 +59,7 @@ a {
 a{
     font-size: larger;
     text-decoration: none;
-    color: #007CFF;
+    color: var(--primaryColor);
     font-weight: 500;
 }
 
@@ -59,7 +71,6 @@ a{
     display: flex;
     position: relative;
 }
-
 .sign-up-image {
     display: flex;
     object-fit: cover;
@@ -95,7 +106,7 @@ a{
 }
 
 button:hover {
-    background-color: #066bd6;
+    background-color: var(--primaryColor);
 }
 
 .hide-input{

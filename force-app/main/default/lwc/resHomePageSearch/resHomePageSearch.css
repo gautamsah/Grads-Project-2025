@@ -1,5 +1,10 @@
+@import "c/resStyleSheet";
 .res-home-page-search-container{
     display: block;
-    margin: 50px auto;
+    margin: 50px 0;
+}
+.res-home-page-search-item{
     width: 80%;
+    margin : 0 auto;
+    display: block;
 }

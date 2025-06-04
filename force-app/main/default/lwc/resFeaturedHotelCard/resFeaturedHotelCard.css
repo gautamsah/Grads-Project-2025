@@ -1,3 +1,30 @@
+@import "c/resStyleSheet";
+
+.carousel-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 56px 0 0 0;
+    padding: 0 16%;
+    text-align: center;
+    font-family: var(--resRegularFont);
+
+}
+.carousel-heading{
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 42px;
+    color : #373F58; 
+}
+.carousel-para{    
+    font-size: 16px;
+    font-weight: 400;
+    margin: 16px 0 0 0;
+    line-height: 24px;
+    color: #666666;
+
+}
 .bgwhite{
     background-color: white;
     width: 100%;
@@ -12,7 +39,7 @@
     font-size: 28px;
     line-height: 42px;
     letter-spacing: 0%;
-    font-family: 'TerminaRegular';
+    font-family: 'CinzelRegular';
     margin: 52px 0px 35px;
 }
 .description{
@@ -20,11 +47,14 @@
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0%;
-    font-family: 'TerminaRegular';
+    font-family: 'CinzelRegular';
     margin-bottom: 25px;
 }
 .child-card{
     margin : 16px 0px;
+}
+.card-container{
+    margin:35px 0 0 0;
 }
 @media screen and (max-width: 600px){
     .bcwhite{

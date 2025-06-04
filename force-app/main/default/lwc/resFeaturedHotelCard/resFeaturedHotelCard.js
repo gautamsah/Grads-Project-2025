@@ -4,6 +4,7 @@ import hoteldetail from '@salesforce/apex/RES_Utility.getFeatureHotelCards';
 export default class ResFeaturedCard extends LightningElement {
     getHotels;
     hasRenderd = false;
+    trueValue = true;
     connectedCallback(){
             this.cards = this.template.querySelector('card-container');
             hoteldetail().then(result => {

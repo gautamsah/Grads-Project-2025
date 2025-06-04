@@ -1,5 +1,16 @@
 <template>
-    <lightning-layout horizontal-align="center">
+    <lightning-layout horizontal-align="center" multiple-rows>
+        <template if:true={showModal}>
+            <lightning-layout-item size="12">
+                <div class="signupModalFullScreen">
+                    <div class="signupModal">
+                        We have sent you a reset password link to {userDetails.email}.
+                        <br>
+                        Please Check your mailbox.
+                    </div>
+                </div>
+            </lightning-layout-item>
+        </template>
         <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
             <lightning-layout multiple-rows vertical-align="stretch">
                 <lightning-layout-item class="" size="12" small-device-size="12" large-device-size="4" medium-device-size="6">

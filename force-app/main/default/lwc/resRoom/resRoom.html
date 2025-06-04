@@ -1,33 +1,29 @@
 <template>
     <lightning-layout class="search">
+        <template if:true={showLoadingSpinner}>
+            <lightning-layout-item class="loading-spinner">
+                <c-res-loading-spinner></c-res-loading-spinner>
+            </lightning-layout-item>
+        </template>
         <lightning-layout-item size="12" class="search-container slds-m-bottom_large">
             <c-res-search-component local-storage-start-date={startDate} local-storage-end-date={endDate}
                 local-storage-input={name} picklist-values={hotels} onbookbuttonclick={handleBookNow}
-                placeholder-text={placeholder}></c-res-search-component>
+                placeholder-text={placeholder} button-label="Search Hotel"></c-res-search-component>
         </lightning-layout-item>
     </lightning-layout>
     <lightning-layout class="main" multiple-rows>
 
         <template if:true={onRoom}>
             <lightning-layout-item size="12">
-                <p class="hotel-name">{name}</p>
+                <a onclick={handleHotelRedirect} class="hotel-name">{name}</a>
             </lightning-layout-item>
             <lightning-layout-item class="city-review" size="12">
                 <p class="hotel-city slds-p-right_small">{city}</p>
                 <c-res-rating-star class="rating-star" rating={rating}></c-res-rating-star>
-                <p class="hotel-review slds-p-left_small">({reviews}) Reviews</p>
+                <a href="#customer_review" class="hotel-review slds-p-left_small">({reviews}) Reviews</a>
             </lightning-layout-item>
             <lightning-layout-item size="12" class="slds-m-bottom_large">
                 <p class="hotel-room-text">Available Rooms</p>
-            </lightning-layout-item>
-        </template>
-
-        <template if:true={onDetails}>
-            <lightning-layout-item size="12">
-                <p class="hotel-name">PRIMARY GUEST DETAILS</p>
-            </lightning-layout-item>
-            <lightning-layout-item size="12" class="slds-m-bottom_large">
-                <p class="hotel-review slds-p-left_small">Please fill all relevant fields to proceed further.</p>
             </lightning-layout-item>
         </template>
 
@@ -38,11 +34,11 @@
                     <p class="cart-heading">Your Selections:</p>
                     <template for:each={selectedRooms} for:item="selectedRoom">
                         <lightning-layout key={selectedRoom.Id} class="fields-value-container top-border" multiple-rows>
-                            <p>Room :</p>
+                            <p class="cart-text">Room</p>
                             <p>{selectedRoom.Name}</p>
                         </lightning-layout>
                         <lightning-layout key={selectedRoom.Id} class="fields-value-container" multiple-rows>
-                            <p>Price :</p>
+                            <p class="cart-text">Price</p>
                             <p>
                                 $ {selectedRoom.Product_Unit_Price__c} x {selectedRoom.count}
                             </p>
@@ -50,15 +46,19 @@
                     </template>
                     <template if:true={selectedRooms.length}>
                         <lightning-layout class="fields-value-container top-border" multiple-rows>
-                            <p>Total Rooms:</p>
+                            <p class="cart-text">Total Rooms</p>
                             <p>{totalRooms}</p>
                         </lightning-layout>
                         <lightning-layout class="fields-value-container" multiple-rows>
-                            <p>Tax:</p>
-                            <p>{taxAmount}</p>
+                            <p class="cart-text">No of days</p>
+                            <p>{numberOfDays}</p>
                         </lightning-layout>
                         <lightning-layout class="fields-value-container" multiple-rows>
-                            <p>Total Amount:</p>
+                            <p class="cart-text">Tax</p>
+                            <p>$ {taxAmount}</p>
+                        </lightning-layout>
+                        <lightning-layout class="fields-value-container" multiple-rows>
+                            <p class="cart-text">Total Amount</p>
                             <p>$ {totalAmount}</p>
                         </lightning-layout>
 
@@ -66,10 +66,19 @@
                             <button class="proceed-button" onclick={handleProceedButton}>Procced</button>
                         </template>
 
-                        <template if:true={onRoom}>
-                            <c-res-button variant='details-page-button'
-                                class="slds-m-vertical_small slds-p-vertical_small sign-up-button"
-                                button-label="Pay" onpress={onSignUpClick}></c-res-button>
+                        <template if:true={onDetails}>
+                            <c-res-button variant='detials-page-button'
+                                class="slds-m-vertical_small slds-p-vertical_small sign-up-button" button-label="Pay"
+                                onpress={onSignUpClick}></c-res-button>
+                            <c-res-button variant='detials-page-button'
+                                class="slds-m-bottom_small slds-p-bottom_small sign-up-button" button-label="Back"
+                                onpress={onDetailBackClick}></c-res-button>
+                        </template>
+
+                        <template if:true={onPayment}>
+                            <c-res-button variant='detials-page-button'
+                                class="slds-m-vertical_small slds-p-vertical_small sign-up-button" button-label="Back"
+                                onpress={onPaymentBackClick}></c-res-button>
                         </template>
                     </template>
                     <template if:false={selectedRooms.length}>
@@ -78,6 +87,7 @@
                         </lightning-layout>
                     </template>
                 </lightning-layout-item>
+
                 <template if:true={onRoom}>
                     <lightning-layout-item size="12" small-device-size="12" large-device-size="9"
                         medium-device-size="10" class="slds-m-bottom_x-large room-info-container">
@@ -144,67 +154,194 @@
                         </template>
                     </lightning-layout-item>
                 </template>
-
+                
                 <template if:true={onDetails}>
+                    <lightning-layout-item size="12" small-device-size="12" large-device-size="9"
+                        medium-device-size="10">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12">
+                                <p class="heading">Personal Information</p>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" class="slds-m-bottom_large">
+                                <p class="hotel-review slds-p-left_small">Please fill all relevant fields to proceed
+                                    further.</p>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" large-device-size="12"
+                                medium-device-size="12" class="slds-m-bottom_x-large room-info-container">
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="12">
+                                        <lightning-layout class="details" multiple-rows>
+                                            <!-- <lightning-layout-item size="2" class="inputField">
+                                        <c-res-input class="slds-m-vertical_small " input-type="text"
+                                            field-label="Salutation" field-name="title" onchange={handleChange}
+                                            field-value={userDetails.title}></c-res-input>
+                                    </lightning-layout-item> -->
+                                            <lightning-layout-item size="6" class="inputField">
+                                                <c-res-input input-type="text" required="true" field-label="First Name"
+                                                    field-name="firstName" onchange={handleChange}
+                                                    field-value={userDetails.firstName}></c-res-input>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="inputField">
+                                                <c-res-input input-type="text" required="true" field-label="Last Name"
+                                                    field-name="lastName" onchange={handleChange}
+                                                    field-value={userDetails.lastName}></c-res-input>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12">
+                                        <lightning-layout class="details" multiple-rows>
+                                            <lightning-layout-item size="6" class="inputField">
+                                                <c-res-input class="slds-m-vertical_small " input-type="email"
+                                                    field-label="Email" field-name="email" onchange={handleChange}
+                                                    field-value={userDetails.email}></c-res-input>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="inputField">
+                                                <c-res-input class="slds-m-vertical_small " input-type="phone"
+                                                    field-label="Phone" field-name="phone" onchange={handleChange}
+                                                    field-value={userDetails.phone}></c-res-input>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12">
+                                        <lightning-layout class="details" multiple-rows>
+                                            <lightning-layout-item size="12" class="inputField">
+                                                <textarea name="spReq" class="slds-m-vertical_small" rows="4"
+                                                    placeholder="Enter your Special Request (if any)" oninput={handleSpecialRequest}>{userDetails.spReq}</textarea>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12">
+                                        <lightning-layout class="details" multiple-rows>
+                                            <c-res-input class="inputField check" input-type="checkbox"
+                                                field-label="Agree to terms and condition" field-name="agreement"
+                                                onchange={handleChange}
+                                                field-value={userDetails.agreement}></c-res-input>
+                                        </lightning-layout>
+                                        <span class={errorMessageCssClass}>Please agree to terms and conditions</span>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+
+                </template>
+
+                <template if:true={onPayment}>
                     <lightning-layout-item size="12" small-device-size="12" large-device-size="9"
                         medium-device-size="10" class="slds-m-bottom_x-large room-info-container">
                         <lightning-layout multiple-rows>
-                            <lightning-layout-item size="12">
-                                <lightning-layout class="details" multiple-rows>
-                                    <lightning-layout-item size="1">
-                                        <c-res-input class="slds-m-vertical_small child-input" input-type="text"
-                                            field-label="Salutation" field-name="title"
-                                            onchange={handleChange}></c-res-input>
+                            <lightning-layout-item size="6">
+                                <p class="heading">Payment</p>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6">
+                                <p class="total-cost">Total to Pay : $ {totalAmount}</p>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" class="payment-container">
+                                <lightning-layout multiple-rows class="payment-container-layout">
+                                    <lightning-layout-item size="3" class="payment-container-left-part">
+                                        <a class={walletTabClass} data-id="walletTab" onclick={handleTabChange}>
+                                            <lightning-icon icon-name="utility:money" alternative-text="Wallet-Icon!"
+                                                title="Money" class="wallet-icon"></lightning-icon>
+                                            <p class="wallet-name">Wallet</p>
+                                        </a>
+                                        <a class={creditCardTabClass} data-id="creditCardTab" onclick={handleTabChange}>
+                                            <lightning-icon icon-name="utility:toggle_panel_bottom"
+                                                alternative-text="Wallet-Icon!" title="Money"
+                                                class="wallet-icon"></lightning-icon>
+                                            <p class="wallet-name">Credit Card</p>
+                                        </a>
+                                        <a class={upiTabClass} data-id="upiTab" onclick={handleTabChange}>
+                                            <lightning-icon icon-name="utility:macros" alternative-text="UPI"
+                                                title="UPI" class="wallet-icon"></lightning-icon>
+                                            <p class="wallet-name">UPI</p>
+                                        </a>
+                                        <a class={netBankingTabClass} data-id="netBankingTab" onclick={handleTabChange}>
+                                            <lightning-icon icon-name="utility:desktop" alternative-text="Net-banking"
+                                                title="Net Banking" class="wallet-icon"></lightning-icon>
+                                            <p class="wallet-name">Net Banking</p>
+                                        </a>
                                     </lightning-layout-item>
-                                    <lightning-layout-item size="4">
-                                        <c-res-input class="slds-m-vertical_small child-input" input-type="text"
-                                            field-label="First Name" field-name="firstName"
-                                            onchange={handleChange}></c-res-input>
-                                    </lightning-layout-item>
-                                    <lightning-layout-item size="4">
-                                        <c-res-input class="slds-m-vertical_small child-input" input-type="text"
-                                            field-label="Last Name" field-name="lastName"
-                                            onchange={handleChange}></c-res-input>
+                                    <lightning-layout-item size="9" class="payment-container-right-part">
+                                        <template if:true={tabStatusCopy.walletTab}>
+                                            <lightning-layout multiple-rows
+                                                class="payment-wallet-current-balance-container">
+                                                <lightning-layout-item size="12" small-device-size="12"
+                                                    medium-device-size="12" large-device-size="4">
+                                                    <a class="payment-add-money" onclick={handleAddMoneyToWallet}>Add money to wallet</a>
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12" small-device-size="12"
+                                                    medium-device-size="12" large-device-size="8">
+                                                    <p class="payment-wallet-current-money">Current Balance in Wallet :
+                                                        <span class="current-money-value">$ {walletAmount}</span>
+                                                    </p>
+                                                </lightning-layout-item>
+                                            </lightning-layout>
+                                            <c-res-button variant='details-page-button'
+                                                class="slds-m-vertical_large sign-up-button" button-label="Proceed to Pay"
+                                                onpress={onProceedPayment}>
+                                            </c-res-button>
+                                        </template>
+
+                                        <template if:true={tabStatusCopy.creditCardTab} ><p class="other-payment-method-tab">
+                                            This Payment method is currently not available!!
+                                        </p></template>
+                                        <template if:true={tabStatusCopy.upiTab}><p class="other-payment-method-tab">
+                                            This Payment method is currently not available!!
+                                        </p></template>
+                                        <template if:true={tabStatusCopy.netBankingTab}><p class="other-payment-method-tab">
+                                            This Payment method is currently not available!!
+                                        </p></template>
                                     </lightning-layout-item>
                                 </lightning-layout>
                             </lightning-layout-item>
-                            <lightning-layout-item size="12">
-                                <lightning-layout class="details" multiple-rows>
-                                    <lightning-layout-item size="5">
-                                        <c-res-input class="slds-m-vertical_small child-input" input-type="email"
-                                            field-label="Email" field-name="email"
-                                            onchange={handleChange}></c-res-input>
-                                    </lightning-layout-item>
-                                    <lightning-layout-item size="5">
-                                        <c-res-input class="slds-m-vertical_small child-input" input-type="phone"
-                                            field-label="Phone" field-name="phone"
-                                            onchange={handleChange}></c-res-input>
-                                    </lightning-layout-item>
+
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </template>
+
+                <template if:true={onOTP}>
+                    <lightning-layout-item size="12" small-device-size="12" large-device-size="9"
+                        medium-device-size="10">
+                        <lightning-layout class="otp-container" multiple-rows>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10"
+                                large-device-size="8">
+                                <lightning-layout class="center slds-m-vertical_medium" multiple-rows>
+                                    <svg class="facility-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round"></g><g > <path d="M17 10V8C17 5.23858 14.7614 3 12 3C9.23858 3 7 5.23858 7 8V10M12 14.5V16.5M8.8 21H15.2C16.8802 21 17.7202 21 18.362 20.673C18.9265 20.3854 19.3854 19.9265 19.673 19.362C20 18.7202 20 17.8802 20 16.2V14.8C20 13.1198 20 12.2798 19.673 11.638C19.3854 11.0735 18.9265 10.6146 18.362 10.327C17.7202 10 16.8802 10 15.2 10H8.8C7.11984 10 6.27976 10 5.63803 10.327C5.07354 10.6146 4.6146 11.0735 4.32698 11.638C4 12.2798 4 13.1198 4 14.8V16.2C4 17.8802 4 18.7202 4.32698 19.362C4.6146 19.9265 5.07354 20.3854 5.63803 20.673C6.27976 21 7.11984 21 8.8 21Z" stroke="#123458" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                    <p class="otp-header">OTP Verification</p>
                                 </lightning-layout>
-                            </lightning-layout-item>
-                            <lightning-layout-item size="12">
-                                <lightning-layout class="details" multiple-rows>
-                                    <lightning-layout-item size="5">
-                                        <c-res-input class="slds-m-vertical_small child-input" input-type="text"
-                                            field-label="Special Request" field-name="spReq"
-                                            onchange={handleChange}></c-res-input>
-                                    </lightning-layout-item>
-                                </lightning-layout>
-                            </lightning-layout-item>
-                            <lightning-layout-item size="12">
-                                <lightning-layout class="details" multiple-rows>
-                                    <c-res-input class="slds-m-vertical_small child-input check" input-type="checkbox"
-                                        field-label="Agree to terms and condition" field-name="agreement"
-                                        onchange={handleChange}></c-res-input>
+                                <p class="otp-instruction slds-m-vertical_small">We have mailed you a 6-digit code on
+                                    "{userDetails.email}". Please check your email and
+                                    enter the code below to complete the transaction.</p>
+                                <p class="otp-instruction center-text">Enter Code</p>
+                                <c-res-input input-type="text" required="true" field-label="OTP" field-name="OTP"
+                                    onchange={handleOtpChange} field-value={otp}>
+                                </c-res-input>
+                                <c-res-button variant='details-page-button' class="slds-m-vertical_large sign-up-button"
+                                    button-label="Verify" onpress={onVerify}>
+                                </c-res-button>
+                                <lightning-layout class="center slds-m-vertical_small" multiple-rows>
+                                    <p class="otp-instruction">Didn't receive the OTP? </p>
+                                    <span class="otp-instruction resend">
+                                        <template if:true={isResendDisabled}>
+                                            Resend in {resendTimer}s
+                                        </template>
+                                        <template if:false={isResendDisabled}>
+                                            <a onclick={onResend}>Resend</a>
+                                        </template>
+                                    </span>
                                 </lightning-layout>
                             </lightning-layout-item>
                         </lightning-layout>
                     </lightning-layout-item>
                 </template>
-
             </lightning-layout>
         </lightning-layout-item>
     </lightning-layout>
-    <!-- <lightning-layout class="personal-details" multiple-rows>
-    </lightning-layout> -->
+    <lightning-layout id="customer_review">
+        <template if:true={onRoom}>
+            <lightning-layout-item size="12">
+                <c-res-hotel-review-details></c-res-hotel-review-details>
+            </lightning-layout-item>
+        </template>
+    </lightning-layout>
 </template>

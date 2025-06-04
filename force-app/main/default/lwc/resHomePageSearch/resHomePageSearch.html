@@ -1,5 +1,7 @@
 <template>
     <lightning-layout class="res-home-page-search-container">
-    <c-res-search-component local-storage-start-date={localStorageStartDate} local-storage-end-date={localStorageEndDate} local-storage-input={localStorageCity} picklist-values={cities} onbookbuttonclick={handleBookNow} placeholder-text={placeholder}></c-res-search-component>
+        <lightning-layout-item class="res-home-page-search-item">
+            <c-res-search-component local-storage-start-date={localStorageStartDate} local-storage-end-date={localStorageEndDate} local-storage-input={localStorageCity} picklist-values={cities} onbookbuttonclick={handleBookNow} placeholder-text={placeholder} button-label="Search"></c-res-search-component>
+        </lightning-layout-item>
 </lightning-layout>
 </template>

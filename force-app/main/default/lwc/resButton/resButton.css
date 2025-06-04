@@ -1,7 +1,9 @@
-.sign-up-button{
+@import "c/resStyleSheet";
+
+.sign-up-button {
     width: 100%;
-    background-color: #007cff;
-    color: white;
+    background-color: var(--primaryColor);
+    color: var(--lightFontColor);
     padding-top: 12px;
     font-size: medium;
     padding-bottom: 12px;
@@ -9,6 +11,27 @@
     border: none;
 }
 
-.sign-up-button:hover{
-    background-color: #066bd6;
+.details-page-button {
+    background-color: var(--primaryColor);
+    width: 100%;
+    border-radius: 12px;
+    padding: 10px;
+    border: none;
+    color: var(--lightFontColor);
+    cursor: pointer;
+}
+
+.detials-page-button {
+    background-color: var(--primaryColor);
+    width: 94%;
+    border-radius: 28px;
+    padding: 10px;
+    border: none;
+    color: var(--lightFontColor);
+    cursor: pointer;
+    margin: 12px 9px;
+}
+
+.sign-up-button:hover {
+    background-color: #14283d;
 }

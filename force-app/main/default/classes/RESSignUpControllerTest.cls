@@ -113,7 +113,10 @@ public class RESSignUpControllerTest {
             actualError = e.getMessage();
         }
         Test.stopTest();
-
+		User u = [select id from User where Email = 'gsah2@horizontal.com' limit 1];
+        PermissionSetAssignment psa = [select AssigneeId, PermissionSetId from PermissionSetAssignment where AssigneeId = :u.Id limit 1];
+        PermissionSet ps = [select id,Name from PermissionSet where id = :psa.PermissionSetId];
+        System.debug('ps name : ' + ps.name);
         System.assertEquals(expectedError, actualError);
     }
     

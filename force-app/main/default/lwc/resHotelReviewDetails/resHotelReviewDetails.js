@@ -31,6 +31,7 @@ export default class ResHotelReviewDetails extends LightningElement {
     allReviewLoaded = false;
     hasReviewRecords = false;
     hotelName;
+    overallRating;
     /*
     *********************************************************
     @methodName     : renderedCallback
@@ -207,16 +208,23 @@ export default class ResHotelReviewDetails extends LightningElement {
         getHotelReviewDetails({hotelName : this.hotelName})
                     .then(result => {
                         console.log('result' ,result);
-                        
                         if(result[0].ratingList.length){
                         this.hasReviewRecords = true;
-                        
                         this.hotelDetails = result[0].hotelRecord;
+
                         this.actualHotelReviewDetails = result[0].ratingList;
                         let tempHotelReviewDetails = [...this.actualHotelReviewDetails];
+                        let randomNum = 3;
                         tempHotelReviewDetails.forEach((review, index) => {
+                            if (randomNum == 11) {
+                                randomNum = 3;
+                            }
+                            else {
+                                randomNum++;
+                            }
                             let tempReviewObj = {...review};
                             tempReviewObj.CreatedDate = review.CreatedDate.substring(0,10);
+                            tempReviewObj.personImg = `https://raw.githubusercontent.com/milinkapatel/Respira-Images/refs/heads/main/person%20(${randomNum}).jpg`
                             tempHotelReviewDetails[index] = tempReviewObj;
                         });
                         this.actualHotelReviewDetails = tempHotelReviewDetails;
@@ -227,6 +235,7 @@ export default class ResHotelReviewDetails extends LightningElement {
                         if(this.actualHotelReviewDetails.length <= this.totalReviewsToDisplay){
                             this.allReviewLoaded = true;
                         }
+                        this.overallRating = this.hotelDetails.Overall_Rating__c.toFixed(1);
                         this.avgValueForMoney = this.hotelDetails.Avg_Value_For_Money__c.toFixed(1);
                         this.avgCleanlinessAndHyigene = this.hotelDetails.Avg_Cleanliness_And_Hygiene__c.toFixed(1);
                         this.avgHospitality = this.hotelDetails.Avg_Hospitality__c.toFixed(1);

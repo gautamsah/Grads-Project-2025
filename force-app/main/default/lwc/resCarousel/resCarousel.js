@@ -51,6 +51,12 @@ export default class ResCarousel extends LightningElement {
             return 'carousel-card quote-card';
         }
     }
+    get nextNavigationButtonClass(){
+        return this.varient == 'Offer' ? 'swiper-button-next swiper-button-offer' : this.varient == 'Quote' ? 'swiper-button-next swiper-button-quote' : 'swiper-button-next';
+    }
+    get prevNavigationButtonClass(){
+        return this.varient == 'Offer' ? 'swiper-button-prev swiper-button-offer' : this.varient == 'Quote' ? 'swiper-button-prev swiper-button-quote' : 'swiper-button-prev';
+    }
     /*
     *********************************************************
     @methodName     : renderedCallback

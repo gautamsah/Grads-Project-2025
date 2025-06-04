@@ -4,25 +4,11 @@ import { getRecord } from 'lightning/uiRecordApi';
 import userId from '@salesforce/user/Id';
 import FirstName from '@salesforce/schema/User.FirstName';
 import Username from '@salesforce/schema/User.Username';
-/*
-@Class name : ResHomePageBanner
-@description : To Show Banner with autoplay video
-@Author: Milin Kapatel
-@Date: 28/03/2025
-@JIRA: GT25-5
-Revision Log  :   
-Ver   Date         Author                               Modification
-1.0   28-03-2025   Milin Kapatel                      Initial Version
-2.0   02-04-2025   Milin Kapatel                      Added Comments
-*/
+
+
 export default class ResHomePageBanner extends LightningElement {
 
-    
-    @track bgvideo;
-    @track userName = '';
-    @track firstName = '';
-    @track errorMsg;
-    
+
     get welcomeMsgClass(){
         if(this.userName == ''){
                 return 'welcome-msg-hidden';
@@ -31,19 +17,12 @@ export default class ResHomePageBanner extends LightningElement {
                 return 'welcome-msg-visible';
             }
     }
+    @track userName = '';
+   
+    @track firstName = '';
+    @track errorMsg;
+    
 
-    /*
-    *********************************************************
-    @Decorator      : wire
-    @methodName     : getRecord
-    @author         : Milin Kapatel
-    @description    : method to is used for getting the details of current user
-    @param          : Id recordId, array : fields
-    @return         : void
-	@date			: March 28, 2025
-	@JIRA			: GT25-5
-    ********************************************************
-	*/
     @wire(getRecord, {recordId : userId, fields : [Username, FirstName]})
     wiredUserDetails({error, data}){
         
@@ -66,18 +45,9 @@ export default class ResHomePageBanner extends LightningElement {
             }
         }
     }
-    /*
-    *********************************************************
-    @methodName     : connectedCallback
-    @author         : Milin Kapatel
-    @description    : method to is used for referencing the video to local variable after lwc is inserted in DOM
-    @param          : void
-    @return         : void
-	@date			: March 28, 2025
-	@JIRA			: GT25-5
-    ********************************************************
-	*/
+    @track bgvideo;
     connectedCallback(){
+        // this.bgvideo = 'https://github.com/milinkapatel/Respira-Images/blob/main/4010511-hd_1920_1080_25fps.mp4';
         this.bgvideo = bgvideoResource;
         
     }

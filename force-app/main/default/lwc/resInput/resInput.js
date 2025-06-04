@@ -6,6 +6,7 @@ export default class ResInput extends LightningElement {
     @api fieldName;
     @api fieldLabel;
     @api validate = false;
+    @api required = false;
 
 
     field;
@@ -43,7 +44,7 @@ export default class ResInput extends LightningElement {
     }
 
     get cssClasses(){
-        return this.hasError ? ' normal error ' : ' normal ';
+        return this.hasError ? ' normal error show-name-error' : ' normal ';
     }
 
     emailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -53,12 +54,15 @@ export default class ResInput extends LightningElement {
     @api validationCheck(){
 
         this.hasError = false;
-        console.log('Hello babe!');
-        
         
         if (this.isEmail && !this.emailFormat.test(this.fieldValue)) {
             this.hasError = true;
             this.errorMessage = 'Please enter a valid email!';
+        }
+
+        if(this.isText && this.required && !this.fieldValue){
+            this.hasError = true;
+            this.errorMessage = `${this.fieldLabel} is required!`;
         }
 
         if (this.isText && this.validate && !this.textFormat.test(this.fieldValue)) {
@@ -71,13 +75,11 @@ export default class ResInput extends LightningElement {
             this.errorMessage = 'Please enter a valid phone!';
         }
 
-        console.log('child call: ', this.hasError);
         return this.hasError;
         
     }
 
     handleChange(event) {
-        console.log('I am in child' , event);
         this.fieldValue = this.isPassword || this.isText || this.isEmail || this.isPhone ? event.target.value : event.target.checked;
         
         this.validationCheck();
@@ -89,7 +91,5 @@ export default class ResInput extends LightningElement {
                 hasError: this.hasError
             }
         }));
-
-        console.log('After dispatch');
     }
 }
