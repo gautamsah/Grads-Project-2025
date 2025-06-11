@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reviewer_Name__c</fullName>
+    <description>This field stores the name of the reviewer</description>
+    <externalId>false</externalId>
+    <formula>Account__r.LastName</formula>
+    <label>Reviewer Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

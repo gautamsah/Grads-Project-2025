@@ -1,0 +1,85 @@
+.about-us-container{
+      color: #333;
+      line-height: 1.6;
+}
+header {
+    color: #030303;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  header p {
+    font-size: 1.2rem;
+    color: #030303;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  section h2 {
+    font-size: 2rem;
+    color: #002b5c;
+    margin-bottom: 1rem;
+    border-left: 5px solid #0066cc;
+    padding-left: 10px;
+  }
+
+  section p {
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+
+  .values {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .value-box {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+
+  .cta {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .cta a {
+    background-color: #0066cc;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+  .cta a:hover {
+    background-color: #004999;
+  }
+
+  @media (max-width: 768px) {
+    header h1 {
+      font-size: 2rem;
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+    }
+  }

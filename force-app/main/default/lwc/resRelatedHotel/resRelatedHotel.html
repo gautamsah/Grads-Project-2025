@@ -1,0 +1,28 @@
+<template>
+    <lightning-layout class="slds-grid_vertical-align-center bgwhite">
+        <lightning-layout-item>
+            <lightning-layout multiple-rows="true" class="title-container">
+                <lightning-layout-item style="width: 90%;">
+                    <template if:true={hasRelatedHotels}>
+                        <p class="title-name">Related Hotels</p>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+            <template if:true={hasRenderd}>
+                <lightning-layout multiple-rows="true" class="slds-grid slds-gutters card-container">
+                    <template for:each={relatedHotels} for:item="hotel">
+                        <lightning-layout-item key={hotel.Id} class="slds-col child-card" size="12" small-device-size="12" medium-device-size="6" large-device-size="3">
+                            <c-res-single-hotel-card hotel-unique-name={hotel.Unique_Hotel_Name__c} img-name={hotel.Banner_Photo_Url__c} hotel-name={hotel.Name}
+                                rating={hotel.Overall_Rating__c} book-btn={trueValue} price={hotel.Price__c} city={hotel.City__c}
+                                state={hotel.State__c} onclick={gotodetailpage}>
+                            </c-res-single-hotel-card>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+            <template if:false={hasRenderd}>
+                <c-res-loading-spinner></c-res-loading-spinner>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

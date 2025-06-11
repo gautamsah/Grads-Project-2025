@@ -1,0 +1,55 @@
+<template>
+    <lightning-layout horizontal-align="center" multiple-rows>
+        <template if:true={showModal}>
+            <lightning-layout-item size="12">
+                <div class="signupModalFullScreen">
+                    <div class="signupModal">
+                        We have sent you a reset password link to {userDetails.email}.
+                        <br>
+                        Please Check your mailbox.
+                    </div>
+                </div>
+            </lightning-layout-item>
+        </template>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+            <lightning-layout multiple-rows vertical-align="stretch">
+                <lightning-layout-item class="" size="12" small-device-size="12" large-device-size="4" medium-device-size="6">
+                    <lightning-layout multiple-rows class="input-and-button-holder slds-p-horizontal_large">
+                        <lightning-layout-item >
+                            <p class="header slds-m-top_x-large">Get Started</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item >
+                            <p class="slds-m-vertical_small signup-detail">Create an account to access exclusive deals, manage your bookings and personalize your travel experience. Start your journey with us. Respira provides the best possible staying options across the globe, which is just a click away!</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <c-res-input class="slds-m-vertical_small child-input" validate="true"  input-type="text" field-label="First Name" field-name="firstName" field-value={userDetails.firstName} onchange={handleChange} ></c-res-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <c-res-input class="slds-m-vertical_small child-input" validate="true"  input-type="text" field-label="Last Name" field-name="lastName" field-value={userDetails.lastName} onchange={handleChange} ></c-res-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <c-res-input class="slds-m-vertical_small child-input"  input-type="email" field-label="E-mail" field-name="email" field-value={userDetails.email} onchange={handleChange} ></c-res-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <c-res-input class="slds-m-vertical_small child-input"  input-type="phone" field-label="Phone" field-name="phone" field-value={userDetails.phone} onchange={handleChange} ></c-res-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <c-res-input class="slds-m-vertical_small child-input check" input-type="checkbox" field-label="Agree to terms and condition" field-name="agreement" field-value={userDetails.agreement} onchange={handleChange}></c-res-input>
+                            <span class={errorMessageCssClass}>Please agree to terms and conditions</span>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <c-res-button variant='sign-up-button' class="slds-m-vertical_small slds-p-vertical_small sign-up-button" button-label="Sign Up" onpress={onSignUpClick} ></c-res-button>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="log-in-text slds-m-vertical_small">
+                            <span>Have an account? </span>
+                            <a onclick={handleLoginClick}>Log In</a>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" large-device-size="8" medium-device-size="6" class=" image-and-quote-holder">
+                    <c-res-testimony-card bg-img={backgroundImage}></c-res-testimony-card>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>    
+    </lightning-layout>
+</template>
