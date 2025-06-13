@@ -1,0 +1,76 @@
+@import "c/resStyleSheet";
+
+*{
+    font-family: var(--resRegularFont);
+    color: var(--darkFontColor);
+}
+
+.footer{
+    justify-content: center;
+    background-color: var(--secondaryColor);
+}
+
+.copyright-text{
+    justify-content: center;
+}
+
+.footer-info{
+    align-items: flex-start;
+    justify-content: center;
+    border-bottom: 0.0625rem solid var(--primaryColor);
+}
+
+.footer-img{
+    height: 60px;
+}
+
+.footer-header-text{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.footer-text{
+    padding-top: 5px;
+}
+
+.footer-text, .footer-detail-text{
+    font-size: 14px;
+    font-family: var(--resRegularFont);
+}
+
+.icon-text-holder{
+    display: flex;
+    padding-top: 10px;
+}
+
+.footer-icon{
+    --lwc-colorTextIconDefault: var(--primaryColor);
+}
+
+.footer-cc-text{
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+
+    .footer-img{
+        height: 40px;
+    }
+
+    .single-footer-item{
+        padding: 8px 0;
+    }
+
+    .footer-text, .footer-detail-text{
+        font-size: 10px;
+    }
+
+    .footer-header-text{
+        font-size: 14px;
+    }
+
+    .footer-cc-text{
+        font-size: 11px;
+    }
+    
+}
