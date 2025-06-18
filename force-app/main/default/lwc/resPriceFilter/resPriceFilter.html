@@ -1,0 +1,11 @@
+<template>
+    <lightning-layout multiple-rows="true" class="outer-container">
+        <lightning-layout-item size="12" class="font-container">
+            Filter By
+        </lightning-layout-item>
+        <lightning-layout-item size="12">
+            <h1>{price}</h1>
+            <input type="range" min="0" max="1000" onchange={pricehandler} value={price}></input> 
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

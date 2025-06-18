@@ -1,0 +1,199 @@
+<template>
+
+    <button class="btn" onclick={handleButton}>Add Review</button>
+    <lightning-layout class={review}>
+    <lightning-layout-item size="12">
+    <lightning-layout multiple-rows="true" class="review-outer-container">
+        <lightning-layout-item size="12">
+            <p class="Review-Header">Add Your Review</p>
+        </lightning-layout-item>
+        <lightning-layout-item size="12">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                    <p class="rating-type">Value For Money</p>
+                         <div class="rate">
+                            <input type="radio" id="star5" name="ValueForMoney" value="5" onchange={rating} />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="ValueForMoney" value="4" onchange={rating} />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="ValueForMoney" value="3" onchange={rating} />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="ValueForMoney" value="2" onchange={rating} />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="ValueForMoney" value="1" onchange={rating} />
+                            <label for="star1" title="text">1 star</label>
+                        </div>
+                 </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                    <p class="rating-type">Cleanliness And Hygiene</p>
+                        <div class="rate">
+                            <div class="rate">
+                                <input type="radio" id="star15" name="CleanlinessAndHygiene" value="5" onchange={rating} />
+                                <label for="star15" title="text">5 stars</label>
+                                <input type="radio" id="star14" name="CleanlinessAndHygiene" value="4" onchange={rating} />
+                                <label for="star14" title="text">4 stars</label>
+                                <input type="radio" id="star13" name="CleanlinessAndHygiene" value="3" onchange={rating} />
+                                <label for="star13" title="text">3 stars</label>
+                                <input type="radio" id="star12" name="CleanlinessAndHygiene" value="2" onchange={rating} />
+                                <label for="star12" title="text">2 stars</label>
+                                <input type="radio" id="star11" name="CleanlinessAndHygiene" value="1" onchange={rating} />
+                                <label for="star11" title="text">1 star</label>
+                            </div>
+                        </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                    <p class="rating-type">Food Quality</p>
+                        <div class="rate">
+                            <div class="rate">
+                                <input type="radio" id="star25" name="FoodQuality" value="5" onchange={rating} />
+                                <label for="star25" title="text">5 stars</label>
+                                <input type="radio" id="star24" name="FoodQuality" value="4" onchange={rating} />
+                                <label for="star24" title="text">4 stars</label>
+                                <input type="radio" id="star23" name="FoodQuality" value="3" onchange={rating} />
+                                <label for="star23" title="text">3 stars</label>
+                                <input type="radio" id="star22" name="FoodQuality" value="2" onchange={rating} />
+                                <label for="star22" title="text">2 stars</label>
+                                <input type="radio" id="star21" name="FoodQuality" value="1" onchange={rating} />
+                                <label for="star21" title="text">1 star</label>
+                            </div>
+                        </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                    <p class="rating-type">Hospitality</p>
+                        <div class="rate">
+                            <div class="rate">
+                                <input type="radio" id="star35" name="Hospitality" value="5" onchange={rating} />
+                                <label for="star35" title="text">5 stars</label>
+                                <input type="radio" id="star34" name="Hospitality" value="4" onchange={rating} />
+                                <label for="star34" title="text">4 stars</label>
+                                <input type="radio" id="star33" name="Hospitality" value="3" onchange={rating} />
+                                <label for="star33" title="text">3 stars</label>
+                                <input type="radio" id="star32" name="Hospitality" value="2" onchange={rating} />
+                                <label for="star32" title="text">2 stars</label>
+                                <input type="radio" id="star31" name="Hospitality" value="1" onchange={rating} />
+                                <label for="star31" title="text">1 star</label>
+                            </div>
+                        </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+        <lightning-layout-item size="12">
+            <p class="rating-type">Review Heading</p>
+            <input type="text" onchange={handleHeading} class="review-heading" required>
+        </lightning-layout-item>
+        <lightning-layout-item size="12">
+            <p class="rating-type">Review Description</p>
+            <!-- <textarea onchange={handleDescription} class="review-heading"> -->
+                <textarea onchange={handleDescription} class="review-heading" required></textarea>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" class="btn-container">
+            <button class="save-btn" onclick={handleClose}>Close</button> 
+            <button class="save-btn" onclick={handleOkay}>Save</button> 
+        </lightning-layout-item>
+    </lightning-layout>
+
+    </lightning-layout-item>
+    </lightning-layout>
+</template>
+
+
+<!-- <template>
+
+    <button class="btn" onclick={handleButton}>Add Review</button>
+    <lightning-layout class={review}>
+
+    
+    <lightning-modal-header label="Add Your Review"></lightning-modal-header>
+    <lightning-modal-body>
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="6">
+                <p>Value For Money</p>
+                 <lightning-tile label="Value For Money" type="media">
+                    <div class="rate">
+                        <input type="radio" id="star5" name="Delivery" value="5" onchange={rating} />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="Delivery" value="4" onchange={rating} />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="Delivery" value="3" onchange={rating} />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="Delivery" value="2" onchange={rating} />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="Delivery" value="1" onchange={rating} />
+                        <label for="star1" title="text">1 star</label>
+                    </div>
+                 </lightning-tile>
+            </lightning-layout-item>
+            <lightning-layout-item size="6">
+                <lightning-tile label="Cleanliness And Hygiene" type="media">
+                    <div class="rate">
+                        <div class="rate">
+                            <input type="radio" id="star15" name="Pizza" value="5" onchange={rating} />
+                            <label for="star15" title="text">5 stars</label>
+                            <input type="radio" id="star14" name="Pizza" value="4" onchange={rating} />
+                            <label for="star14" title="text">4 stars</label>
+                            <input type="radio" id="star13" name="Pizza" value="3" onchange={rating} />
+                            <label for="star13" title="text">3 stars</label>
+                            <input type="radio" id="star12" name="Pizza" value="2" onchange={rating} />
+                            <label for="star12" title="text">2 stars</label>
+                            <input type="radio" id="star11" name="Pizza" value="1" onchange={rating} />
+                            <label for="star11" title="text">1 star</label>
+                        </div>
+                    </div>
+                </lightning-tile>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="6">
+                <lightning-tile label="Food Quality" type="media">
+                    <div class="rate">
+                        <div class="rate">
+                            <input type="radio" id="star25" name="Burger" value="5" onchange={rating} />
+                            <label for="star25" title="text">5 stars</label>
+                            <input type="radio" id="star24" name="Burger" value="4" onchange={rating} />
+                            <label for="star24" title="text">4 stars</label>
+                            <input type="radio" id="star23" name="Burger" value="3" onchange={rating} />
+                            <label for="star23" title="text">3 stars</label>
+                            <input type="radio" id="star22" name="Burger" value="2" onchange={rating} />
+                            <label for="star22" title="text">2 stars</label>
+                            <input type="radio" id="star21" name="Burger" value="1" onchange={rating} />
+                            <label for="star21" title="text">1 star</label>
+                        </div>
+                    </div>
+                </lightning-tile>
+            </lightning-layout-item>
+            <lightning-layout-item size="6">
+                <lightning-tile label="Hospitality" type="media">
+                    <div class="rate">
+                        <div class="rate">
+                            <input type="radio" id="star35" name="Package" value="5" onchange={rating} />
+                            <label for="star35" title="text">5 stars</label>
+                            <input type="radio" id="star34" name="Package" value="4" onchange={rating} />
+                            <label for="star34" title="text">4 stars</label>
+                            <input type="radio" id="star33" name="Package" value="3" onchange={rating} />
+                            <label for="star33" title="text">3 stars</label>
+                            <input type="radio" id="star32" name="Package" value="2" onchange={rating} />
+                            <label for="star32" title="text">2 stars</label>
+                            <input type="radio" id="star31" name="Package" value="1" onchange={rating} />
+                            <label for="star31" title="text">1 star</label>
+                        </div>
+                    </div>
+                </lightning-tile>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout>
+            <lightning-layout-item size="12">
+                <input type="text" onchange={handleHeading}>
+            </lightning-layout-item>
+            <lightning-layout-item size="12">
+                <input type="textarea" onchange={handleHeading}>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="Save" onclick={handleOkay}></lightning-button>
+    </lightning-modal-footer>
+</lightning-layout>
+</template> -->
