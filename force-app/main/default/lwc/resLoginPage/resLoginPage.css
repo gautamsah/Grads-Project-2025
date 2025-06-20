@@ -1,0 +1,130 @@
+/* *{
+    background-color: #fefef4;
+} */
+.login-outer-container{
+    margin: 52px 10px;
+}
+.child-input {
+    color: rgba(102, 102, 102, 1);
+    width: 100%;
+    outline: none;
+    line-height: 25px;
+    font-size: 18px;
+    font-family: sans-serif;
+    box-shadow: none;
+    border: none;
+    background-color: rgb(214, 214, 214);
+    border-bottom: 1px solid var(--primaryColor);
+}
+
+a {
+    color: var(--primaryColor);
+}
+
+.header {
+    font-weight: 800;
+    font-size: x-large;
+}
+
+.hide-error {
+    display: none;
+}
+
+.logo {
+    width: 40%;
+}
+
+.show-error {
+    bottom: 100;
+    display: block;
+    color: red;
+}
+
+.signup-detail {
+    font-weight: 500;
+    font-size: large;
+    color: rgba(102, 102, 102, 1);
+}
+
+.sign-up-image {
+    object-fit: cover;
+}
+
+.log-in-text {
+    
+    align-items: center;
+    justify-content: space-between;
+}
+
+a{
+    font-size: larger;
+    text-decoration: none;
+    color: var(--primaryColor);
+    font-weight: 500;
+}
+
+.forgotpass{
+    text-align: end;
+}
+
+.image-and-quote-holder {
+    display: flex;
+    position: relative;
+}
+.sign-up-image {
+    display: flex;
+    object-fit: cover;
+    flex-grow: 1;
+    max-width: 100%;
+    height: auto;
+    filter: brightness(50%);
+}
+
+.quote-comma-holder {
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: white;
+}
+
+.quote-comma {
+    font-size: xxx-large;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.quote {
+    font-size: x-large;
+    font-weight: 800;
+}
+.login-btn{
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: var(--primaryColor);
+}
+
+.hide-input{
+    display: none;
+}
+.show-input{
+    display: block;
+}
+
+@media screen and (max-width: 425px) {
+    .quote {
+        font-size: 12px;
+    }
+
+    .quote-comma {
+        font-size: xx-large;
+        font-weight: 600;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+}

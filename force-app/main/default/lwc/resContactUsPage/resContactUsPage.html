@@ -1,0 +1,138 @@
+<template>
+    <c-res-generic-banner title="#let's_talk" subtitle="We would love to hear from you!"></c-res-generic-banner>
+
+    <lightning-layout class="outer-container" horizontal-align="center">
+        <lightning-layout-item class="inner-container">
+            <lightning-layout multiple-rows="true" class="location-container" horizontal-align="spread">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4" class="detail-container">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12">
+                            <p class="detail-get-in-touch">GET IN TOUCH</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <P class="detail-lable">Visit one of our office or contact us today</P>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <P class="detail-head">Head Office</P>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <lightning-layout multiple-rows="true" class="detail-address">
+                                <lightning-layout-item size="12" class="icons">
+                                    <lightning-icon icon-name="utility:location" size="small"></lightning-icon>
+                                    <P style="margin-left: 15px;  margin-bottom:12px;">Horizontal Digital, Vadodara</P>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="icons">
+                                    <lightning-icon icon-name="utility:email" size="small"></lightning-icon>
+                                    <P style="margin-left: 15px; margin-bottom:12px;">respirahotels@gmail.com</P>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="icons">
+                                    <lightning-icon icon-name="utility:call" size="small"></lightning-icon>
+                                    <p style="margin-left: 15px;  margin-bottom:12px;">+91 9876543210</p>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="icons">
+                                    <lightning-icon icon-name="utility:clock" size="small"></lightning-icon>
+                                    <p style="margin-left: 15px;  margin-bottom:12px;">MON - FRI: 9:00am to 6:30pm</p>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="7" class="map-conatainer">
+                    
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d258.9229775430438!2d73.19697143971119!3d22.323922142076174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8bd5e80724b%3A0x20763c9f79320ff0!2sHorizontal!5e0!3m2!1sen!2sin!4v1744363018506!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="100%" height="350px"></iframe>
+                    
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout>
+   
+    <lightning-layout class="form-outer-container" horizontal-align="center" multiple-rows="true">
+        <lightning-layout-item class="form-inner-container" size="12" small-device-size="12" medium-device-size="12" large-device-size="8">
+            <p class="detail-get-in-touch">LEAVE A MESSAGE</p>
+            <P class="detail-lable">We Would Love to hear from you!</P>
+            <!-- <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"> -->
+                <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DHr00000JQwLw" method="POST">
+    
+                    <input type=hidden name="orgid" value="00DHr00000JQwLw">
+    <input type=hidden name="retURL" value="http://respira-dev.my.site.com/respira/s/contact-us">
+                
+                    <lightning-layout multiple-rows="true" class="form-details">
+                        <lightning-layout-item size="12">
+                            <label for="name">Name</label><input  id="name" maxlength="80" name="name" size="20" type="text" value={name}/><br>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <!-- <label for="00NHr00001aRMw3">Email</label>
+                            <input  id="00NHr00001aRMw3" maxlength="80" name="00NHr00001aRMw3" size="20" type="text" /><br> -->
+                            <!-- <label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br> -->
+                            <label for="00NHr00001aRXA5">Email</label><input  id="00NHr00001aRXA5" maxlength="80" name="00NHr00001aRXA5" size="20" type="text" value={email}/><br>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <label for="subject">Subject</label><input  id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <label for="description">Description</label><textarea name="description"></textarea><br>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <input type="hidden"  id="external" name="external" value="1" /><br>
+                            <input type="submit" name="submit" class="btn" onclick={handleSubmit}>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </form>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" large-device-size="4" medium-device-size="12" class="people-container">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="12" class="people">
+                    <img src="https://raw.githubusercontent.com/milinkapatel/Respira-Images/refs/heads/main/jay_pic.png" alt="">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12">
+                            <p>Jay Patel</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <span>Associate Salesforce Consultant</span>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <span> Phone: +91 98765 43210</span>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <span>Email: jay.patel@horizontal.com</span>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="people">
+                    <img src="https://raw.githubusercontent.com/milinkapatel/Respira-Images/refs/heads/main/ADIT_CSD_MILIN.jpg" alt="">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12">
+                            <p>Milin Kapatel</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <span>Associate Salesforce Consultant</span>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <span> Phone: +91 98765 43210</span>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <span>Email: mkapatel@horizontal.com</span>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="people">
+                    <img src="https://raw.githubusercontent.com/milinkapatel/Respira-Images/refs/heads/main/IMG-20250227-WA0040.jpg" alt="">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12">
+                            <p>Prit Prajapati</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <span>Associate Salesforce Consultant</span>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <span> Phone: +91 98765 43210</span>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <span>Email: pprajapati@horizontal.com</span>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout>   
+</template>

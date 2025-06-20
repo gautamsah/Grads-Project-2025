@@ -1,0 +1,139 @@
+<template>
+    <div class="hotel-review-details">
+        <div class="review-details-customer-review-text">
+            Customer Review
+        </div>
+        <template if:true={hasReviewRecords}>
+            <div class="review-details-summary-part">
+                <div class="review-details-overall">
+                    <div class="review-details-overall-content">
+                        <span class="review-details-overall-rating">{overallRating}</span>
+                        <span class="review-details-total-review"> {hotelDetails.Total_Reviews__c} Reviews</span>
+                    </div>
+                    <div class="review-details-overall-stars">
+                        <c-res-rating-star rating={hotelDetails.Overall_Rating__c}></c-res-rating-star>
+                    </div>
+                </div>
+                <div class="review-details-avg">
+                    <div>
+                        <div class="side review-details-avg-rating-text">
+                            <div>Value for money</div>
+                        </div>
+                        <div class="right review-details-avg-rating-value">
+                            <div>{avgValueForMoney}</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="value-for-money-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="side review-details-avg-rating-text">
+                            <div>Cleanliness and Hyigene</div>
+                        </div>
+                        <div class="right review-details-avg-rating-value">
+                            <div>{avgCleanlinessAndHyigene}</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="cleanliness-and-hygiene-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="side review-details-avg-rating-text">
+                            <div>Hospitality</div>
+                        </div>
+                        <div class="right review-details-avg-rating-value">
+                            <div>{avgHospitality}</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="hospitality-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="side review-details-avg-rating-text">
+                            <div>Food Quality</div>
+                        </div>
+                        <div class="right review-details-avg-rating-value">
+                            <div>{avgFoodQuality}</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="food-quality-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-details-sort-container">
+                <div class="review-details-sort-heading">
+                    <lightning-icon class="review-details-icon review-details-icon-sort" icon-name="utility:sort" alternative-text="sort" title="Sort"></lightning-icon>
+                    <div>Sort by</div>
+                </div>
+                <div class="review-details-sort-btns-container">
+                <a class="review-details-sort-date" onclick={handleSortByDate}>
+                    <lightning-icon class="review-details-icon" icon-name="utility:date_time" alternative-text="sort" title="Sort"></lightning-icon>
+                    <div>Date</div>
+                    <lightning-icon class={SortByDateArrowupCss} icon-name="utility:arrowup" alternative-text="sort" title="Sort"></lightning-icon>
+                    <lightning-icon class={SortByDateArrowdownCss} icon-name="utility:arrowdown" alternative-text="sort" title="Sort"></lightning-icon>
+                </a>
+                <a class="review-details-sort-rating" onclick={handleSortByRating}>
+                    <lightning-icon class="review-details-icon" icon-name="utility:rating" alternative-text="sort" title="Sort"></lightning-icon>
+                    <div>Rating</div>
+                    <lightning-icon class={SortByRatingArrowupCss} icon-name="utility:arrowup" alternative-text="sort" title="Sort"></lightning-icon>
+                    <lightning-icon class={SortByRatingArrowdownCss} icon-name="utility:arrowdown" alternative-text="sort" title="Sort"></lightning-icon>
+                </a>
+            </div>
+            </div>
+            <template for:each={hotelReviewDetails} for:item="hotelReview">
+                <div key={hotelReview.Id} class="review-details-reviews-container">
+                    <div class="review-details-review-left">
+                        <div class="review-details-review-person-img">
+                            <!-- <svg width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle opacity="1" cx="12" cy="9" r="3" stroke="#123458" stroke-width="1.5"/>
+                                <circle cx="12" cy="12" r="10" stroke="#123458" stroke-width="1.5"/>
+                                <path opacity="1" d="M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20" stroke="#123458" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg> -->
+                            <img src={hotelReview.personImg} alt="person-img">
+                        </div>
+                        <div class="review-details-review-star-name-date">
+                            <div class="review-details-review-star">
+                                <c-res-rating-star rating={hotelReview.Avg_Rating__c}></c-res-rating-star>
+                            </div>
+                            <div class="review-details-review-name">
+                                <p>{hotelReview.Reviewer_Name__c}</p>
+                            </div>
+                            <div class="review-details-review-date">
+                                <p>{hotelReview.CreatedDate}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-details-reviews-right-part">
+                        <div class="review-details-review-title">
+                            <p>{hotelReview.Review_Title__c}</p>
+                        </div>
+                        <div class="review-details-review-description">
+                            <p>{hotelReview.Description__c}</p>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <div class={loadMoreCss}>
+                <a class="review-details-load-more-btn" onclick={handleLoadMore}>
+                    Load more
+                </a>
+            </div>
+        </template>
+        <template if:false={hasReviewRecords}>
+            <div class="review-details-no-reviews-found">
+                No Reviews at the moment!!!
+                <br>
+                Be the first to share your experience.
+            </div>
+        </template>
+    </div>
+</template>
