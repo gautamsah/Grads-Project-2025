@@ -1,0 +1,48 @@
+@import "c/resStyleSheet";
+
+*{
+    font-family: var(--resRegularFont);
+}
+
+.title-name{
+    font-family: auto;
+    font-size: 45px;
+    line-height: 42px;
+    margin: 52px 0px 35px;
+}
+
+.title-name::before{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 2.08333vw;
+    /* background-color: var(--primaryColor); */
+    border-bottom: 1px solid var(--primaryColor);
+    margin-right: 5px;
+}
+.description{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    font-family: var(--resRegularFont);
+    margin-bottom: 25px;
+}
+.child-card{
+    margin : 16px 0px;
+}
+@media screen and (max-width: 600px){
+    .bcwhite{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .title-name{
+        font-size: 20px;
+        margin: 25px 0px;
+    }
+    .description{
+        font-size: 10px;
+        margin-bottom: 25px;
+    }
+
+}

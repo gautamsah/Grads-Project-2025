@@ -1,0 +1,12 @@
+:host {
+    --primaryColor: #123458;
+    --accentColor :  #b88917;
+    --whiteBackground : #ffffff;
+    --secondaryColor : #eaeaea;
+    --darkFontColor : #030303;
+    --lightFontColor : #ffffff;
+    --resRegularFont : 'InterRegular';
+    --resLightFont : 'InterLight';
+    --resMediumFont : 'InterMedium';
+    --resBoldFont : 'InterBold';
+}

@@ -1,0 +1,16 @@
+<template>
+    <lightning-layout class="outer-container" multiple-rows="true">
+        <lightning-layout-item size="12">
+            <p class="big-font">Reviews</p>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" padding="around-small">
+            
+            <lightning-input type="radio" name="btn" label="5 Stars" data-id="checkbox" onchange={handleChange} value="5"></lightning-input>
+            <lightning-input type="radio" name="btn" label="4 Stars & Up" data-id="checkbox" onchange={handleChange} value="4"></lightning-input>
+            <lightning-input type="radio" name="btn" label="3 Stars & Up" data-id="checkbox" onchange={handleChange} value="3"></lightning-input>
+            <lightning-input type="radio" name="btn" label="2 Stars & Up" data-id="checkbox" onchange={handleChange} value="2"></lightning-input>
+            <lightning-input type="radio" name="btn" label="1 Stars & Up" data-id="checkbox" onchange={handleChange} value="1"></lightning-input>
+
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

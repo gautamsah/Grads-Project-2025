@@ -1,0 +1,22 @@
+.skeleton-container {
+    padding: 1rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+.skeleton-header {
+    height: 20px;
+    width: 100%;
+    background-color: #eee;
+    margin-bottom: 0.5rem;
+}
+.skeleton-text {
+    height: 10px;
+    width: 100%;
+    background-color: #eee;
+    margin-bottom: 0.5rem;
+}
+.skeleton-image {
+    height: 270px;
+    width: 100%;
+    background-color: #eee;
+}
