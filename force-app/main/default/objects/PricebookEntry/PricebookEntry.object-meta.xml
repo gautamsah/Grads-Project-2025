@@ -145,7 +145,6 @@
     <searchLayouts>
         <searchResultsAdditionalFields>PRODUCT.NAME</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>PRODUCT.CUSTOMER_PRODUCT_ID</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>PSM.SELLING_MODEL_TYPE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>PSM.PRICING_TERM</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>PSM.PRICING_TERM_UNIT</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>PRODUCT.DEFAULT_PRICE</searchResultsAdditionalFields>
