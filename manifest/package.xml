@@ -24,6 +24,12 @@
 		<members>*</members>
 		<name>AuraDefinitionBundle</name>
 	</types>
+    <types>
+		<members>ESW_Respira_Agent_1745231358703</members>
+		<members>ESW_Respira_Support_Agent_1744959664251</members>
+		<members>Respira</members>
+		<name>CustomSite</name>
+	</types>
 	<types>
 		<members>Account-Account Layout</members>
 		<members>Case-Case Layout</members>
@@ -43,7 +49,10 @@
 		<members>Community User</members>
 		<members>Community User RES</members>
 		<members>Einstein Agent User</members>
+		<members>ESW_Respira_Agent_1745231358703 Profile</members>
+		<members>ESW_Respira_Support_Agent_1744959664251 Profile</members>
 		<members>Hotel Experience</members>
+		<members>Respira Profile</members>
 		<members>System Admin RES</members>
 		<name>Profile</name>
 	</types>
