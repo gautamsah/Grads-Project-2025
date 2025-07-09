@@ -17,34 +17,26 @@ jobs:
     environment: prod
     steps:
       # Checkout the Source code from the latest commit
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           
-      #- name: Install NPM
-      #  run: |
-      #    npm install --legacy-peer-deps
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
 
-      - name: Upgrade NPM to latest
-        run: npm install -g npm@latest
-        
-      # Now Install Salesforce CLI
-      - name: 'Install Salesforce CLI'
+      #- name: Upgrade NPM to latest
+      #  run: npm install -g npm@latest
+          
+      - name: Install Salesforce CLI
         run: |
-            wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
-            mkdir ~/sfdx
-            tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1
-            echo "$HOME/sfdx/bin" >> $GITHUB_PATH
-            ~/sfdx/bin/sfdx version
+         npm install @salesforce/cli --global
+         sfdx --version
 
       - name: Install the sfdx-git-delta plugin
         run: |
-          echo 'y' | sfdx plugins:install sfdx-git-delta
+          echo 'y' | sf plugins install sfdx-git-delta
                     
       - name: Decrypt the server.key.enc file & store inside assets folder
         run: |
