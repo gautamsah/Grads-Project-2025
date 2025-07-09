@@ -21,9 +21,17 @@ jobs:
         with:
           fetch-depth: 0
           
-      - name: Install NPM
-        run: |
-          npm install --legacy-peer-deps
+      #- name: Install NPM
+      #  run: |
+      #    npm install --legacy-peer-deps
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Upgrade NPM to latest
+        run: npm install -g npm@latest
           
       # Now Install Salesforce CLI
       - name: 'Install Salesforce CLI'
