@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>This Decision Will check that Record is Created or Price is Updated</description>
+        <name>Check_the_Record_is_Created_or_Updated</name>
+        <label>Check the Record is Created or Updated</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>IsCreated</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>created</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Find_the_Minimum_Price_from_the_All_Rooms_of_the_Hotels</targetReference>
+            </connector>
+            <label>IsCreated</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>created</name>
+        <dataType>Boolean</dataType>
+        <expression>OR(
+ ISNEW(),
+ ISCHANGED({!$Record.Product_Unit_Price__c})
+)</expression>
+    </formulas>
+    <interviewLabel>Hotel Products : After Save {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Hotel Products : After Save</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_the_Record_is_Created_or_Updated</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Hotel_Product_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Room</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Hotel__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Product_Unit_Price__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Product2</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <description>This Sub-Flow will find the minimum price of the rooms of the specific hotel and update the record of Hotel</description>
+        <name>Find_the_Minimum_Price_from_the_All_Rooms_of_the_Hotels</name>
+        <label>Find the Minimum Price from the All Rooms of the Hotels</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <flowName>Hotel_Products_Minimum_Room_Price</flowName>
+        <inputAssignments>
+            <name>getRoomRecord</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>

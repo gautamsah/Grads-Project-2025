@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Food Order</fullName>
+        <default>false</default>
+        <label>Food Order</label>
+    </customValue>
+    <customValue>
+        <fullName>Non-veg. Food</fullName>
+        <default>false</default>
+        <label>Non-veg. Food</label>
+    </customValue>
+    <customValue>
+        <fullName>Pets</fullName>
+        <default>false</default>
+        <label>Pets</label>
+    </customValue>
+    <customValue>
+        <fullName>Parking space</fullName>
+        <default>false</default>
+        <label>Parking space</label>
+    </customValue>
+    <customValue>
+        <fullName>Room Service</fullName>
+        <default>false</default>
+        <label>Room Service</label>
+    </customValue>
+    <customValue>
+        <fullName>Telephone</fullName>
+        <default>false</default>
+        <label>Telephone</label>
+    </customValue>
+    <customValue>
+        <fullName>Free Breakfast</fullName>
+        <default>false</default>
+        <label>Free Breakfast</label>
+    </customValue>
+    <customValue>
+        <fullName>A.C.</fullName>
+        <default>false</default>
+        <label>A.C.</label>
+    </customValue>
+    <customValue>
+        <fullName>Television</fullName>
+        <default>false</default>
+        <label>Television</label>
+    </customValue>
+    <customValue>
+        <fullName>Veg. Food</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Veg. Food</label>
+    </customValue>
+    <masterLabel>Facilities</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,43 @@
+@import "c/resStyleSheet";
+
+.normal{
+    width: 100%;
+    padding: 10px;
+    background-color: #f6f5f5;
+    border: none;
+    border-bottom: 1px solid var(--primaryColor);
+    outline: none;
+    /* border-radius: 5px; */
+}
+
+.checkbox-layout{
+    display: flex;
+    align-items: center;
+}
+
+.input-label{
+    font-size: medium;
+}
+
+input[type='checkbox']{
+    width: auto;
+    transform: scale(1.2);
+}
+
+.error{
+    border-bottom: 1px solid red;
+}
+
+input::placeholder{
+    color: #666666;
+    font-size: medium;
+}
+
+.errorMessage{
+    bottom: 100;
+    color: red;
+}
+
+.show-name-error{
+    border-bottom: 1px solid red !important;
+}

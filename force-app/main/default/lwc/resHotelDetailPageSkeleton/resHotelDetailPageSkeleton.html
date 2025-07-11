@@ -1,0 +1,72 @@
+<template>
+    <lightning-layout class="eighty-width">
+        <!-- Title and Location -->
+        <div class="skeleton-title skeleton shimmer"></div>
+        <div class="skeleton-subtext skeleton shimmer"></div>
+
+        <!-- Main image -->
+
+        <!-- Highlights Section -->
+        <div class="slds-grid slds-wrap slds-m-top_medium">
+            <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                <div class="skeleton-image-small skeleton shimmer"></div>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                <div class="skeleton-paragraph skeleton shimmer top-space"></div>
+                <div class="skeleton-paragraph short skeleton shimmer"></div>
+                <div class="skeleton-paragraph short skeleton shimmer"></div>
+                <div class="skeleton-paragraph short skeleton shimmer"></div>
+                <div class="skeleton-paragraph short skeleton shimmer"></div>
+                <div class="skeleton-paragraph short skeleton shimmer"></div>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-wrap slds-m-top_medium">
+            <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                <div class="skeleton-paragraph skeleton shimmer top-space"></div>
+                <div class="skeleton-paragraph short skeleton shimmer"></div>
+                <div class="skeleton-paragraph short skeleton shimmer"></div>
+                <div class="skeleton-paragraph short skeleton shimmer"></div>
+                <div class="skeleton-paragraph short skeleton shimmer"></div>
+                <div class="skeleton-paragraph short skeleton shimmer"></div>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                <div class="skeleton-image-small skeleton shimmer"></div>
+            </div>
+        </div>
+
+        <!-- Activities -->
+        <div class="skeleton-heading skeleton shimmer"></div>
+        <div class="slds-grid slds-gutters">
+            <template for:each={onetothree} for:item="i">
+                <div key={i} class="slds-col slds-size_1-of-3 slds-p-around_small">
+                    <div class="skeleton-card skeleton shimmer"></div>
+                </div>
+            </template>
+        </div>
+
+        <!-- Facilities -->
+        <div class="skeleton-heading skeleton shimmer"></div>
+        <div class="slds-grid slds-wrap">
+            <template for:each={onetosix} for:item="i">
+                <div key={i} class="slds-col slds-size_1-of-3 slds-p-around_small">
+                    <div class="skeleton-pill skeleton shimmer"></div>
+                </div>
+            </template>
+        </div>
+
+        <!-- Map -->
+        <div class="skeleton-heading skeleton shimmer"></div>
+        <div class="skeleton-map skeleton shimmer"></div>
+
+        <!-- Related Hotels -->
+        <div class="skeleton-heading skeleton shimmer"></div>
+        <div class="slds-grid slds-gutters">
+            <template for:each={onetofour} for:item="i">
+                <div key={i} class="slds-col slds-size_1-of-4 slds-p-around_small">
+                    <div class="skeleton-card skeleton shimmer"></div>
+                </div>
+            </template>
+        </div>
+    </lightning-layout>
+</template>

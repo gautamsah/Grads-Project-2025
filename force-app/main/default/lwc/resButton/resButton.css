@@ -1,0 +1,37 @@
+@import "c/resStyleSheet";
+
+.sign-up-button {
+    width: 100%;
+    background-color: var(--primaryColor);
+    color: var(--lightFontColor);
+    padding-top: 12px;
+    font-size: medium;
+    padding-bottom: 12px;
+    border-radius: 8px;
+    border: none;
+}
+
+.details-page-button {
+    background-color: var(--primaryColor);
+    width: 100%;
+    border-radius: 12px;
+    padding: 10px;
+    border: none;
+    color: var(--lightFontColor);
+    cursor: pointer;
+}
+
+.detials-page-button {
+    background-color: var(--primaryColor);
+    width: 94%;
+    border-radius: 28px;
+    padding: 10px;
+    border: none;
+    color: var(--lightFontColor);
+    cursor: pointer;
+    margin: 12px 9px;
+}
+
+.sign-up-button:hover {
+    background-color: #14283d;
+}
