@@ -1,0 +1,21 @@
+{
+  "required" : [ "CaseNumber", "email" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "CaseNumber" : {
+      "title" : "CaseNumber",
+      "description" : "It will store the case number given by the User.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "email" : {
+      "title" : "email",
+      "description" : "It will Store the Email of the Current User.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DigitalExperienceConfig xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>ESW_Respira_Agent_1745231358703</label>
+    <site>
+        <urlPathPrefix>ESWRespiraAgent1745231358703</urlPathPrefix>
+    </site>
+    <space>site/ESW_Respira_Agent_17452313587031</space>
+</DigitalExperienceConfig>
