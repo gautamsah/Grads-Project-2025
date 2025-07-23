@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Alpine Retreat Lodge</fullName>
+        <default>false</default>
+        <label>Alpine Retreat Lodge</label>
+    </customValue>
+    <customValue>
+        <fullName>Coastal Hideway</fullName>
+        <default>false</default>
+        <label>Coastal Hideway</label>
+    </customValue>
+    <customValue>
+        <fullName>Downtown Chic Studio</fullName>
+        <default>false</default>
+        <label>Downtown Chic Studio</label>
+    </customValue>
+    <customValue>
+        <fullName>Hotel Sunbath</fullName>
+        <default>false</default>
+        <label>Hotel Sunbath</label>
+    </customValue>
+    <customValue>
+        <fullName>Metro Loft Oasis</fullName>
+        <default>false</default>
+        <label>Metro Loft Oasis</label>
+    </customValue>
+    <customValue>
+        <fullName>Paradise Resort</fullName>
+        <default>false</default>
+        <label>Paradise Resort</label>
+    </customValue>
+    <customValue>
+        <fullName>Riverside Haven</fullName>
+        <default>false</default>
+        <label>Riverside Haven</label>
+    </customValue>
+    <customValue>
+        <fullName>Tranquil Oasis Resort</fullName>
+        <default>false</default>
+        <label>Tranquil Oasis Resort</label>
+    </customValue>
+    <customValue>
+        <fullName>Urban Chic Hotel</fullName>
+        <default>false</default>
+        <label>Urban Chic Hotel</label>
+    </customValue>
+    <customValue>
+        <fullName>Welcome Hotel</fullName>
+        <default>false</default>
+        <label>Welcome Hotel</label>
+    </customValue>
+    <customValue>
+        <fullName>Grand Mercure</fullName>
+        <default>false</default>
+        <label>Grand Mercure</label>
+    </customValue>
+    <customValue>
+        <fullName>Hotel Piere</fullName>
+        <default>false</default>
+        <label>Hotel Piere</label>
+    </customValue>
+    <description>This global picklist holds the value of all the hotels.</description>
+    <masterLabel>All Hotels</masterLabel>
+    <sorted>true</sorted>
+</GlobalValueSet>

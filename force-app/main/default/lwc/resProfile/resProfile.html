@@ -1,0 +1,539 @@
+<template>
+    <lightning-layout multiple-rows class="res-profile-container">
+        <template if:true={showLoadingSpinner}>
+            <lightning-layout-item class="loading-spinner">
+                <c-res-loading-spinner></c-res-loading-spinner>
+            </lightning-layout-item>
+        </template>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="3"
+            class="res-profile-container-left-part">
+            <a class={userDetailsTabClass} onclick={handleUserDetails}>
+                <lightning-icon icon-name="utility:user" alternative-text="User-Icon" title="User Details"
+                    class={userDetailsIconClass}></lightning-icon>
+                <p class={userDetailsNameClass}>User Details</p>
+            </a>
+            <a class={bookingsTabClass} onclick={handleBookings}>
+                <lightning-icon icon-name="utility:survey" alternative-text="Bookings-icon" title="Bookings"
+                    class={bookingsIconClass}></lightning-icon>
+                <p class={bookingsNameClass}>Bookings</p>
+            </a>
+            <a class={walletTabClass} onclick={handleWallet}>
+                <lightning-icon icon-name="utility:money" alternative-text="Wallet-Icon" title="Wallet"
+                    class={walletIconClass}></lightning-icon>
+                <p class={walletNameClass}>Wallet</p>
+            </a>
+            <a class={supportTicketsTabClass} onclick={handleSupportTickets}>
+                <lightning-icon icon-name="utility:comments" alternative-text="Support-Tickets-Icon"
+                    title="Support Ticket" class={supportTicketsIconClass}></lightning-icon>
+                <p class={supportTicketsNameClass}>Support Tickets</p>
+            </a>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="9" large-device-size="9">
+            <!-- User Details -->
+            <template if:true={showUserDetails}>
+                <lightning-layout multiple-rows class="margin-10">
+                    
+                    <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="6"
+                        class="res-user-details-input-item">
+                        <label for="firstNameInput">First Name</label>
+                        <!-- <input type="text" value={firstNameInput} name="firstNameInput" onchange={handleFirstNameInputChange} class={firstNameInputClass}> -->
+                        <c-res-input input-type="text" required="true" field-label="First Name" field-name="firstName"
+                            onchange={handleChange} field-value={userDetailsCopy.firstName}
+                            class={firstNameInputClass}></c-res-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="6"
+                        class="res-user-details-input-item">
+                        <label for="lastNameInput">Last Name</label>
+                        <c-res-input input-type="text" required="true" field-label="Last Name" field-name="lastName"
+                            onchange={handleChange} field-value={userDetailsCopy.lastName}
+                            class={lastNameInputClass}></c-res-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="6"
+                        class="res-user-details-input-item">
+                        <label for="emailInput">Email</label>
+                        <c-res-input input-type="text" required="true" field-label="Email" field-name="email"
+                            onchange={handleChange} field-value={userDetailsCopy.email}
+                            class={emailInputClass}></c-res-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="6"
+                        class="res-user-details-input-item">
+                        <label for="contactInput">Contact</label>
+                        <c-res-input input-type="text" required="true" field-label="Contact" field-name="contact"
+                            onchange={handleChange} field-value={userDetailsCopy.contact}
+                            class={contactInputClass}></c-res-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="res-user-details-buttons">
+                        <template if:false={userDetailsEditClicked}>
+                            <button onclick={handleUserDetailsEditButton}
+                                class="res-user-details-button">Edit</button>
+                        </template>
+                        <template if:true={userDetailsEditClicked}>
+                            <button onclick={handleUserDetailsSaveButton}
+                                class="res-user-details-button">Save</button>
+                            <button onclick={handleUserDetailsCancelButton}
+                                class="res-user-details-button">Cancel</button>
+                        </template>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+            <!-- Bookings -->
+            <template if:true={showBookings}>
+                <lightning-layout multiple-rows class="margin-20">
+                    <template if:true={gotBookings}>
+                        <lightning-layout-item class="res-booking-details-summary-hotel-name" size="12">Your Bookings</lightning-layout-item>
+                        <lightning-layout-item class="res-booking-details-filter-bar" size="12">
+                            <button class={resBookingDetailsFilterOptionAllClass} data-filteroption="all" onclick={handleBookingDetailsFilterChange}>
+                                All
+                            </button>
+                            <button class={resBookingDetailsFilterOptionRecentClass} data-filteroption="recent" onclick={handleBookingDetailsFilterChange}>
+                                Recent
+                            </button>
+                            <button class={resBookingDetailsFilterOptionPastClass} data-filteroption = "past" onclick={handleBookingDetailsFilterChange}>
+                                Past
+                            </button>
+                            <button class={resBookingDetailsFilterOptionUpcomingClass} data-filteroption = "upcoming" onclick={handleBookingDetailsFilterChange}>
+                                Upcoming
+                            </button>
+                            <button class={resBookingDetailsFilterOptionCanceledClass} data-filteroption = "canceled" onclick={handleBookingDetailsFilterChange}>
+                                Canceled
+                            </button>
+                        </lightning-layout-item>
+                        <template for:each={bookings} for:item="booking">
+                            <lightning-layout-item key={booking.orderId} size="12" small-device-size="12"
+                                medium-device-size="12" large-device-size="12">
+                                <lightning-layout multiple-rows class="res-bookings-card">
+                                    <lightning-layout-item size="3" class="res-booking-card-img-item">
+                                        <img src={booking.hotelImg} alt="Hotel_Img" class="res-booking-card-img">
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="9">
+                                        <lightning-layout multiple-rows class="res-booking-card-right-part">
+                                            <lightning-layout-item size="6" class="res-booking-card-hotel">
+                                                {booking.hotelName} 
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="slds-m-bottom_medium">
+                                                <span>
+                                                    Booked On : {booking.createdDate}
+                                                </span>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="res-booking-card-dates">
+                                                {booking.checkinDate} - {booking.checkoutDate}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="res-booking-card-details">
+                                                Booking No. : {booking.orderId}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="res-booking-card-details">
+                                                Status : {booking.status}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="res-booking-total-cost">
+                                                Total Cost : $ {booking.totalCost}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="res-booking-card-buttons">
+                                                <Button class="res-booking-hyperlink res-booking-card-button" data-orderid={booking.orderId}
+                                                    onclick={handleBookingDetails}>View Details</Button>
+                                                <Button class="res-booking-hyperlink res-booking-card-button" data-orderid={booking.orderId}
+                                                    onclick={handleInvoiceDownload}>Get invoice in mail</Button>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    
+                                </lightning-layout>
+                            </lightning-layout-item>
+                        </template>
+                    </template>
+                    <template if:false={gotBookings}>
+                        You Don't have any bookings yet, Book Now!!
+                    </template>
+                </lightning-layout>
+            </template>
+            <!-- Give-Review -->
+            <lightning-layout class={reviewItemClass}>
+                <lightning-layout-item size="12" class={review}>
+                <lightning-layout multiple-rows="true" class="review-outer-container">
+                    <lightning-layout-item size="12">
+                        <p class="Review-Header">Add Your Review</p>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="margin-b-10">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                <p class="rating-type">Value For Money</p>
+                                        <div class="rate">
+                                        <input type="radio" data-id="star5" id="star5" name="ValueForMoney" value="5" onchange={rating} />
+                                        <label for="star5" title="text">5 stars</label>
+                                        <input type="radio" data-id="star4" id="star4" name="ValueForMoney" value="4" onchange={rating} />
+                                        <label for="star4" title="text">4 stars</label>
+                                        <input type="radio" data-id="star3" id="star3" name="ValueForMoney" value="3" onchange={rating} />
+                                        <label for="star3" title="text">3 stars</label>
+                                        <input type="radio" data-id="star2" id="star2" name="ValueForMoney" value="2" onchange={rating} />
+                                        <label for="star2" title="text">2 stars</label>
+                                        <input type="radio" data-id="star1" id="star1" name="ValueForMoney" value="1" onchange={rating} />
+                                        <label for="star1" title="text">1 star</label>
+                                    </div>
+                                </lightning-layout-item>
+                            <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                <p class="rating-type">Cleanliness And Hygiene</p>
+                                    <div class="rate">
+                                        <div class="rate">
+                                            <input type="radio" data-id="star15" id="star15" name="CleanlinessAndHygiene" value="5" onchange={rating} />
+                                            <label for="star15" title="text">5 stars</label>
+                                            <input type="radio" data-id="star14" id="star14" name="CleanlinessAndHygiene" value="4" onchange={rating} />
+                                            <label for="star14" title="text">4 stars</label>
+                                            <input type="radio" data-id="star13" id="star13" name="CleanlinessAndHygiene" value="3" onchange={rating} />
+                                            <label for="star13" title="text">3 stars</label>
+                                            <input type="radio" data-id="star12" id="star12" name="CleanlinessAndHygiene" value="2" onchange={rating} />
+                                            <label for="star12" title="text">2 stars</label>
+                                            <input type="radio" data-id="star11" id="star11" name="CleanlinessAndHygiene" value="1" onchange={rating} />
+                                            <label for="star11" title="text">1 star</label>
+                                        </div>
+                                    </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                <p class="rating-type">Food Quality</p>
+                                    <div class="rate">
+                                        <div class="rate">
+                                            <input type="radio" data-id="star25" id="star25" name="FoodQuality" value="5" onchange={rating} />
+                                            <label for="star25" title="text">5 stars</label>
+                                            <input type="radio" data-id="star24" id="star24" name="FoodQuality" value="4" onchange={rating} />
+                                            <label for="star24" title="text">4 stars</label>
+                                            <input type="radio" data-id="star23" id="star23" name="FoodQuality" value="3" onchange={rating} />
+                                            <label for="star23" title="text">3 stars</label>
+                                            <input type="radio" data-id="star22" id="star22" name="FoodQuality" value="2" onchange={rating} />
+                                            <label for="star22" title="text">2 stars</label>
+                                            <input type="radio" data-id="star21" id="star21" name="FoodQuality" value="1" onchange={rating} />
+                                            <label for="star21" title="text">1 star</label>
+                                        </div>
+                                    </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                <p class="rating-type">Hospitality</p>
+                                    <div class="rate">
+                                        <div class="rate">
+                                            <input type="radio" data-id="star35" id="star35" name="Hospitality" value="5" onchange={rating} />
+                                            <label for="star35" title="text">5 stars</label>
+                                            <input type="radio" data-id="star34" id="star34" name="Hospitality" value="4" onchange={rating} />
+                                            <label for="star34" title="text">4 stars</label>
+                                            <input type="radio" data-id="star33" id="star33" name="Hospitality" value="3" onchange={rating} />
+                                            <label for="star33" title="text">3 stars</label>
+                                            <input type="radio" data-id="star32" id="star32" name="Hospitality" value="2" onchange={rating} />
+                                            <label for="star32" title="text">2 stars</label>
+                                            <input type="radio" data-id="star31" id="star31" name="Hospitality" value="1" onchange={rating} />
+                                            <label for="star31" title="text">1 star</label>
+                                        </div>
+                                    </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12">
+                        <p class="rating-type">Review Heading</p>
+                        <input type="text" onchange={handleHeading} class="review-heading" value={ReviewHeading}>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12">
+                        <p class="rating-type">Review Description</p>
+                        <!-- <textarea onchange={handleDescription} class="review-heading"> -->
+                            <textarea onchange={handleDescription} data-id="ratingdescription" class="review-description textarea" required></textarea>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="btn-container">
+                        <button class="save-btn" onclick={handleClose}>Close</button> 
+                        <button class="save-btn" data-reviewid={reviewId} onclick={handleOkay}>Save</button> 
+                    </lightning-layout-item>
+                </lightning-layout>
+            
+                </lightning-layout-item>
+            </lightning-layout>
+            <!-- Booking Details -->
+            <template if:true={showBookingDetails}>
+                <lightning-layout multiple-rows class="res-booking-details-container">
+                    
+                    <lightning-layout-item size="12" class={resCancelOrderModalClass}>
+                        <lightning-layout class="res-cancel-order-layout-class" multiple-rows>
+                            <lightning-layout-item size="12" class="res-booking-card-hotel">
+                                Confirm Booking Cancellation!
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="12" class="res-create-new-case-items">
+                                Are you sure you want to cancel this booking?
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="12" class="res-create-new-case-items">
+                                Just a reminder: if you cancel, you'll receive only 70% of your booking cost back, as agreed during booking confirmation.
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="12" class="res-create-new-case-items flex-row">
+                                <button onclick={handleCancelOrderConfirmation} class="res-booking-card-button" data-orderid={booking.orderId}>Confirm Cancellation</button>
+                                <button onclick={handleCancelOrderCancel} class="res-booking-card-button">Cancel</button>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class={resCreateCaseItemClass}>
+                        <lightning-layout class="res-create-case-layout-class" multiple-rows>
+                            <lightning-layout-item size="12" class="res-booking-card-hotel">
+                                Create New Ticket
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="12" class="res-create-new-case-items">
+                                <label for="orderId">Booking No.</label>
+                                <input type="text" class="res-create-new-case-input" name="orderId" value={newSupportTicket.orderId}
+                                    onchange={handleNewSupportTicketChange} readonly>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="12" class="res-create-new-case-items">
+                                <label for="subject">Subject</label>
+                                <input type="text" class="res-create-new-case-input" name="subject" value={newSupportTicket.subject}
+                                    onchange={handleNewSupportTicketChange}>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="12" class="res-create-new-case-items">
+                                <label for="description">Description</label>
+                                <textarea rows="4" class="res-create-new-case-input" name="description"
+                                    onchange={handleNewSupportTicketChange}>{newSupportTicket.description}</textarea>
+                            </lightning-layout-item>
+                            <template if:true={showNewSupportTicketError}>
+                                <lightning-layout-item size="12" class="res-create-new-case-items res-new-case-error">
+                                    {newSupportTicketError}
+                                </lightning-layout-item>
+                            </template>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="12" class="res-create-new-case-items flex-row">
+                                <button onclick={handleNewSupportTicketSubmit} class="res-booking-card-button">Submit</button>
+                                <button onclick={handleNewSupportTicketCancel} class="res-booking-card-button">Cancel</button>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="6" class="res-booking-details-summary res-booking-details-summary">
+                        <Button onclick={handleBookings} class="res-user-details-button">Back</Button>
+                        <template if:true={booking.showCancelBookingButton}>
+                            <button onclick={handleCancelBooking} class="res-user-details-button" style="border: none;">Cancel Booking
+                            </button>
+                        </template>
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item size="6" class="res-booking-card-buttons">
+                        <template if:true={booking.review}>
+                            <Button class="res-booking-card-top-buttons res-user-details-button" data-hotelid={booking.hotelId} onclick={handleGiveReviewButton}>Edit Review</Button>
+                        </template>
+                        <template  if:true={booking.reviewAccess}>
+                            <Button class="res-booking-card-top-buttons res-user-details-button" data-hotelid={booking.hotelId} onclick={handleGiveReviewButton}>Give Review</Button>
+                        </template>
+                        <Button data-hotel={booking.hotelUniqueName} onclick={handleBookAgain} class="res-booking-card-top-buttons res-user-details-button">Book
+                            again</Button>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="6" class="res-booking-details-summary res-booking-details-summary-hotel-name">
+                        {booking.hotelName}
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" class="res-booking-details-summary res-booking-details-summary-total-cost res-booking-summary-right-part">
+                        Total Cost : $ {booking.totalCost}
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" class="res-booking-details-summary res-booking-details-summary-other-details">
+                        {booking.checkinDate} - {booking.checkoutDate}
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" class="res-booking-details-summary res-booking-details-summary-other-details res-booking-summary-right-part">
+                        Status : {booking.status}
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" class="res-booking-details-summary res-booking-details-summary-other-details">
+                        Booking No. : {booking.orderId}
+                    </lightning-layout-item>
+                    <template for:each={booking.orderItems} for:item="orderItem">
+                        <lightning-layout-item key={orderItem.Id} size="12" small-device-size="12"
+                            medium-device-size="12" large-device-size="12" class="res-booking-details-item">
+                            <lightning-layout multiple-rows class="res-bookings-card">
+                                <lightning-layout-item size="3" class="res-booking-card-img-item">
+                                    <img src={orderItem.Product2.Image_URL__c} alt="Hotel_Img" class="res-booking-card-img">
+                                </lightning-layout-item>
+                                <lightning-layout-item size="9">
+                                    <lightning-layout multiple-rows class="res-booking-card-right-part">
+                                        <lightning-layout-item size="12" class="res-booking-card-hotel">
+                                            {orderItem.Product2.Name}
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" class="res-booking-card-details">
+                                            No. of Rooms : {orderItem.Quantity}
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" class="res-booking-total-cost">
+                                            Room Price : $ {orderItem.UnitPrice}
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                                <!-- //////////////////////////////////// -->
+                                <!-- <lightning-layout-item size="12">
+                                    {orderItem.Product2.Name}
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12">
+                                    No. of Rooms : {orderItem.Quantity}
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12">
+                                    Room Price : {orderItem.UnitPrice}
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12">
+                                    Order ID : {booking.orderId}
+                                </lightning-layout-item> -->
+                            </lightning-layout>
+                        </lightning-layout-item>
+                    </template>
+                    <lightning-layout-item size="12">
+                        <!-- <button class="res-booking-card-button create-new-case-btn" onclick={handleCreateNewCaseButton}>Create New Ticket</button> -->
+                        <a class="create-new-case-btn" onclick={handleCreateNewCaseButton}>Create a support ticket</a>
+                        <span class="create-new-case-btn">Need Support ? </span>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+            <!-- Wallet -->
+            <template if:true={showWallet}>
+                <lightning-layout multiple-rows class="margin-30">
+                    <lightning-layout-item size="12" class="res-wallet-container">
+                        <lightning-layout multiple-rows class="res-wallet-balance-addmoney">
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="4">
+                                <c-res-button variant='details-page-button' class="slds-m-vertical_large sign-up-button res-wallet-add-money"
+                            button-label="Add Money" onpress={handleAddMoney}></c-res-button>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="8">
+                                <p class="res-wallet-current-money">Current Balance in Wallet : <span
+                                        class="res-wallet-current-money-value">$ {walletAmount}</span></p>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <!-- <lightning-layout-item size="12">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12">
+                                <lightning-layout>
+                                    <lightning-layout-item  size="3">Transaction No.</lightning-layout-item>
+                                    <lightning-layout-item  size="3">Date</lightning-layout-item>
+                                    <lightning-layout-item  size="2">Deposit</lightning-layout-item>
+                                    <lightning-layout-item  size="2">Withdrawal</lightning-layout-item>
+                                    <lightning-layout-item  size="2">Closing Balance</lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            <template for:each={transactions} for:item="transaction">
+                                <lightning-layout-item size="12" key={transaction.Name}>
+                                    <lightning-layout>
+                                        <lightning-layout-item  size="3">{transaction.Name}</lightning-layout-item>
+                                        <lightning-layout-item  size="3">{transaction.Date__c}</lightning-layout-item>
+                                        <lightning-layout-item  size="2">
+                                            <template if:true={transaction.isDeposit}>{transaction.Amount__c}</template>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item  size="2">
+                                            <template if:true={transaction.isWithdrawal}>{transaction.Amount__c}</template>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item  size="2">{transaction.Closing_Balance__c}</lightning-layout-item>
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </lightning-layout-item> -->
+                    <lightning-layout-item size="12"><p class="res-wallet-current-money margin-t-30 margin-b-10">Transactions</p></lightning-layout-item>
+                    <lightning-layout-item size="12">
+                        <lightning-datatable
+                            key-field="id"
+                            data={data}
+                            columns={columns}>
+                        </lightning-datatable>
+                        
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+            <template if:true={showAddMoneyScreen}>
+                <lightning-layout multiple-rows class="margin-30">
+                    <lightning-layout-item size="12">
+                        <c-res-input input-type="text" field-label="Amount To Add" field-name="addMoneyAmount"
+                                    onchange={handleAmountChange} field-value={addMoneyAmount}
+                                    class="res-firstname-input">
+                        </c-res-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12">
+                        <p class={addMoneyErrorClass}>{addMoneyError}</p>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12">
+                        <button onclick={handleProceedPayment} class="res-user-details-button res-user-details-button-active">Proceed to pay</button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+            <template if:true={showOtpVarificationScreen}>
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12" large-device-size="12"
+                        medium-device-size="12">
+                        <lightning-layout class="otp-container" multiple-rows>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10"
+                                large-device-size="8">
+                                <lightning-layout class="center slds-m-vertical_medium" multiple-rows>
+                                    <lightning-icon class="slds-m-right_small" icon-name="utility:lock"
+                                        alternative-text="Lock!" title="Lock"></lightning-icon>
+                                    <p class="otp-header">OTP Verification</p>
+                                </lightning-layout>
+                                <p class="otp-instruction slds-m-vertical_small">We have mailed you a 6-digit code on
+                                    "{userDetails.email}". Please check your email and
+                                    enter the code below to complete the transaction.</p>
+                                <p class="otp-instruction center-text">Enter Code</p>
+                                <c-res-input input-type="text" required="true" field-label="OTP" field-name="OTP"
+                                    onchange={handleOtpChange} field-value={otp}>
+                                </c-res-input>
+                                <c-res-button variant='details-page-button' class="slds-m-vertical_large sign-up-button"
+                                    button-label="Verify" onpress={onVerify}>
+                                </c-res-button>
+                                <lightning-layout class="center slds-m-vertical_small" multiple-rows>
+                                    <p class="otp-instruction">Didn't receive the OTP? </p>
+                                    <p class="otp-instruction">
+                                        <template if:true={isResendDisabled}>
+                                            Resend in {resendTimer}s
+                                        </template>
+                                        <template if:false={isResendDisabled}>
+                                            <a onclick={onResend}> Resend</a>
+                                        </template>
+                                    </p>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+            <!-- Support Tickets -->
+            <template if:true={showSupportTickets}>
+                <lightning-layout multiple-rows class="res-support-tickets-container">
+                    <lightning-layout-item size="6" class="res-booking-details-summary-hotel-name">
+                        Your Tickets
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12">
+                        <lightning-layout multiple-rows>
+                            <template if:true={gotCases}>
+                                <template for:each={supportTickets} for:item="st">
+                                    <lightning-layout-item key={st.Id} size="12" small-device-size="12"
+                                        medium-device-size="12" large-device-size="12">
+                                        <lightning-layout multiple-rows class="res-bookings-card padding-10">
+                                            <lightning-layout-item size="6" class="res-booking-card-hotel">
+                                                Subject : {st.Subject}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="res-booking-card-details create-new-case-btn">
+                                                Created On : {st.CreatedDate}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="res-booking-card-details">
+                                                Descripiton :
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="res-booking-card-details">
+                                                {st.Description}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="res-booking-card-details">
+                                                Booking No. : {st.Order__r.OrderNumber}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="res-booking-total-cost">
+                                                Status : {st.Status}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="hide-review">
+                                                <Button class="res-booking-card-button">Escalate</Button>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                </template>
+                            </template>
+                            <template if:false={gotCases}>
+                                You haven't Created any cases!!
+                            </template>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
