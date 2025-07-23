@@ -1,0 +1,27 @@
+{
+  "required" : [ "Contact", "PersonAccount" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "Contact" : {
+      "title" : "Contact",
+      "description" : "This Variable store the Record of the Contact.",
+      "lightning:type" : "lightning__recordInfoType",
+      "lightning:sObjectInfo" : {
+        "apiName" : "Contact"
+      },
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "PersonAccount" : {
+      "title" : "PersonAccount",
+      "description" : "This Variable store the Record of the Person Account.",
+      "lightning:type" : "lightning__recordInfoType",
+      "lightning:sObjectInfo" : {
+        "apiName" : "Account"
+      },
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

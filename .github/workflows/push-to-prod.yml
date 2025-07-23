@@ -75,21 +75,17 @@ jobs:
       - name: Authenticate Salesforce ORG
         run: |
           sfdx force:auth:jwt:grant -i ${{ secrets.HUB_CONSUMER_KEY }} -f ${{ vars.JWT_KEY_FILE }} --username ${{ vars.HUB_USER_NAME }}  -a HubOrg
+      
       - name: Generate the package.xml for delta files
         run: |
           mkdir changed-sources
-          sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output changed-sources/ --generate-delta --source force-app/
+          sf sgd source delta --to "HEAD" --from "HEAD^" --output changed-sources/ --generate-delta --source force-app/
       
-      # If the env variable equals all, we run all tests
-      - name: 'Deploy delta changes - run NO tests-Sandbox'
+      - name: validate Delta components to Salesforce
         run: |
-          sfdx force:source:deploy -p "changed-sources/force-app" -u HubOrg --testlevel NoTestRun --json
-
-      - name: 'Deploy destructive changes (if any) to Production org'
-        run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" -u HubOrg --testlevel NoTestRun --ignorewarnings 
-
-
-      #- name: Validate Source Code Against Salesforce ORG
-      #  run: |
-      #    sfdx force:source:deploy -p force-app -c -u HubOrg
-  
+          sf project deploy start --source-dir "changed-sources/force-app" --target-org HubOrg --test-level NoTestRun
+       
+      - name: Validate destructive changes (if any)
+        run: |
+          sf deploy metadata --metadata-dir "changed-sources/destructiveChanges" --target-org HubOrg --test-level NoTestRun
+          

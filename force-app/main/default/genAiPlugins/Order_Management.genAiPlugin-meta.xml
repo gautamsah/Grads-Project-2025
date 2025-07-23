@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata">
+    <canEscalate>false</canEscalate>
+    <description>Handles questions related to a user’s order, order status.</description>
+    <developerName>Order_Management</developerName>
+    <genAiFunctions>
+        <functionName>Custom_Flow_Identify_Customer_By_Email</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>Get_Order_Details_From_the_Contact5</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>SvcCopilotTmpl__IdentifyCustomerByEmail</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>Custom_Flow_Get_Order_By_Order_Number2</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>Ask User for their 8 digit Order Number and then find the Order and return the details.</description>
+        <developerName>instruction_askuserfor0</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_askuserfor0</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Before giving any information ask for the email address and verify the user.</description>
+        <developerName>instruction_beforegivi1</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_beforegivi1</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Before giving Order Detail ask for the Email and verify user from the email.</description>
+        <developerName>instruction_beforegivi2</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_beforegivi2</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>If user want to know the details about all the order so give them all the record which is related to that contact.</description>
+        <developerName>instruction_ifuserwant3</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_ifuserwant3</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Immediately verify the order using both pieces of information. Once confirmed, provide the user with the requested order details clearly and concisely and show information in different lines. Offer to answer any further questions.</description>
+        <developerName>instruction_immediatel4</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_immediatel4</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>When user want to know related to Order Status pick one action from here.</description>
+        <developerName>instruction_whenuserwa5</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_whenuserwa5</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Provide the answer in Modern way so user like to interact with us.</description>
+        <developerName>instruction_providethe6</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_providethe6</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Order Management</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to answer general questions about orders, get order details, and cancel orders.</scope>
+</GenAiPlugin>

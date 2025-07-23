@@ -1,36 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+	<types>
+		<members>*</members>
+		<name>ApexClass</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>ApexComponent</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>ApexPage</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>ApexTestSuite</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>ApexTrigger</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>AuraDefinitionBundle</name>
+	</types>
     <types>
-        <members>*</members>
-        <name>ApexClass</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexComponent</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexPage</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexTestSuite</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexTrigger</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>AuraDefinitionBundle</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>LightningComponentBundle</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>StaticResource</name>
-    </types>
-    <version>63.0</version>
+		<members>ESW_Respira_Agent_1745231358703</members>
+		<members>ESW_Respira_Support_Agent_1744959664251</members>
+		<members>Respira</members>
+		<name>CustomSite</name>
+	</types>
+	<types>
+		<members>Account-Account Layout</members>
+		<members>Case-Case Layout</members>
+		<members>Order-Order Layout</members>
+		<members>OrderItem-Order Product Layout</members>
+		<members>Pricebook2-Price Book Layout</members>
+		<members>PricebookEntry-Price Book Entry</members>
+		<members>Product2-Product Layout</members>
+		<members>User-User Layout</members>
+		<name>Layout</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>LightningComponentBundle</name>
+	</types>
+	<types>
+		<members>Community User</members>
+		<members>Community User RES</members>
+		<members>Einstein Agent User</members>
+		<members>ESW_Respira_Agent_1745231358703 Profile</members>
+		<members>ESW_Respira_Support_Agent_1744959664251 Profile</members>
+		<members>Hotel Experience</members>
+		<members>Respira Profile</members>
+		<members>System Admin RES</members>
+		<name>Profile</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>StaticResource</name>
+	</types>
+	<version>64.0</version>
 </Package>

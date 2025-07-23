@@ -1,0 +1,14 @@
+{
+  "required" : [ "orderNumber" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "orderNumber" : {
+      "title" : "orderNumber",
+      "description" : "This variable store the order Number.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
